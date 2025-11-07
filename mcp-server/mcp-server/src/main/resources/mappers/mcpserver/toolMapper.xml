@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace는 인터페이스 경로와 동일해야 함 -->
+<mapper namespace="com.aiagent.mcpserver.mapper.ToolMapper">
+    <select id="getToolList" resultType="com.aiagent.mcpserver.model.ToolInfo">
+        SELECT tool_id
+             , tool_name
+             , tool_desc
+             , tool_type
+             , exec_target
+             , query_params
+             , enabled
+        FROM tool_info
+    </select>
+    <select id="getUserInfo" resultType="com.aiagent.mcpserver.model.UserInfo" parameterType="com.aiagent.mcpserver.model.UserInfo">
+        SELECT
+            ssn
+             , name
+             , age
+             , gender
+             , email
+        FROM user_info
+        WHERE 1=1
+        <if test="name != null and !name.equals('')">
+            AND name = #{name}
+        </if>
+        <if test="age != null and !age.equals('')">
+            AND age = #{age}
+        </if>
+        <!-- 나이 조건
+        <if test="age != null and ageCondition != null and ageCondition != ''">
+            <choose>
+                <when test="ageCondition == 'EQ'">
+                    AND age = #{age}
+                </when>
+                <when test="ageCondition == 'GT'">
+                    AND age &gt; #{age}
+                </when>
+                <when test="ageCondition == 'LT'">
+                    AND age &lt; #{age}
+                </when>
+                <otherwise>
+                </otherwise>
+            </choose>
+        </if>
+        -->
+        <if test="gender != null and !gender.equals('')">
+            AND gender = #{gender}
+        </if>
+        <if test="email != null and !email.equals('')">
+            AND email = #{email}
+        </if>
+        <if test="jobId != null and !jobId.equals('')">
+            AND jobId = #{jobId}
+        </if>
+    </select>
+    <select id="getUserJobInfo" resultType="com.aiagent.mcpserver.model.JobInfo" parameterType="com.aiagent.mcpserver.model.JobInfo">
+        SELECT
+            job_id,
+            job_title,
+            avg_salary
+        FROM job_info
+        <if test="job_title != jobTitle and !jobTitle.equals('')">
+            AND jobTitle = #{jobTitle}
+        </if>
+    </select>
+    <select id="getWeatherInfo" resultType="com.aiagent.mcpserver.model.WeatherInfo" parameterType="com.aiagent.mcpserver.model.WeatherInfo">
+        SELECT
+            target_date,
+            weather,
+            temperature,
+            humidity
+        FROM weather_info
+        WHERE 1=1
+        <if test="targetDate != null and !targetDate.equals('')">
+            AND target_date = #{targetDate}
+        </if>
+        <if test="weather != null and !weather.equals('')">
+            AND weather = #{weather}
+        </if>
+        <if test="temperature != null and !temperature.equals('')">
+            AND temperature = #{temperature}
+        </if>
+        <if test="humidity != null and !humidity.equals('')">
+            AND humidity = #{humidity}
+        </if>
+    </select>
+</mapper>

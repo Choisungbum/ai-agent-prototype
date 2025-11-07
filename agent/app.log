@@ -1,0 +1,13 @@
+2025-11-05 16:53:03,312 [DEBUG] httpcore.connection - connect_tcp.started host='localhost' port=11434 local_address=None timeout=None socket_options=None
+2025-11-05 16:53:03,567 [DEBUG] httpcore.connection - connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x0000024412EC6710>
+2025-11-05 16:53:03,567 [DEBUG] httpcore.http11 - send_request_headers.started request=<Request [b'POST']>
+2025-11-05 16:53:03,568 [DEBUG] httpcore.http11 - send_request_headers.complete
+2025-11-05 16:53:03,568 [DEBUG] httpcore.http11 - send_request_body.started request=<Request [b'POST']>
+2025-11-05 16:53:03,569 [DEBUG] httpcore.http11 - send_request_body.complete
+2025-11-05 16:53:03,569 [DEBUG] httpcore.http11 - receive_response_headers.started request=<Request [b'POST']>
+2025-11-05 16:53:04,211 [DEBUG] httpcore.http11 - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Content-Type', b'application/x-ndjson'), (b'Date', b'Wed, 05 Nov 2025 07:53:04 GMT'), (b'Transfer-Encoding', b'chunked')])
+2025-11-05 16:53:04,211 [INFO] httpx - HTTP Request: POST http://localhost:11434/api/generate "HTTP/1.1 200 OK"
+2025-11-05 16:53:04,213 [DEBUG] httpcore.http11 - receive_response_body.started request=<Request [b'POST']>
+2025-11-05 16:53:04,434 [DEBUG] httpcore.http11 - receive_response_body.complete
+2025-11-05 16:53:04,435 [DEBUG] httpcore.http11 - response_closed.started
+2025-11-05 16:53:04,435 [DEBUG] httpcore.http11 - response_closed.complete

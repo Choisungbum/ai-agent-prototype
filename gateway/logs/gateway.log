@@ -124,3 +124,27 @@
 2025-11-07T15:45:11.661+09:00  INFO 7300 --- [gateway] [http-nio-8080-exec-3] o.e.gateway.controller.ChatController    : Agent 서버 응답: {"response":"아직까지 사용자가 제시한 물건이란 단어를 가지고 있는 내 재화 및 소지품은 없으니 주실 수 없습니다.  \n그렇다고 하여 도움이 필요하시면 언제든지 말씀해주세요!"}
 2025-11-07T15:45:55.280+09:00  INFO 7300 --- [gateway] [http-nio-8080-exec-2] o.e.gateway.controller.ChatController    : frontend 요청 수신 : 2025년 10월10일 날씨 알려줘 
 2025-11-07T15:46:14.047+09:00  INFO 7300 --- [gateway] [http-nio-8080-exec-2] o.e.gateway.controller.ChatController    : Agent 서버 응답: {"response":"날씨를 알고 싶으시다면, 현재 날짜와 지역을 알려 주시기를 바랍니다. 그럼 정확한 날씨 정보를 제공할 수 있습니다.\n\n하지만, 특정 날짜의 날씨 예보를 위해서는 지역도 알려주셔야 합니다. \n\n예를 들어, 2025년 10월 10일의 날씨는 다르기 때문에, 지역을 입력해주시면, 정확한 날씨 예보를 제공할 수 있습니다.\n\n지역을 입력하신 후, 다시 한 번 문의해 주시기를 바랍니다!"}
+2025-11-07T16:04:20.718+09:00  INFO 7300 --- [gateway] [http-nio-8080-exec-5] o.e.gateway.controller.ChatController    : frontend 요청 수신 : 2025년 10월10일 날씨 알려줘
+2025-11-07T16:04:36.945+09:00  INFO 7300 --- [gateway] [http-nio-8080-exec-5] o.e.gateway.controller.ChatController    : Agent 서버 응답: {"response":"⚠️ MCP 호출 실패 (500)"}
+2025-11-07T16:04:56.975+09:00  INFO 7300 --- [gateway] [http-nio-8080-exec-6] o.e.gateway.controller.ChatController    : frontend 요청 수신 : 2025년 10월10일 날씨 알려줘
+2025-11-07T16:07:32.809+09:00  INFO 7300 --- [gateway] [http-nio-8080-exec-6] o.e.gateway.controller.ChatController    : Agent 서버 응답: {"response":"⚠️ MCP 호출 실패 (500)"}
+2025-11-07T16:15:41.029+09:00  INFO 7300 --- [gateway] [http-nio-8080-exec-9] o.e.gateway.controller.ChatController    : frontend 요청 수신 : 2025년 10월10일 날씨 알려줘
+2025-11-07T16:16:11.674+09:00  INFO 7300 --- [gateway] [http-nio-8080-exec-9] o.e.gateway.controller.ChatController    : Agent 서버 응답: {"response":"⚠️ MCP 호출 실패 (500)"}
+2025-11-07T16:16:28.184+09:00  INFO 7300 --- [gateway] [http-nio-8080-exec-10] o.e.gateway.controller.ChatController    : frontend 요청 수신 : 2025년 10월10일 날씨 알려줘
+2025-11-07T16:17:14.248+09:00  INFO 7300 --- [gateway] [http-nio-8080-exec-10] o.e.gateway.controller.ChatController    : Agent 서버 응답: {"response":"⚠️ MCP 호출 실패 (500)"}
+2025-11-07T16:18:09.267+09:00  INFO 7300 --- [gateway] [http-nio-8080-exec-1] o.e.gateway.controller.ChatController    : frontend 요청 수신 : weather
+2025-11-07T16:18:25.361+09:00  INFO 7300 --- [gateway] [http-nio-8080-exec-1] o.e.gateway.controller.ChatController    : Agent 서버 응답: {"response":"현재의 날씨를 알려드릴 수 있을까요? 지역을 선택해 주세요! \n\n서울:  \n기온 16도, 미세먼지 34㎍/m³, 강수확률 0%\n\n경주:  \n기온 17도, 미세먼지 21㎍/m³, 강수확률 10%\n\n부산:  \n기온 15도, 미세먼지 30㎍/m³, 강수확률 20%\n\n등등. 지역을 선택해 주세요!"}
+2025-11-07T16:18:33.523+09:00  INFO 7300 --- [gateway] [http-nio-8080-exec-3] o.e.gateway.controller.ChatController    : frontend 요청 수신 : 2025년 10월10일 날씨 알려줘
+2025-11-07T16:18:54.457+09:00  INFO 7300 --- [gateway] [http-nio-8080-exec-3] o.e.gateway.controller.ChatController    : Agent 서버 응답: {"response":"2025년 10월 10일 날씨는 맑은데요. 기온은 30.8도이고 습도는 49%입니다."}
+2025-11-07T16:19:05.586+09:00  INFO 7300 --- [gateway] [http-nio-8080-exec-2] o.e.gateway.controller.ChatController    : frontend 요청 수신 : 2025년 10월10일 기온만 알려줘 
+2025-11-07T16:19:17.123+09:00  INFO 7300 --- [gateway] [http-nio-8080-exec-2] o.e.gateway.controller.ChatController    : Agent 서버 응답: {"response":"2025년 10월 10일 기온은 30.8도, 습도는 49%입니다.\n\n맑은 날씨가 예상됩니다!"}
+2025-11-07T16:19:34.748+09:00  INFO 7300 --- [gateway] [http-nio-8080-exec-4] o.e.gateway.controller.ChatController    : frontend 요청 수신 : 노트북줘
+2025-11-07T16:19:48.016+09:00  INFO 7300 --- [gateway] [http-nio-8080-exec-4] o.e.gateway.controller.ChatController    : Agent 서버 응답: {"response":"노트북은 개인용 컴퓨터입니다. \n\n예를 들면, 문서작성, 웹 브라우징, 게임 등 다양한 작업을 할 수 있습니다.\n\n몇 가지 종류가 있습니다. \n\n1. 데스크탑\n2. 랩톱 \n3. 노트북\n\n어떤 제품이 필요하실까요?"}
+2025-11-07T16:41:52.379+09:00  INFO 7300 --- [gateway] [http-nio-8080-exec-6] o.e.gateway.controller.ChatController    : frontend 요청 수신 : 안녕 ?
+2025-11-07T16:42:09.703+09:00  INFO 7300 --- [gateway] [http-nio-8080-exec-6] o.e.gateway.controller.ChatController    : Agent 서버 응답: {"response":"안녕하세요! 너도 안녕이 맞지? 어떤일이나 도움이 필요하신가요?"}
+2025-11-07T16:42:43.777+09:00  INFO 7300 --- [gateway] [http-nio-8080-exec-7] o.e.gateway.controller.ChatController    : frontend 요청 수신 : 혹시 사용자 중 여성 사용자만 보여줄 수 있어 ?.
+2025-11-07T16:42:51.431+09:00  INFO 7300 --- [gateway] [http-nio-8080-exec-7] o.e.gateway.controller.ChatController    : Agent 서버 응답: {"response":"⚠️ MCP 호출 실패 (500)"}
+2025-11-07T16:45:41.668+09:00  INFO 7300 --- [gateway] [http-nio-8080-exec-10] o.e.gateway.controller.ChatController    : frontend 요청 수신 : 혹시 사용자 중 여성 사용자만 보여줄 수 있어 ?
+2025-11-07T16:46:05.343+09:00  INFO 7300 --- [gateway] [http-nio-8080-exec-10] o.e.gateway.controller.ChatController    : Agent 서버 응답: {"response":"⚠️ MCP 호출 실패 (500)"}
+2025-11-07T16:48:43.790+09:00  INFO 7300 --- [gateway] [http-nio-8080-exec-3] o.e.gateway.controller.ChatController    : frontend 요청 수신 : 혹시 사용자 중 여성 사용자만 보여줄 수 있어 ?
+2025-11-07T16:49:23.045+09:00  INFO 7300 --- [gateway] [http-nio-8080-exec-3] o.e.gateway.controller.ChatController    : Agent 서버 응답: {"response":"여성 사용자만 보여드릴게요!\n\n이 영희, 최지현, 한가인, 장원영, 안유진, 배수지, 송혜교, 김태리, 손예진, 한소희, 김지원, 전지현, 박신혜, 문채원, 김하늘, 이하늬, 정은지, 이하린, 전소민, 이효리, 김민정, 유인나, 한지민, 문근영, 김새론, 박보영, 정유미, 공효진, 김유정, 신민아, 정려원, 조보아, 이정은, 이성경, 신세경, 최수영, 이유리, 홍은희, 김유리, 정소민, 이유비, 서예지, 김소현, 정은채, 전도연, 김혜수, 임수정, 수지의 정보가 보이시겠어요!\n\n어떤 정보를 볼래요?"}

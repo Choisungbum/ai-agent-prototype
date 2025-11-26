@@ -7,3 +7,6 @@ pydantic
 python-dotenv
 mysql-connector-python
 sqlalchemy
+langfuse
+dotenv
+transformers

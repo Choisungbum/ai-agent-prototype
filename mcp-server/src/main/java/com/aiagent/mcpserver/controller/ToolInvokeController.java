@@ -1,5 +1,6 @@
 package com.aiagent.mcpserver.controller;
 
+import com.aiagent.mcpserver.model.JsonRpcRequest;
 import com.aiagent.mcpserver.model.ToolInfo;
 import com.aiagent.mcpserver.service.ToolInvokeService;
 import com.aiagent.mcpserver.service.ToolService;
@@ -18,53 +19,56 @@ import java.util.Map;
 @Data
 @Slf4j
 @RestController
-@RequestMapping("/tools")
+@RequestMapping("/")
 @RequiredArgsConstructor
 public class ToolInvokeController {
 
     @Autowired
     private final ToolInvokeService toolInvokeService;
 
-    @GetMapping("/toolList")
-    public ResponseEntity<List<ToolInfo>> getToolList(){
-        List<ToolInfo> result = toolInvokeService.getToolList();
-        return ResponseEntity.ok(result);
-    }
+//    @GetMapping("/initialize")
+//    public ResponseEntity<JsonRpcResponse> initialize(){
+//        List<ToolInfo> result = toolInvokeService.getToolList();
+//        return ResponseEntity.ok(result);
+//    }
 
     /**
-     * 🧠 Tool 실행 API (공용 엔드포인트)
-     * 예시 요청:
-     * POST /api/tool/invoke
+     * agent -> mcp 서버 데이터 요청 형식
+     *
+     * initialize 요청 형식
      * {
-     *   "toolName": "select_user_list",
-     *   "toolType": "DB_MAPPER"
-     *   "params": {
-     *       "name": "홍길동",
-     *       "gender": "M",
-     *       "age": 30,
-     *       "ageCondition": "GT"
+     *     "jsonrpc": "2.0",
+     *     "id": 1,
+     *     "method": "initialize",
+     *     "params": {
+     *       "client": "ai-agent",
+     *       "version": "1.0",
+     *       "capabilities": {
+     *         "toolUse": true
+     *       }
+     *     }
      *   }
-     * }
+     *
+     * mcp/useTool" 메서드 요청 형식
+     * {
+     *     "jsonrpc": "2.0",
+     *     "id": 10,
+     *     "method": "tools/call",
+     *     "params": {
+     *       "tool": "getUserInfo",
+     *       "toolCallId": "call_001",
+     *       "args": {
+     *         "name": "홍길동"
+     *       }
+     *     }
+     *   }
+     *
      */
     @PostMapping("/invoke")
-    public ResponseEntity<?> invokeTool(@RequestBody ToolInfo toolInfo) {
+    public ResponseEntity<?> invoke(@RequestBody JsonRpcRequest request) {
         try{
-            // 1. toolName 추출
-            // 2. toolType 추출
-//            ToolInfo toolInfo = new ToolInfo();
-//            toolInfo.setToolName((String) request.get("toolName"));
-//            toolInfo.setToolType((String) request.get("toolType"));
-//
-//            // 3. params 추출 (각종 쿼리 조건, 필터 등)
-//            @SuppressWarnings("unchecked")
-//            Map<String, Object> params = (Map<String, Object>) request.get("params");
-//
-//            log.info("MCP Tool info : toolName:{}, params:{}", toolInfo.getToolName(), params);
+            Object result = toolInvokeService.invoke(request);
 
-            // 4. 서비스 레이어에 위임 (실제 DB Mapper 호출 or 비즈니스 로직 수행)
-            Object result = toolInvokeService.invoke(toolInfo);
-
-            // 5. 결과 반환
             return ResponseEntity.ok(result);
         } catch(Exception e) {
             log.error("❌ Tool Invoke Error: {}", e.getMessage(), e);

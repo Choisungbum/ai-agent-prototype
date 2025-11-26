@@ -1,6 +1,6 @@
 package com.aiagent.mcpserver.mapper;
 
-import com.aiagent.mcpserver.model.JobInfo;
+import com.aiagent.mcpserver.model.UserJobInfo;
 import com.aiagent.mcpserver.model.ToolInfo;
 import com.aiagent.mcpserver.model.UserInfo;
 import com.aiagent.mcpserver.model.WeatherInfo;
@@ -11,11 +11,11 @@ import java.util.List;
 @Mapper
 public interface ToolMapper {
     /* Tool 목록 조회 */
-    public List<ToolInfo> getToolList();
+    public List<ToolInfo> initialize();
 
-    public UserInfo getUserInfo(UserInfo args);
-    public JobInfo getUserJobInfo(JobInfo args);
-    public WeatherInfo getWeatherInfo(WeatherInfo args);
+    public List<UserInfo> getUserInfo(UserInfo args);
+    public List<UserJobInfo> getUserJobInfo(UserJobInfo args);
+    public List<WeatherInfo> getWeatherInfo(WeatherInfo args);
 
     int insertUserInfo(UserInfo args);
 }

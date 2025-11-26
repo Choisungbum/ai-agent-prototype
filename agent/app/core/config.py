@@ -1,18 +1,12 @@
-from pydantic import BaseSetting
+from pydantic_settings import BaseSettings
 
-class Settings(BaseSetting):
-    LLM_MODE: str = "llmam3"
-    APP_NAME: str = "LangChain Agent"
-    APP_VERSION: str = "1.0.0"
-    
-    # DB 설정 (MariaDB)
-    DB_HOST: str
-    DB_PORT: int
-    DB_USER: str
-    DB_PASSWORD: str
-    DB_NAME: str
+class Settings(BaseSettings):
+    MAX_PROMPT_TOKENS: int = 0
+    MAX_HISTORY_TOKENS: int = 0
+    TARGET_SUMMARY_TOKENS: int = 0
 
-class Config:
-    env_file= ".env"
+    class Config:
+        env_file = ".env"
 
+# 여기서 미리 생성해둡니다.
 settings = Settings()

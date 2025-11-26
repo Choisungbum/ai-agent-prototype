@@ -1,5 +1,6 @@
 package com.aiagent.mcpserver.util;
 import java.lang.reflect.Field;
+import java.util.HashMap;
 import java.util.Map;
 
 public class CommonUtils {
@@ -35,6 +36,27 @@ public class CommonUtils {
         } catch (Exception e) {
             throw new RuntimeException("객체 매핑 실패", e);
         }
+    }
+
+    // 어떤 객체든 Map<String, Object> 로 변환
+    public static Map<String, Object> objectToMap(Object obj) {
+        Map<String, Object> result = new HashMap<>();
+
+        if (obj == null) return result;
+
+        Class<?> clazz = obj.getClass();
+        Field[] fields = clazz.getDeclaredFields();
+
+        for (Field field : fields) {
+            field.setAccessible(true); // private 필드 접근 허용
+            try {
+                result.put(field.getName(), field.get(obj));
+            } catch (IllegalAccessException e) {
+                // 필요하면 로그 처리
+                e.printStackTrace();
+            }
+        }
+        return result;
     }
 
     /** 간단한 타입 변환 헬퍼 */

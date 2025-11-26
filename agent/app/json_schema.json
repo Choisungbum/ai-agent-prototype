@@ -1,0 +1,71 @@
+{
+    "type": "object",
+    "title": "UserInfo",
+    "properties": {
+        "age": {
+            "anyOf": [
+                {
+                    "type": "integer"
+                },
+                {
+                    "type": "null"
+                }
+            ],
+            "title": "Age",
+            "default": null,
+            "description": "사용자의 나이"
+        },
+        "ssn": {
+            "anyOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "null"
+                }
+            ],
+            "title": "Ssn",
+            "default": null,
+            "description": "사용자의 주민등록번호(******-*******)"
+        },
+        "name": {
+            "anyOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "null"
+                }
+            ],
+            "title": "Name",
+            "default": null,
+            "description": "사용자의 이름"
+        },
+        "email": {
+            "anyOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "null"
+                }
+            ],
+            "title": "Email",
+            "default": null,
+            "description": "사용자의 이메일"
+        },
+        "gender": {
+            "anyOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "null"
+                }
+            ],
+            "title": "Gender",
+            "default": null,
+            "description": "사용자의 성별 (남자 : M, 여자 : F)"
+        }
+    }
+}

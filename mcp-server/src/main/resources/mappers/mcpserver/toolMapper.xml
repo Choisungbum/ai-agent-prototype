@@ -5,14 +5,13 @@
 
 <!-- namespace는 인터페이스 경로와 동일해야 함 -->
 <mapper namespace="com.aiagent.mcpserver.mapper.ToolMapper">
-    <select id="getToolList" resultType="com.aiagent.mcpserver.model.ToolInfo">
+    <select id="initialize" resultType="com.aiagent.mcpserver.model.ToolInfo">
         SELECT tool_id
              , tool_name
-             , tool_desc
+             , tool_description
              , tool_type
-             , exec_target
-             , query_params
-             , enabled
+             , function_name
+             , args_schema
         FROM tool_info
     </select>
     <select id="getUserInfo" resultType="com.aiagent.mcpserver.model.UserInfo" parameterType="com.aiagent.mcpserver.model.UserInfo">
@@ -57,14 +56,15 @@
             AND jobId = #{jobId}
         </if>
     </select>
-    <select id="getUserJobInfo" resultType="com.aiagent.mcpserver.model.JobInfo" parameterType="com.aiagent.mcpserver.model.JobInfo">
+    <select id="getUserJobInfo" resultType="com.aiagent.mcpserver.model.UserJobInfo" parameterType="com.aiagent.mcpserver.model.UserJobInfo">
         SELECT
             job_id,
             job_title,
-            avg_salary
-        FROM job_info
-        <if test="job_title != jobTitle and !jobTitle.equals('')">
-            AND jobTitle = #{jobTitle}
+            salary
+        FROM user_job_Info
+        WHERE 1 = 1
+        <if test="jobTitle != jobTitle and !jobTitle.equals('')">
+            AND job_title = #{jobTitle}
         </if>
     </select>
     <select id="getWeatherInfo" resultType="com.aiagent.mcpserver.model.WeatherInfo" parameterType="com.aiagent.mcpserver.model.WeatherInfo">

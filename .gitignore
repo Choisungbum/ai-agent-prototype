@@ -1,0 +1,95 @@
+# =====================
+# OS
+# =====================
+.DS_Store
+Thumbs.db
+
+# =====================
+# IDE / Editor
+# =====================
+.idea/
+.vscode/
+*.iml
+
+# =====================
+# Build / Temp / Logs
+# =====================
+target/
+build/
+out/
+dist/
+bin/
+obj/
+*.log
+*.tmp
+*.swp
+*.swo
+
+# =====================
+# Package / Library / Dependency
+# (자동 생성되므로 Git에 불필요)
+# =====================
+node_modules/
+vendor/
+.venv/
+venv/
+env/
+__pycache__/
+*.pyc
+*.pyo
+
+# =====================
+# Java / Maven / Gradle / Spring
+# =====================
+*.class
+*.war
+*.jar
+*.ear
+*.classpath
+*.project
+.settings/
+.mvn/
+!**/src/main/**         # 프로젝트 코드 유지
+!**/src/test/**
+
+# Gradle
+.gradle/
+build/
+*gradle-wrapper.jar
+
+# =====================
+# Python
+# =====================
+.mypy_cache/
+pytest_cache/
+.cache/
+
+# =====================
+# Environment / Security Files
+# =====================
+.env
+*.pem
+*.key
+*.crt
+*.p12
+*.jks
+*.keystore
+
+# =====================
+# Database / Dumps
+# =====================
+*.sql
+*.db
+*.sqlite
+
+# =====================
+# Mac / Windows executables
+# =====================
+*.exe
+*.dll
+*.so
+*.dylib
+*.pkg
+*.deb
+*.rpm
+*.msi

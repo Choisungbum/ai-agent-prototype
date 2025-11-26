@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  redis:
+    image: redis:alpine
+    container_name: my-redis
+    ports:
+      - "6379:6379"  # 호스트:컨테이너
+    command: redis-server /usr/local/etc/redis/redis.conf
+    volumes:
+      - ./redis_data:/data # 데이터 보존을 위한 볼륨 마운트
+      # [추가] 내 컴퓨터의 redis.conf를 컨테이너 내부로 연결
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
+    restart: always
+
+  postgres:
+    image: postgres:15-alpine
+    container_name: my-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: wisenut       # .env 변수 사용 권장
+      POSTGRES_PASSWORD: wisenut1!
+      POSTGRES_DB: data_info
+    volumes:
+      - ./pg_data:/var/lib/postgresql/data
+    restart: always

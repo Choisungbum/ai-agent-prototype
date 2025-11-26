@@ -1,8 +1,10 @@
-export const sendToAgent = async(userMessage) => {
+export const sendToAgent = async(userMessage, sessionId) => {
   try{
     const response = await fetch("http://localhost:8080/api/chat", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json",
+        "X-Session-ID": sessionId
+       },
       body: JSON.stringify({ message: userMessage }),
     });
 

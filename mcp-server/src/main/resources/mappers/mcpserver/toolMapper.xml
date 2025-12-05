@@ -14,7 +14,7 @@
              , args_schema
         FROM tool_info
     </select>
-    <select id="getUserInfo" resultType="com.aiagent.mcpserver.model.UserInfo" parameterType="com.aiagent.mcpserver.model.UserInfo">
+    <select id="searchUsers" resultType="com.aiagent.mcpserver.model.SearchUserInfo" parameterType="com.aiagent.mcpserver.model.SearchUserInfo">
         SELECT
             ssn
              , name
@@ -26,26 +26,26 @@
         <if test="name != null and !name.equals('')">
             AND name = #{name}
         </if>
-        <if test="age != null and !age.equals('')">
-            AND age = #{age}
-        </if>
-        <!-- 나이 조건
-        <if test="age != null and ageCondition != null and ageCondition != ''">
+        <!-- 나이 조건 -->
+        <if test="age != null">
             <choose>
-                <when test="ageCondition == 'EQ'">
-                    AND age = #{age}
-                </when>
                 <when test="ageCondition == 'GT'">
-                    AND age &gt; #{age}
+                    <![CDATA[AND age > #{age}]]>
                 </when>
                 <when test="ageCondition == 'LT'">
-                    AND age &lt; #{age}
+                    <![CDATA[AND age < #{age}]]>
+                </when>
+                <when test="ageCondition == 'GE'">
+                    <![CDATA[AND age >= #{age}]]>
+                </when>
+                <when test="ageCondition == 'LE'">
+                    <![CDATA[AND age <= #{age}]]>
                 </when>
                 <otherwise>
+                    <![CDATA[AND age = #{age}]]>
                 </otherwise>
             </choose>
         </if>
-        -->
         <if test="gender != null and !gender.equals('')">
             AND gender = #{gender}
         </if>
@@ -56,7 +56,7 @@
             AND jobId = #{jobId}
         </if>
     </select>
-    <select id="getUserJobInfo" resultType="com.aiagent.mcpserver.model.UserJobInfo" parameterType="com.aiagent.mcpserver.model.UserJobInfo">
+    <select id="getUserJobInfo" resultType="com.aiagent.mcpserver.model.SearchJobInfo" parameterType="com.aiagent.mcpserver.model.SearchJobInfo">
         SELECT
             job_id,
             job_title,
@@ -66,8 +66,27 @@
         <if test="jobTitle != jobTitle and !jobTitle.equals('')">
             AND job_title = #{jobTitle}
         </if>
+        <if test="salary != null">
+            <choose>
+                <when test="salaryCondition == 'GT'">
+                    <![CDATA[AND salary > #{salary}]]>
+                </when>
+                <when test="salaryCondition == 'LT'">
+                    <![CDATA[AND salary < #{salary}]]>
+                </when>
+                <when test="salaryCondition == 'GE'">
+                    <![CDATA[AND salary >= #{salary}]]>
+                </when>
+                <when test="salaryCondition == 'LE'">
+                    <![CDATA[AND salary <= #{salary}]]>
+                </when>
+                <otherwise>
+                    <![CDATA[AND salary = #{salary}]]>
+                </otherwise>
+            </choose>
+        </if>
     </select>
-    <select id="getWeatherInfo" resultType="com.aiagent.mcpserver.model.WeatherInfo" parameterType="com.aiagent.mcpserver.model.WeatherInfo">
+    <select id="searchWeatherRecords" resultType="com.aiagent.mcpserver.model.SearchWeatherInfo" parameterType="com.aiagent.mcpserver.model.SearchWeatherInfo">
         SELECT
             target_date,
             weather,
@@ -81,11 +100,43 @@
         <if test="weather != null and !weather.equals('')">
             AND weather = #{weather}
         </if>
-        <if test="temperature != null and !temperature.equals('')">
-            AND temperature = #{temperature}
+        <if test="temperature != null">
+            <choose>
+                <when test="temperatureCondition == 'GT'">
+                    <![CDATA[AND temperature > #{temperature}]]>
+                </when>
+                <when test="temperatureCondition == 'LT'">
+                    <![CDATA[AND temperature < #{temperature}]]>
+                </when>
+                <when test="temperatureCondition == 'GE'">
+                    <![CDATA[AND temperature >= #{temperature}]]>
+                </when>
+                <when test="temperatureCondition == 'LE'">
+                    <![CDATA[AND temperature <= #{temperature}]]>
+                </when>
+                <otherwise>
+                    <![CDATA[AND temperature = #{temperature}]]>
+                </otherwise>
+            </choose>
         </if>
-        <if test="humidity != null and !humidity.equals('')">
-            AND humidity = #{humidity}
+        <if test="humidity != null">
+            <choose>
+                <when test="humidityCondition == 'GT'">
+                    <![CDATA[AND humidity > #{humidity}]]>
+                </when>
+                <when test="humidityCondition == 'LT'">
+                    <![CDATA[AND humidity < #{humidity}]]>
+                </when>
+                <when test="humidityCondition == 'GE'">
+                    <![CDATA[AND humidity >= #{humidity}]]>
+                </when>
+                <when test="humidityCondition == 'LE'">
+                    <![CDATA[AND humidity <= #{humidity}]]>
+                </when>
+                <otherwise>
+                    <![CDATA[AND humidity = #{humidity}]]>
+                </otherwise>
+            </choose>
         </if>
     </select>
 </mapper>

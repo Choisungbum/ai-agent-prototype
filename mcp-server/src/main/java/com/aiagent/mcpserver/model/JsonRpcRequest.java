@@ -12,4 +12,5 @@ public class JsonRpcRequest {
     public String method;
     public Map<String, Object> params;
     public String id;
+    public String toolCallId;
 }

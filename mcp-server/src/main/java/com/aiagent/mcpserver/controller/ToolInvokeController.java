@@ -1,19 +1,15 @@
 package com.aiagent.mcpserver.controller;
 
 import com.aiagent.mcpserver.model.JsonRpcRequest;
-import com.aiagent.mcpserver.model.ToolInfo;
 import com.aiagent.mcpserver.service.ToolInvokeService;
-import com.aiagent.mcpserver.service.ToolService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
-import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Map;
 
 @Data
@@ -25,6 +21,8 @@ public class ToolInvokeController {
 
     @Autowired
     private final ToolInvokeService toolInvokeService;
+
+    ObjectMapper mapper = new ObjectMapper();
 
 //    @GetMapping("/initialize")
 //    public ResponseEntity<JsonRpcResponse> initialize(){
@@ -69,6 +67,14 @@ public class ToolInvokeController {
         try{
             Object result = toolInvokeService.invoke(request);
 
+            try {
+                // 2. 맵을 JSON 문자열로 변환 (writeValueAsString)
+                String jsonString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(result);
+                System.out.println("##################print result : ");
+                System.out.println(jsonString);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             return ResponseEntity.ok(result);
         } catch(Exception e) {
             log.error("❌ Tool Invoke Error: {}", e.getMessage(), e);

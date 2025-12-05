@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class UserInfo {
+public class SearchUserInfo {
     private String ssn;
     private String name;
     private Integer age;
@@ -13,8 +13,6 @@ public class UserInfo {
     private String email;
     private String jobId;
 
-    // db에는 없지만 나이컬럼의 조건을 담기위한 파라미터
-    // EQ, GT, LT
-    // default EQ
-    private String ageCondition = "EQ";
+    // 나이 범위조회 컬럼
+    private String ageCondition;
 }

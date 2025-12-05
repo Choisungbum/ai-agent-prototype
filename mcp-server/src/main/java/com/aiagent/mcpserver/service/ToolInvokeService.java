@@ -19,6 +19,7 @@ public class ToolInvokeService {
     @Autowired
     private ToolMapper toolMapper;
 
+
     /**
      * mcp 서버 -> agent 데이터 응답 형식
      *
@@ -109,7 +110,7 @@ public class ToolInvokeService {
             String name = params.get("tool").toString();
             Map<String, Object> args = (Map<String, Object>) params.get("args");
 
-            result.put("toolCallId", "callID");
+            result.put("toolCallId", request.getToolCallId());
             Map<String, Object> content = new HashMap<>();
 
             content.put("status", "success");
@@ -117,38 +118,40 @@ public class ToolInvokeService {
 
             // tool 선택
             switch (name) {
-                case "get_user_info":
+                case "search_users":
                     if (Objects.nonNull(args)) {
-                        UserInfo userInfo = CommonUtils.mapToObject(args, UserInfo.class);
-                        List<UserInfo> data = toolMapper.getUserInfo(userInfo);
+                        SearchUserInfo searchUserInfo = CommonUtils.mapToObject(args, SearchUserInfo.class);
+                        List<SearchUserInfo> data = toolMapper.searchUsers(searchUserInfo);
 
                         if (data != null) {
-                            for (UserInfo info : data) {
+                            for (SearchUserInfo info : data) {
                                 resultMap.add(CommonUtils.objectToMap(info)); // 객체를 json 데이터로 변환
                             }
                         }
                     }
                     break;
-                case "get_weather_info":
+                case "search_weather_records":
                     if (Objects.nonNull(args)) {
-                        WeatherInfo weatherInfo = CommonUtils.mapToObject(args, WeatherInfo.class);
-                        weatherInfo.setTargetDate(weatherInfo.getTargetDate().replace("-",""));
-                        List<WeatherInfo> data = toolMapper.getWeatherInfo(weatherInfo);
+                        SearchWeatherInfo searchWeatherInfo = CommonUtils.mapToObject(args, SearchWeatherInfo.class);
+                        if (searchWeatherInfo.getTargetDate() != null && !searchWeatherInfo.getTargetDate().isEmpty()) {
+                            searchWeatherInfo.setTargetDate(searchWeatherInfo.getTargetDate().replace("-",""));
+                        }
+                        List<SearchWeatherInfo> data = toolMapper.searchWeatherRecords(searchWeatherInfo);
 
                         if (data != null) {
-                            for(WeatherInfo info : data){
+                            for(SearchWeatherInfo info : data){
                                 resultMap.add(CommonUtils.objectToMap(info)); // 객체를 json 데이터로 변환
                             }
                         }
                     }
                     break;
-                case "get_user_job_info":
+                case "search_jobs":
                     if (Objects.nonNull(args)) {
-                        UserJobInfo userJobInfo = CommonUtils.mapToObject(args, UserJobInfo.class);
-                        List<UserJobInfo> data = toolMapper.getUserJobInfo(userJobInfo);
+                        SearchJobInfo searchJobInfo = CommonUtils.mapToObject(args, SearchJobInfo.class);
+                        List<SearchJobInfo> data = toolMapper.searchJobs(searchJobInfo);
 
                         if (data != null) {
-                            for(UserJobInfo info : data){
+                            for(SearchJobInfo info : data){
                                 resultMap.add(CommonUtils.objectToMap(info)); // 객체를 json 데이터로 변환
                             }
                         }

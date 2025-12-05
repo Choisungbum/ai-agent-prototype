@@ -118,7 +118,7 @@ async def summarize_if_needed(memory: ChatMemory, llm):
         return
     
     # 1. 전체 메세지 가져오기
-    all_messages = memory.get_messages
+    all_messages = memory.get_messages()
     # 2. LLM에게 요약 요청
     message = "\n".join(f"{m['role']}:{m['content']}" for m in all_messages)
     summary_prompt = PromptTemplate.from_template("""

@@ -1,5 +1,6 @@
 import asyncio
 
+import re
 import os
 import json
 import ast
@@ -147,10 +148,9 @@ async def process_chat(message: str, sessionId: str) -> str:
             history_list.append(HumanMessage(content=m["content"]))
         else:
             history_list.append(AIMessage(content=m["content"]))
-    
-    history = history_list
 
-    pprint(f"history : {history}")
+
+    pprint(f"history : {history_list}")
 
 
     print("--------- tool list 호출---------")
@@ -167,141 +167,230 @@ async def process_chat(message: str, sessionId: str) -> str:
 
     # 프롬프트 템플릿
     prompt = ChatPromptTemplate.from_messages([
-        # LLM이 system/human/assistant 구조를 가장 잘 이해
-        # 시스템 메시지: AI의 역할, 규칙, 도구 정의, 출력 포맷
-        ("system", """
-            너는 사용자의 질문을 분석하여 JSON 객체를 반환하는 AI 도우미야.
+    ("system", """
+        You are a smart assistant capable of using tools.
 
-            ### 절대 규칙
-            - "flag"는 반드시 최상위 depth 위치로.
-            - JSON-RPC 기본 요청 형식으로 출력해
+        # TOOLS
+        {tool_list}
 
-            ### 입력 데이터 규칙
-            - {history} 는 서버에서 실제 대화 내용 문자열로 치환되어 전달된다.
-            - {sessionId} 는 서버에서 실제 세션 ID 값으로 치환되어 전달된다.
-            - {tool_list} 는 사용 가능한 함수 리스트 JSON 텍스트이며 서버에서 치환된다.
-            - {history}, {tool_list}는 그대로 출력하지 말고 참고만 한다.
+        # INSTRUCTION (Follow Strictly)
+        1. **Language Strategy**: 
+        - THINK and DECIDE tools in **ENGLISH** (Logic works best in English).
+        - OUTPUT 'Final Answer' in **KOREAN** (Must answer in Korean).
+     
+        2. **Format**:
+        Thought: [Reasoning in English]
+        Action: [Tool Name] (or None)
+        Action Input: [JSON format]
+        Observation: [Wait for result]
+        ... (Repeat if needed) ...
+        Final Answer: [Answer in Korean]
+     
+        3. **Rules**:
+        - If user greets (e.g., "안녕"), Action: None -> Final Answer.
+        - **NO LOOP**: Before calling a tool, CHECK {history}. If you already searched for it, DO NOT search again.
+        - **NO FAKE TOOLS**: Use ONLY provided tools.
+        - **STOP**: Once you have the info, output 'Final Answer' immediately.
+        - **SINGLE TARGET PER ACTION**:
+            - You MUST search for **ONE target at a time**.
+            - NEVER try to search for multiple people/dates in a single Action.
+            - INVALID: {{"name": "A", "name": "B"}} (System Crash!)
+            - INVALID: {{"name": ["A", "B"]}} (System Crash!)
+            - **VALID**: Search "A" -> Wait -> Search "B".
+     
+        4. **[Multi-Object Check]**:
+       - If user asks for Multiple People (e.g., A and B), you MUST search for **BOTH**.
+       - Before writing 'Final Answer', ask yourself: "Did I find info for EVERYONE?"
+       - If you only found A, **DO NOT STOP**. Search for B immediately.
 
-            ### 로직 규칙
-            - 사용자의 질문과 [함수 리스트]({tool_list})를 비교하여 가장 관련 있는 함수를 선택.
-            - 함수가 명확히 매칭되면 "flag": "0".
-            - 매칭된 함수 이름은 "params.tool" 에 넣는다.
-            - 질문에서 추출 가능한 값만 "params.args" 에 키-값 형태로 넣는다.
-            - 함수가 없거나 모호하면 모든 필드는 "" 로 만들고 "flag": "-1"만 출력해.
-            - args 에 값을 넣을 때 똑같은 항목이 있다면 억지로 매핑하지말고 한 번 더 호출해 
+        # FEW-SHOT EXAMPLES
 
-            ### 출력 형식 (무조건 동일하게 사용)
-            {{
-            "jsonrpc": "2.0",
-            "id": {sessionId},
-            "method": "tools/call",
-            "flag": "0",
-            "params": {{
-                    "tool": "",
-                    "toolCallId": "",
-                    "args": {{}}
-                }}
-            }}
+        [Case 1: Simple Greeting]
+        User: 안녕 반가워 (Korean)
+        Thought: User is greeting. No tool needed.
+        Action: None
+        Final Answer: 안녕하세요! 무엇을 도와드릴까요? (Korean)
 
-            ### 참고
-            - "toolCallId" 는 "call_001" 형식의 고유 문자열 생성
-            - JSON의 구조와 key 이름을 절대 바꾸지 마.
-            - result, error, success, status 등은 절대 추가하지 마.
+        [Case 2: Single Tool Search]
+        User: 2025년 10월 30일 날씨 어때? (Korean)
+        Thought: Need to search weather records.
+        Action: search_weather_records
+        Action Input: {{"target_date": "20251030"}}
+        Observation: Weather Info: [Date: 20251030, Weather: Sunny, Temp: 29C]
+        Thought: I have the weather info.
+        Final Answer: 2025년 10월 30일 날씨는 맑고 기온은 29도입니다. (Korean)
 
-            ### 최근 대화
-            {history}
-
-            이제 다음 사용자 질문에 대해 위 JSON 형식만 반환해:
-        """),
-        # 휴먼 메시지: 실제 사용자의 입력
-        ("human", "{question}")
-    ])
+        [Case 3: Multi-step Search]
+        User: 수지와 공유의 나이를 알려줘. (Korean)
     
-
-    # 체인 생성
-    # LCEL
-    chain = prompt | llm | JsonOutputParser() 
-    
-    # chain 실행
-    llm_result = await chain.ainvoke({
-        "tool_list": tool_list,
-        "sessionId":sessionId,
-        "history":history,
-        "question": message
-    }) 
-
-    
-    print(f"[LLM 응답]\n")
-    print(json.dumps(llm_result, indent=2, ensure_ascii=False)) 
-    
-
-    # 결과 파싱 -> 실제 MCP 호출
-    try:
-        # 0 -> mcp 서버 호출, 1 -> 일반 응답 
-        if (llm_result["flag"] == '0'):
-            async with httpx.AsyncClient() as client:
-                try:
-                    response = await client.post(
-                        f"{MCP_SERVER_URL}/invoke"
-                        , json=llm_result
-                        , headers={"Content-Type": "application/json"}
-                        , timeout=30.0
-                    )
-                                
-                    tool_result = response.text
-                    if response.status_code == 200:
-                        tool_result = response.text
-                        print(f"[MCP 결과] {tool_result}")
-
-                        # 5️⃣ Reflect 단계: 처음 질문 + MCP 결과를 함께 전달
-                        reflect_prompt = ChatPromptTemplate.from_messages([
-                            ("system", """
-                            너는 친절한 AI 어시스턴트야.
-
-                            야래 MCP 서버에서 조회한 결과를 바탕으로 자연스럽고 간결하게 사용자 질문에 답변해줘.
-                            {tool_result}
-                            """),
-                            ("human", "{question}")
-                        ])
-
-                        reflect_chain = reflect_prompt | llm | StrOutputParser()
-                        final_answer = await reflect_chain.ainvoke({
-                            "tool_result": tool_result,
-                            "question": message
-                        })
-    
-                    else:
-                        print(f"⚠️ MCP 호출 실패 ({response.status_code})")
-                        return f"제가 잘모르는 부분입니다."
-                except requests.exceptions.HTTPError as exc:
-                    raise HTTPException(
-                        status_code=exc.response.status_code,
-                        detail=f"Target server returned an error: {exc.response.text}"
-                    )
-                except requests.exceptions.RequestException as exc:
-                    raise HTTPException(
-                        status_code=503,
-                        detail=f"An error occurred while requesting the target server: {exc}"
-                    )
-                except httpx.ReadTimeout:
-                    # 10초 이상 걸리면 여기로 떨어짐
-                    raise HTTPException(status_code=504, detail="Upstream request timeout (30s exceeded)")
+        Thought: User wants info for two people: Suzy and 공유. I must search ONE BY ONE. First, Suzy.
+        Action: search_users
+        Action Input: {{"name": "수지"}}
+        Observation: User Info: [Name: Suzy, Age: 29]
         
-        # elif (llm_result["flag"] == '-1'):
+        Thought: I found Suzy. Now I MUST search for 공유.
+        Action: search_users
+        Action Input: {{"name": "공유"}}
+        Observation: User Info: [Name: 공유, Age: 44]
+        
+        Thought: I have info for both.
+        Final Answer: 수지는 29세이고, 공유는 44세입니다. (Korean)
+    """),
+    ("human", """
+        # HISTORY
+        {history}
+
+        # CURRENT QUESTION
+        User: {question}
+
+        # AGENT SCRATCHPAD
+        {agent_scratchpad}
+    """)
+])
+
+    # TARL (Tool-Augmented Reasoning Loop) 시작
+    agent_scratchpad = "" # 생각의 누적 기록 공간
+    step_count = 0
+    max_steps = 10 # 무한 루프 방지용 (최대 5번까지 도구 사용 가능)
+    final_answer = ""
+
+    while step_count < max_steps:
+        step_count += 1
+        print(f"\n--- [Step {step_count}] Reasoning 시작 ---") 
+
+        # LLM 호출 (생각하기)
+        # bind를 사용하여 stop 시퀀스 사용
+        # LLM이 "Observation:" 이라고 쓰려는 순간 강제로 출력을 끝냄
+        # 그렇지 않을 경우 Observation 할루시네이션을 통해 Final Answer까지 가버림
+        chain = prompt | llm.bind(stop=["Observation:"]) | StrOutputParser()
+
+        response_text = await chain.ainvoke({
+            "tool_list": tool_list,
+            "history": history_list, 
+            "question": message,
+            "agent_scratchpad": agent_scratchpad
+        })
+
+        print(f"[LLM 생각]:\n{response_text}")
+
+        # 종료 조건 확인 (Final Answer 감지)
+        if "Final Answer:" in response_text:
+            agent_scratchpad = ''
+            final_answer = response_text.split("Final Answer:")[-1].strip()
+
+            final_last_brace_index = final_answer.rfind("}")
+            if final_last_brace_index != -1:
+                final_answer = final_answer[:final_last_brace_index+1]
+            print(f"✅ 최종 답변 도출 완료")
+            break
+        
+        action_match = re.search(r"Action:\s*(.*?)\n", response_text)
+        input_match = re.search(r"Action Input:\s*(.*)", response_text, re.DOTALL)
+
+        # Action 파싱 (정규표현식 사용)
+        # LLM이 뱉은 텍스트에서 'Action:'과 'Action Input:'을 찾아냄
+        if action_match and input_match:
+            try:
+                tool_name = action_match.group(1).strip()
+                raw_args = input_match.group(1).strip()
+
+                # Action Input 뒤에 붙은 불필요한 문자 제거 및 dict 형태로 변환
+                last_brace_index = raw_args.rfind("}")
+                if last_brace_index != -1:
+                    cleaned_args = raw_args[:last_brace_index+1]
+                
+                tool_args_dict = json.loads(cleaned_args)
+
+
+                print(f"👉 도구 실행 요청: {tool_name}")
+                print(f"👉 파싱된 인자(Object): {tool_args_dict}") 
+
+            except json.JSONDecodeError as e:
+                print(f"⚠️ JSON 파싱 실패: {raw_args}")
+                agent_scratchpad += f"\nObservation: JSON 형식이 잘못되었습니다. ({cleaned_args}) 올바른 JSON으로 다시 시도하세요.\n"
+                continue
+            except Exception as e:
+                agent_scratchpad += f"\nObservation: 파싱 중 에러 발생 ({str(e)})\n"
+                continue
         else:
-            reflect_prompt = ChatPromptTemplate.from_messages([
-                            ("system", """
-                            너는 친절한 AI 어시스턴트야. 사용자 질문에 답변해줘.
-                            """),
-                            ("human", "{question}")
-                        ])
+            # LLM이 도구 쓸 생각은 없고, 그냥 답을 뱉었는데 형식을 안 지킨 경우
+            print("⚠️ 형식 없음 감지 -> 강제 Final Answer 처리")
+            
+            # 혹시 모르니 빈 문자열인지 체크
+            if not response_text.strip():
+                print("⚠️ 빈 응답 -> 재시도")
+                agent_scratchpad += "\nObservation: 아무 말도 하지 않았습니다. 답변을 주세요.\n"
+                continue
 
-            reflect_chain = reflect_prompt | llm | StrOutputParser()
-            final_answer = await reflect_chain.ainvoke({ "question": message})
+            agent_scratchpad = ''
+            final_answer = response_text.strip()
+            print(f"✅ 최종 답변 도출 완료 (강제 처리)")
+            break
 
-    except json.JSONDecodeError:
-        return llm_result
-    
+        # MCP 서버 호출 (Acting)
+        tool_result = ""
+        tool_call_id = f"call_{step_count}"
+
+        try:
+            # MCP 서버 스펙에 맞춘 JSON-RPC 생성
+            mcp_payload = {
+                "jsonrpc": "2.0",
+                "id": sessionId,
+                "method": "tools/call",
+                "params": {
+                    "tool": tool_name,
+                    "toolCallId": tool_call_id, # 유니크 ID
+                    "args": tool_args_dict # LLM이 만든 JSON 문자열 그대로 전달
+                }
+            }
+
+            async with httpx.AsyncClient() as client:
+                mcp_response = await client.post(
+                    f"{MCP_SERVER_URL}/invoke",
+                    json=mcp_payload,
+                    headers={"Content-Type": "application/json"},
+                    timeout=30.0
+                )
+
+                if mcp_response.status_code == 200:
+                    result_json = mcp_response.json()
+                    
+                    # 알맹이 추출 로직
+                    try:
+                        real_data = result_json.get("result", {}).get("content", {}).get("data", [])
+                        
+                        if not real_data:
+                            tool_result = "검색 결과가 없습니다."
+                        else:
+                            # ★ 8B 모델용 떠먹여주기 포맷 (JSON 껍데기 제거)
+                            tool_result = f"검색 결과: {str(real_data)}"
+                            
+                    except Exception as e:
+                        tool_result = f"데이터 파싱 에러: {mcp_response.text}"
+                else:
+                    tool_result = f"Error: 도구 호출 실패 (Status {mcp_response.status_code})"
+
+        except Exception as e:
+            tool_result = f"Error: 도구 실행 중 예외 발생 ({str(e)})"
+            print(f"⚠️ {tool_result}")
+
+        # [디버깅용 출력]
+        print(f"[관찰 결과]: {tool_result}")
+
+        # ★★★ [핵심 수정] 기억 업데이트는 여기서 딱 한 번만! ★★★
+        # 순서 중요: [AI의 생각/행동(response_text)] -> [시스템의 결과(tool_result)]
+        agent_scratchpad += f"\n{response_text}\nObservation: {tool_result}\n"
+        
+        print(f"현재까지 기억 : {agent_scratchpad}")
+
+        # 루프 종료 후 처리
+    if not final_answer:
+        agent_scratchpad = ''
+        final_answer = "죄송합니다. 도구 실행 횟수가 초과되어 답변을 생성하지 못했습니다."
+
+    print("--------- 토큰 계산---------")
+
+    # 토큰 계산
     prompt_tokens = token_counter.input_tokens
     human_tokens = count_tokens_with_ollama(message)
     assistant_tokens = token_counter.output_tokens
@@ -317,19 +406,9 @@ async def process_chat(message: str, sessionId: str) -> str:
     ## 기존 
     await summarize_if_needed(memory, llm)
 
-    print(f"[Reflect 결과] {final_answer}")
+    print(f"[최종 결과] {final_answer}")
     return final_answer
-    
-# def pretty_tool_data(data):
-#     # tools 내부 params만 다시 파싱해서 dict로 변환
-#     for tool in data["response"]["result"]["tools"]:
-#         try:
-#             tool["params"] = json.loads(tool["params"])   # 문자열 → dict
-#         except:
-#             pass
-
-#     # 전체 다시 예쁘게 출력
-#     print(json.dumps(data, indent=2, ensure_ascii=False))  
+ 
 
 def pretty_tool_data(data):
     # 1. 입력받은 data가 '리스트'인지 '딕셔너리'인지 확인하여 타겟을 정합니다.
@@ -353,6 +432,17 @@ def pretty_tool_data(data):
 
     # 3. 전체 예쁘게 출력
     print(json.dumps(data, indent=2, ensure_ascii=False))
+
+# def pretty_tool_data(data):
+#     # tools 내부 params만 다시 파싱해서 dict로 변환
+#     for tool in data["response"]["result"]["tools"]:
+#         try:
+#             tool["params"] = json.loads(tool["params"])   # 문자열 → dict
+#         except:
+#             pass
+
+#     # 전체 다시 예쁘게 출력
+#     print(json.dumps(data, indent=2, ensure_ascii=False)) 
 
 # 
 # initialize 요청

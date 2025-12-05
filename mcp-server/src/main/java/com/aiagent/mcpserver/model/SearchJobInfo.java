@@ -5,8 +5,10 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class UserJobInfo {
+public class SearchJobInfo {
     private String jobId;
     private String jobTitle;
     private Integer salary;
+
+    private Integer salaryCondition;
 }

@@ -68,10 +68,17 @@ public class ToolInvokeController {
             Object result = toolInvokeService.invoke(request);
 
             try {
+//                args 조회
+                Map<String, Object> params = request.getParams();
+                Map<String, Object> args = (Map<String, Object>) params.get("args");
+                String argsJson = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(args);
+                System.out.println("##################print args : ");
+                System.out.println(argsJson);
+
                 // 2. 맵을 JSON 문자열로 변환 (writeValueAsString)
-                String jsonString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(result);
+                String resultJson = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(result);
                 System.out.println("##################print result : ");
-                System.out.println(jsonString);
+                System.out.println(resultJson);
             } catch (Exception e) {
                 e.printStackTrace();
             }

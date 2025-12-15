@@ -56,14 +56,14 @@
             AND jobId = #{jobId}
         </if>
     </select>
-    <select id="getUserJobInfo" resultType="com.aiagent.mcpserver.model.SearchJobInfo" parameterType="com.aiagent.mcpserver.model.SearchJobInfo">
+    <select id="searchJobs" resultType="com.aiagent.mcpserver.model.SearchJobInfo" parameterType="com.aiagent.mcpserver.model.SearchJobInfo">
         SELECT
             job_id,
             job_title,
             salary
         FROM user_job_Info
         WHERE 1 = 1
-        <if test="jobTitle != jobTitle and !jobTitle.equals('')">
+        <if test="jobTitle != null and !jobTitle.equals('')">
             AND job_title = #{jobTitle}
         </if>
         <if test="salary != null">

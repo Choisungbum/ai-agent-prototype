@@ -110,7 +110,7 @@ public class ToolInvokeService {
             String name = params.get("tool").toString();
             Map<String, Object> args = (Map<String, Object>) params.get("args");
 
-            result.put("toolCallId", request.getToolCallId());
+            result.put("toolCallId", params.get("toolCallId").toString());
             Map<String, Object> content = new HashMap<>();
 
             content.put("status", "success");

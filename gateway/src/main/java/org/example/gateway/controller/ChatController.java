@@ -35,7 +35,7 @@ public class ChatController {
         headers.set("X-Session-ID", sessionId);
 
         if (request != null && "SESSION_INIT".equals(request.getMessage())) {
-            String sessionid = sessionService.createSession();
+            String sessionid =  UUID.randomUUID().toString();
             log.info("session ID : {}", sessionid);
             headers.set("X-Session-ID", sessionid);
 

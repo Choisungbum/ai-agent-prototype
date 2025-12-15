@@ -21,7 +21,7 @@ class ChatMemory:
         self.msg_key = f"session:{session_id}:message"
         self.sum_key = f"session:{session_id}:summary"
         self.token_key = f"session:{session_id}:token_total"
-        self.tools_key =  f"session:{session_id}:tools_key"
+        self.tools_key =  f"session:{session_id}:tools"
 
     def add_init(self, init_list:list):
          print(f"init_list : {init_list}")
@@ -129,7 +129,7 @@ async def summarize_if_needed(memory: ChatMemory, llm):
         {messages}
         """)
 
-    chain = summary_prompt | llm | StrOutputParser
+    chain = summary_prompt | llm | StrOutputParser()
     summary = chain.invoke({"messages": message})
 
     # 3. redis 갱신

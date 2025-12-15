@@ -10,5 +10,5 @@ public class SearchJobInfo {
     private String jobTitle;
     private Integer salary;
 
-    private Integer salaryCondition;
+    private String salaryCondition;
 }

@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException, Header
+from fastapi import APIRouter, HTTPException, Header, Response, status
 from app.models.chat_models import ChatRequest, ChatResponse
 from app.services.chat_service import process_chat
 from app.services.chat_service import initialize
@@ -28,7 +28,7 @@ async def chat(request: ChatRequest
     return ChatResponse(response=response_text)
         
 @router.post("/initialize")
-async def chatInitialize(x_session_id: str = Header(None)) -> ChatResponse:
+async def chatInitialize(x_session_id: str = Header(None)):
     sessionId = x_session_id
     response_text = await initialize(sessionId)
-    return ChatResponse(response=json.dumps(response_text))
+    return Response(status_code=status.HTTP_200_OK)

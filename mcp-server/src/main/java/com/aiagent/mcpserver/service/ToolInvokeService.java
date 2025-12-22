@@ -85,7 +85,6 @@ public class ToolInvokeService {
                 toolsForJson.add(toolForJson);
             }
 
-            result.put("session", System.currentTimeMillis());
             result.put("tools", toolsForJson);
        } else if ("tools/list".equals(method)) {
             log.info("tools/list");

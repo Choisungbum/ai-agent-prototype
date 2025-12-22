@@ -39,7 +39,7 @@ class ChatMemory:
         # token_total 값을 tokens 만큼 증가
         r.incrby(self.token_key, tokens)
 
-    def get_messages(self, limit=10):
+    def get_messages(self, limit=15):
         # Redis 리스트에서 뒤에서 limit 개수만 가져옴
         msgs = r.lrange(self.msg_key, -limit, -1)
         return [json.loads(m) for m in msgs]

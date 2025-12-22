@@ -12,7 +12,7 @@ from fastapi import HTTPException
 
 #  langchain_core 최신 버전 (v0.2.x ~ v0.3.x 이후) 1.0.3 사용
 from langchain_core.prompts import PromptTemplate
-from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.output_parsers import JsonOutputParser
 from langchain_core.messages import SystemMessage, HumanMessage, AIMessage
@@ -35,8 +35,8 @@ REQUEST_INITIALIZE = os.getenv("REQUEST_INITIALIZE")
 
 NO_RESULT = os.getenv("NO_RESULT")
 
-# 토큰 계산기
-token_counter = SimpleTokenCounter()
+# 토큰 계산
+total_session_tokens = {"input": 0, "output": 0}
 
 # 전역 LLM 사용
 llm = ChatOllama ( # langchain-ollama 1.0.0 버전 문법 
@@ -45,8 +45,7 @@ llm = ChatOllama ( # langchain-ollama 1.0.0 버전 문법
     temperature=0,
     num_ctx=4096,  # context 길이
     top_p=0.9,
-    repeat_penalty=1.05,
-    callbacks=[token_counter]
+    repeat_penalty=1.05
 )
 
 async def initialize(sessionId:str) -> str:
@@ -142,7 +141,6 @@ async def process_chat(message: str, sessionId: str) -> str:
 
     print("---------process_chat start---------")
 
-    print("--------- 이전 대화 내역 호출---------")
     memory = ChatMemory(sessionId)
 
     summary = memory.get_summary()
@@ -154,22 +152,36 @@ async def process_chat(message: str, sessionId: str) -> str:
     history_list = []
     history_list.append(SystemMessage (content=f"요약: {summary} \n"))
 
+    # 매핑테이블 정의
+    role_map = {
+        "human": HumanMessage,
+        "user": HumanMessage,      
+        "system": SystemMessage,
+        "ai": AIMessage,
+        "assistant": AIMessage
+    }
+
     for m in recent:
-        history_list.append(HumanMessage(content=m["content"]) if m["role"] == "human" else AIMessage(content=m["content"]))
+        msg_class = role_map.get(m["role"], AIMessage)
+        history_list.append(msg_class(content=m["content"]))
 
+    print(f"\n[history]")
+    for msg in history_list:
+    # msg.type은 'human', 'ai', 'system'을 반환함
+        print(f"[{msg.type}]: {msg.content}")
 
-    pprint(f"history : {history_list}")
-
-
-    print("--------- tool list 호출---------")
+    print(f"\n[message] \n{message}")
+    print(f"\n[sessionId] \n{sessionId}")
+    
     tool_list = memory.get_tool_list()
 
-    print(f"[tool list] \n")
-    print(f"[message] \n{message}")
-    print(f"[sessionId] \n{sessionId}")
-    
-
     # 프롬프트 템플릿
+    # 1. 생각 및 결정은 영어로
+    # 2. ReAct 패턴의 Format 지정
+    # 3. 실행 규칙 지정
+    # 4. 타켓이 하나가 아닐 경우의 전략 
+    # 5. 문맥 참조 및 출력 범위 제한 
+    # 6. 파라미터 규칙 지정
     prompt = ChatPromptTemplate.from_messages([
     ("system", """
         You are a smart assistant capable of using tools.
@@ -177,19 +189,16 @@ async def process_chat(message: str, sessionId: str) -> str:
         # TOOLS
         {tool_list}
 
-        # INSTRUCTION (Follow Strictly)
-        1. **Language Strategy**: 
-        - THINK and DECIDE tools in **ENGLISH** (Logic works best in English).
-     
-        2. **Format**:
+        # SYSTEM INSTRUCTIONS
+        1. **Language**: THINK and DECIDE tools in **ENGLISH**.
+        
+        2. **Format**: Use the following format STRICTLY. Pure Text only (No Markdown headers like #).
         Thought: [Reasoning in English]
         Action: [Tool Name] (or None)
-        Action Input: [JSON format, param in Korean]
+        Action Input: [JSON String]
         Observation: [Wait for result]
-        ... (Repeat if needed) ...
-   
-     
-        3. **Rules**:
+
+         3. **Rules**:
         - If user greets (e.g., "안녕"), Action: None 
         - **NO LOOP**: Before calling a tool, CHECK {history}. If you already searched for it, DO NOT search again.
         - **NO FAKE TOOLS**: Use ONLY provided tools.
@@ -200,19 +209,41 @@ async def process_chat(message: str, sessionId: str) -> str:
             - INVALID: {{"name": ["A", "B"]}} (System Crash!)
             - **VALID**: Search "A" -> Wait -> Search "B".
      
-        4. **[Multi-Object Check]**:
-        - If user asks for Multiple People (e.g., A and B), you MUST search for **BOTH**.
-        - Before writing 'Final Answer', ask yourself: "Did I find info for EVERYONE?"
-        - If you only found A, **DO NOT STOP**. Search for B immediately.
-        5. "You MUST use the following format strictly:" Action: [Tool Name] Action Input: [JSON String]
+        4. **[Multi-Target Search Strategy]**
+        - **Checklist Creation:** If the user asks for multiple targets (e.g., "Find A and B"), mentally create a checklist: `[A, B]`.
+        - **Independent Execution:** Search for each target **independently**.
+            - If the result for A is "Empty/Not Found": Mark A as "Missing", but **DO NOT STOP**.
+            - **IMMEDIATELY** proceed to search for B. (A's failure does not affect B).
+        - **Completion Condition:** You are NOT allowed to generate a "Action: DONE" until you have iterated through **ALL** targets in your checklist.
+        - **Final Reporting:** In your "Action: DONE", clearly summarize the status of EACH target (e.g., "A: Found (Details...), B: Not Found").
 
-        # FEW-SHOT EXAMPLES
+       5. **[CONTEXT & SCOPE RULE]** (Read Carefully)
+        - **Step 1: Context Understanding (Input)**
+            - You MUST look at **History** to understand pronouns like "he", "she", "that person", or "same as before".
+            - Example: If History has "Search for A", and User says "What is his age?", you MUST search for "A".
+        
+        - **Step 2: Output Control (Output)**
+            - If the user explicitly changes the topic (e.g., "Now find B"), do NOT include info about "A" in the "Action: DONE".
+            - **Rule of Thumb:** Use History to *understand* the question, but answer ONLY what is *currently* asked.
+     
+        6. **[Argument Value Rules]**
+        - **NO GUESSING**: Do NOT fill in optional parameters with assumed values.
+        - **User Explicit Only**: Use a value ONLY if the user explicitly stated it in the query
+        - If the user input contains a mixed Korean/English term
+                (e.g., "DevOps 엔지니어", "IT 컨설턴트"):
+                - You MUST copy the term EXACTLY as it appears in the user input.
+                - DO NOT translate, normalize, or standardize the term.
+                - If you output a translated or normalized version,
+                    the output is considered INVALID.
+     
+
+        # FEW-SHOT EXAMPLES (Follow these patterns)
 
         [Case 1: Simple Greeting]
-        User: 안녕 반가워 
+        User: 안녕 반가워
         Thought: User is greeting. No tool needed.
         Action: None
-    
+
         [Case 2: Single Tool Search]
         User: 2025년 10월 30일 날씨 어때? 
         Thought: Need to search weather records.
@@ -222,10 +253,11 @@ async def process_chat(message: str, sessionId: str) -> str:
         Thought: I have the weather info.
         Action: DONE
 
-        [Case 3: Multi-step Search]
+        [Case 3: Multi-step / Fail-Recovery]
         User: 윈터와 카리나의 나이를 알려줘. 
     
-        Thought: User wants info for two people: 윈터 and 카리나. I must search ONE BY ONE. First, 윈터.
+        Thought: User wants info for two people: 윈터 and 카리나. I will attempt to search for them sequentially. 
+                First, I will check 윈터. If 윈터 is not found, I will mark it as missing and immediately proceed to 카리나
         Action: search_users
         Action Input: {{"name": "윈터"}}
         Observation: User Info: [Name: 윈터, Age: 29]
@@ -237,39 +269,55 @@ async def process_chat(message: str, sessionId: str) -> str:
         
         Thought: I have info for both.
         Action: DONE
+     
+        [Case: Preventing Translation]
+        User: "IT 컨설턴트 연봉은?"
+        Thought: User used the Korean term "IT 컨설턴트".
+        Action: search_jobs
+        Action Input: {{"job_title": "IT 컨설턴트"}}
+     
     """),
+     MessagesPlaceholder(variable_name="history"),
     ("human", """
-        # HISTORY
-        {history}
 
-        # CURRENT QUESTION
+        # CURRENT MESSAGE
         User: {question}
 
         # AGENT SCRATCHPAD
         {agent_scratchpad}
-    """)
+        """)
     ])
 
     # --- [Phase 1] 데이터 수집 단계 ---
+    print("\n--- [Phase 1] 데이터 수집 단계  ---")
+
     # TARL (Tool-Augmented Reasoning Loop) 시작
-    agent_scratchpad = "" # 생각의 누적 기록 공간
+    # 생각의 누적 기록 공간
+    agent_scratchpad = "" 
     step_count = 0
-    max_steps = 10 # 무한 루프 방지용
+    # 무한 루프 방지용
+    max_steps = 10 
     final_answer = ""
-    collected_data = []   # 장바구니
+    # 장바구니 = tool 결과 데이터
+    collected_data = []   
+    isAction = False
+    current_action_key = ""
     # 중복방지 key set
     executed_actions = set()
 
+    ##########################
+    # Agentic Loop 시작
+    ##########################
     while step_count < max_steps:
         step_count += 1
         print(f"\n--- [Step {step_count}] Reasoning 시작 ---") 
-
-        print(f"\n[이전기억]:\n{agent_scratchpad}")
+        print(f"현재까지 기억 \n {agent_scratchpad}")
 
         ##########################
-        # LLM 호출 (생각하기)
+        # LLM 호출 (Reasoning)
         ##########################
-        chain = prompt | llm.bind(stop=["Observation:"]) | StrOutputParser()
+        # chain = prompt | llm.bind(stop=["Observation:"]) | StrOutputParser()
+        chain = prompt | llm.bind(stop=["Observation:"]) | RunnableLambda(raw_accumulate) | StrOutputParser()
         response_text = await chain.ainvoke({
             "tool_list": tool_list,
             "history": history_list, 
@@ -280,10 +328,10 @@ async def process_chat(message: str, sessionId: str) -> str:
         print(f"[LLM 생각]:\n{response_text} \n")
 
         ####################################################
-        # 종료 조건: AI가 'DONE'을 외치거나 'None'으로 도망갈 때
+        # 종료 조건: AI가 'DONE' / 'None' 출력할 경우
         ####################################################
         if "Action: DONE" in response_text or "Action: None" in response_text:
-            print("✅ 검색 종료 선언 (DONE/None)")
+            print("검색 종료 선언 (DONE/None) 1")
             break
 
         ####################################################
@@ -292,7 +340,11 @@ async def process_chat(message: str, sessionId: str) -> str:
         action_match = re.search(r"Action:\s*(.*?)\n", response_text)
         input_match = re.search(r"Action Input:\s*(.*)", response_text, re.DOTALL)
 
+        ####################################################
+        # 사용할 도구 및 파라미터 존재하는 경우 
+        ####################################################
         if action_match and input_match:
+            isAction = True
             try:
                 tool_name = action_match.group(1).strip()
                 raw_args = input_match.group(1).strip()
@@ -304,24 +356,24 @@ async def process_chat(message: str, sessionId: str) -> str:
                 
                 tool_args_dict = json.loads(cleaned_args)
 
-
                 print(f"👉 도구 실행 요청: {tool_name}")
                 print(f"👉 파싱된 인자(Object): {tool_args_dict}") 
 
-                current_action_key = f"{tool_name}:{json.dumps(tool_args_dict, sort_keys=True)}"
+                #####################
+                # 중복검사 키 생성
+                #####################
+                current_action_key = f"{tool_name}:{json.dumps(tool_args_dict, sort_keys=True, ensure_ascii=False)}"
 
-                # 2. 명단에 있는지 확인 (중복 검사)
+                # 중복 검사
                 if current_action_key in executed_actions:
-                    print(f"⛔ 중복 행동 감지.")
+                    print(f"중복 행동 감지.")
                     
-                    # 3. AI한테 경고장 날리기 (절대 API 호출 안 해줌)
+                    # AI한테 경고
                     error_msg = "(System: You ALREADY executed this action. DO NOT TRY AGAIN. If you have info, output 'Action: DONE'.)"
-                    
-                    # 4. 기억에 박고 다음 턴으로 강제 이동 (continue)
                     agent_scratchpad += f"\nObservation: {error_msg}\n"
                     continue 
                 
-                # 3. 처음 하는 거면 명단에 등록
+                # 새로운 키 등록 
                 executed_actions.add(current_action_key)
 
             except json.JSONDecodeError as e:
@@ -332,7 +384,7 @@ async def process_chat(message: str, sessionId: str) -> str:
                 agent_scratchpad += f"\nObservation: 파싱 중 에러 발생 ({str(e)})\n"
                 continue
         else:         
-            print("⛔ [시스템 감지] Action: None 선언됨.")
+            print("검색 종료 선언 (DONE/None) 2")
             if "result:" in agent_scratchpad:
                 print("⚠️ 데이터는 있는데 답 안 하고 도망감 -> 강제 복귀")
                 
@@ -344,7 +396,7 @@ async def process_chat(message: str, sessionId: str) -> str:
                 
             else:
                 # 데이터도 없는데 None이면 진짜 할 거 없는 거임 (이건 보내주자)
-                print("⛔ 데이터도 없고 할 것도 없음 -> 종료")
+                print("데이터도 없고 할 것도 없음 -> 종료")
                 msg = "죄송합니다. 관련 정보를 찾을 수 없습니다."
                 agent_scratchpad += f"\nObservation: {msg}\n"
                 break
@@ -354,7 +406,9 @@ async def process_chat(message: str, sessionId: str) -> str:
         tool_call_id = f"call_{step_count}"
 
         try:
-            # MCP 서버 스펙에 맞춘 JSON-RPC 생성
+            ###################################
+            # MCP 서버 스펙에 맞춘 JSON-RPC 생성 
+            ###################################
             mcp_payload = {
                 "jsonrpc": "2.0",
                 "id": sessionId,
@@ -366,6 +420,9 @@ async def process_chat(message: str, sessionId: str) -> str:
                 }
             }
 
+            #################
+            # MCP 서버 호출 
+            #################
             async with httpx.AsyncClient() as client:
                 mcp_response = await client.post(
                     f"{MCP_SERVER_URL}/invoke",
@@ -395,68 +452,90 @@ async def process_chat(message: str, sessionId: str) -> str:
             tool_result = f"Error: 도구 실행 중 예외 발생 ({str(e)})"
             print(f"⚠️ {tool_result}")
 
-        # [디버깅용 출력]
-        print(f"[관찰 결과]: {tool_result}")
+        #################
+        # 검색결과 처리
+        #################
 
-        # Final Anwser 얻기위한 추가 메세지
-        system_nudge = ""
-
-        # 1. 검색결과 존재 -> 검색결과를 통해 Final Answer 출력
+        # 검색결과 존재 -> 장바구니에 검색결과 담기
         if "result:" in tool_result:
+            collected_data.append(current_action_key)
             collected_data.append(tool_result)
-            print(f"🎒 데이터 확보: {tool_result}")
-        
-        # 2. 검색결과 없음 -> 검색결과가 없으니 데이터 검색 포기 후 Final Answer 출력
+            
+        # 검색결과 없음 -> 장바구니에 검색결과 NO_RESULT 저장
         elif NO_RESULT in tool_result:
-             print("⛔ [시스템] 데이터 없음. 포기 강요.")
+            collected_data.append(current_action_key)
+            collected_data.append(NO_RESULT)
              
-
-        # 3. 데이터 결과와 추가 메세지 조합
-        agent_scratchpad += f"\n{response_text}\nObservation: {tool_result}\n"
+        print(f"데이터 현황: {tool_result}")
         
-        print(f"현재까지 기억 : {agent_scratchpad}")
+        # Observation 검색 결과 추가
+        agent_scratchpad += f"\n{response_text}\nObservation: {collected_data}\n"
+        
+        
 
     # --- [Phase 2] 답변 생성 단계 ---
     print("\n--- [Phase 2] 최종 답변 생성 중 ---")
 
-    if not collected_data:
-        final_answer = "죄송합니다. 관련 정보를 찾을 수 없습니다."
-    else:
-        # 장바구니 털기
-        context_text = "\n".join(collected_data)
+    if isAction == True:
+
+        # 장바구니 출력
+        context_text = "\n".join(collected_data) 
+        print(f"\ncontext_text\n {context_text}")
         
         # 2번째 LLM을 위한 심플한 프롬프트
         summary_prompt = f"""
-        당신은 친절한 AI 비서입니다.
-        아래 '수집된 데이터'를 바탕으로 사용자의 질문에 대해 한국어로 자연스럽게 답변하세요.
-        
-        [수집된 데이터]
+        You are a friendly AI assistant.
+        Based on the 'Collected Data' below, please answer the user's question naturally in Korean.
+
+        [Collected Data]
         {context_text}
-        
-        [사용자 질문]
+
+        [User Question]
         {message}
-        
-        [작성 가이드]
-        - 없는 말을 지어내지 마세요.
-        - 데이터에 있는 내용만 요약해서 설명하세요.
-        - 'Action', 'Thought' 같은 형식 쓰지 말고 그냥 줄글로 답하세요.
+
+        [Writing Guidelines]
+        - Do not fabricate information.
+        - Summarize and explain using only the content provided in the data.
+        - If the provided data does not contain the answer, explicitly state that no information was found.
         """
-        
-        # LLM 호출 (한 방에 끝)
-        final_answer = llm.invoke(summary_prompt).content
+            
+        # LLM 호출
+        final_chain = llm
+        # final_answer = llm.invoke(summary_prompt).content
 
-    print(f"🚀 최종 결과: {final_answer}")
+    else:
+        summary_prompt = f"""
+            You are a friendly AI assistant.
+            please answer the user's question naturally in Korean.
 
+            
+            [User Question]
+            {message}
+
+        [Writing Guidelines]
+        - Do not fabricate information.
+            """
+        ##########################
+        # LLM 호출 (Final Answer 생성)
+        ##########################
+        # final_chain = llm | RunnableLambda(raw_accumulate) | StrOutputParser()
+        final_chain = llm | RunnableLambda(raw_accumulate)
     
-    print("--------- 토큰 계산---------")
-
-    #  # redis 추가
-    memory.add_message("human", message, 2000)
-    memory.add_message("assistant", final_answer, 40)
+    final_answer = final_chain.invoke(summary_prompt).content
+    print(f"최종 답변: {final_answer}")
 
     ## 기존 
     await summarize_if_needed(memory, llm)
-    
+
+    # redis 추가
+    memory.add_message("human", message, total_session_tokens["input"])
+    memory.add_message("system", current_action_key, 0)
+    memory.add_message("assistant", final_answer, total_session_tokens["output"])
+
+    # 전역변수 토큰 초기화
+    total_session_tokens["input"] = 0
+    total_session_tokens["output"] = 0
+
     return final_answer
  
 
@@ -484,5 +563,19 @@ def pretty_tool_data(data):
     # 3. 전체 예쁘게 출력
     print(json.dumps(data, indent=2, ensure_ascii=False))
 
-def raw(msg: AIMessage):
-    return msg
+def raw_accumulate(ai_message):
+    metadata = ai_message.response_metadata
+    
+    # Llama 3.1 (Ollama) 기준 키값
+    input_cnt = metadata.get("prompt_eval_count", 0)
+    output_cnt = metadata.get("eval_count", 0)
+    
+    # 🚨 여기가 핵심: 전역 변수에 더하기
+    total_session_tokens["input"] += input_cnt
+    total_session_tokens["output"] += output_cnt
+    
+    print(f"🦙 [Llama] 이번 턴: {input_cnt + output_cnt} (누적: {total_session_tokens['input'] + total_session_tokens['output']})")
+    print(f"🦙 [Llama] 이번 턴: {input_cnt}")
+    print(f"🦙 [Llama] 이번 턴: {output_cnt}")
+    
+    return ai_message  # 체인 연결용 반환

@@ -1,124 +1,231 @@
-2025-12-10T10:17:03.015+09:00  INFO 15284 --- [gateway] [http-nio-8080-exec-8] o.e.gateway.controller.ChatController    : session ID : 327246b4-9c88-4653-b013-552095ae88db
-2025-12-10T10:17:03.911+09:00  INFO 15284 --- [gateway] [http-nio-8080-exec-8] o.e.gateway.controller.ChatController    : initialize 요청
-2025-12-10T10:19:26.456+09:00  INFO 15284 --- [gateway] [http-nio-8080-exec-8] o.e.gateway.controller.ChatController    : initialize 결과 : {"response":"{\"response\": {\"result\": {\"session\": 1765329548058, \"tools\": [{\"name\": \"search_jobs\", \"params\": {\"type\": \"object\", \"title\": \"SearchJobInfo\", \"properties\": {\"job_id\": {\"anyOf\": [{\"type\": \"integer\"}, {\"type\": \"null\"}], \"title\": \"Job Id\", \"default\": null, \"description\": \"[\\uac80\\uc0c9 \\uc870\\uac74] \\uc9c1\\uc5c5 ID\"}, \"salary\": {\"anyOf\": [{\"type\": \"integer\"}, {\"type\": \"null\"}], \"title\": \"Salary\", \"default\": null, \"description\": \"[\\uac80\\uc0c9 \\uae30\\uc900] \\uc5f0\\ubd09 \\uac12 (\\ub2e8\\uc704\\ub294 \\ub9cc\\ub2e8\\uc704, \\uc22b\\uc790\\ub9cc \\uc785\\ub825, \\uc608: 5000)\"}, \"job_title\": {\"anyOf\": [{\"type\": \"string\"}, {\"type\": \"null\"}], \"title\": \"Job Title\", \"default\": null, \"description\": \"[\\uac80\\uc0c9 \\uc870\\uac74] \\uc9c1\\uc5c5\\uba85 \\ud0a4\\uc6cc\\ub4dc (\\uc608: \\uac1c\\ubc1c\\uc790)\"}, \"salary_condition\": {\"anyOf\": [{\"type\": \"string\"}, {\"type\": \"null\"}], \"title\": \"Salary Condition\", \"default\": null, \"description\": \"[\\ud544\\ud130 \\uc635\\uc158] \\uc5f0\\ubd09 \\uc870\\uac74 \\ucf54\\ub4dc (EQ, GT, LT, GE, LE). \\uc608: '5\\ucc9c\\ub9cc\\uc6d0 \\uc774\\uc0c1' -> salary=5000, cond='GE'\"}}}, \"desc\": \"\\uc9c1\\uc5c5\\uba85, \\uc5f0\\ubd09 \\uc870\\uac74 \\ub4f1\\uc744 \\uc774\\uc6a9\\ud574 \\uc9c1\\uc5c5 \\uc815\\ubcf4\\ub97c \\uac80\\uc0c9\\ud55c\\ub2e4.\"}, {\"name\": \"search_users\", \"params\": {\"type\": \"object\", \"title\": \"SearchUserInfo\", \"properties\": {\"age\": {\"anyOf\": [{\"type\": \"integer\"}, {\"type\": \"null\"}], \"title\": \"Age\", \"default\": null, \"description\": \"[\\ud544\\ud130] \\ud2b9\\uc815 \\ub098\\uc774\\uc778 \\uc0ac\\uc6a9\\uc790\\ub9cc \\uace8\\ub77c\\ub0bc \\ub54c \\uc785\\ub825 (\\uc608: 30)\"}, \"ssn\": {\"anyOf\": [{\"type\": \"string\"}, {\"type\": \"null\"}], \"title\": \"Ssn\", \"default\": null, \"description\": \"[\\uac80\\uc0c9 \\uc870\\uac74] \\uc8fc\\ubbfc\\ub4f1\\ub85d\\ubc88\\ud638\\ub85c \\uc815\\ud655\\ud788 \\ud55c \\uba85\\uc744 \\ucc3e\\uc744 \\ub54c \\uc785\\ub825 (\\uc5c6\\uc73c\\uba74 \\uc0dd\\ub7b5)\"}, \"name\": {\"anyOf\": [{\"type\": \"string\"}, {\"type\": \"null\"}], \"title\": \"Name\", \"default\": null, \"description\": \"[\\uac80\\uc0c9 \\uc870\\uac74] \\uc774 \\uc774\\ub984\\uc744 \\uac00\\uc9c4 \\uc0ac\\uc6a9\\uc790\\ub4e4\\uc744 \\uc870\\ud68c (\\ub3d9\\uba85\\uc774\\uc778 \\ud3ec\\ud568)\"}, \"email\": {\"anyOf\": [{\"type\": \"string\"}, {\"type\": \"null\"}], \"title\": \"Email\", \"default\": null, \"description\": \"[\\uac80\\uc0c9 \\uc870\\uac74] \\uc774\\uba54\\uc77c \\uc8fc\\uc18c\\uac00 \\uc77c\\uce58\\ud558\\ub294 \\uc0ac\\uc6a9\\uc790 \\uc870\\ud68c\"}, \"gender\": {\"anyOf\": [{\"type\": \"string\"}, {\"type\": \"null\"}], \"title\": \"Gender\", \"default\": null, \"description\": \"[\\ud544\\ud130] \\uc131\\ubcc4\\ub85c \\uc881\\ud600\\uc11c \\uac80\\uc0c9 (\\ub0a8\\uc790: 'M', \\uc5ec\\uc790: 'F')\"}, \"age_condition\": {\"anyOf\": [{\"type\": \"string\"}, {\"type\": \"null\"}], \"title\": \"Age Condition\", \"default\": null, \"description\": \"[\\ud544\\ud130 \\uc635\\uc158] \\ub098\\uc774 \\uac80\\uc0c9 \\uc870\\uac74 \\ucf54\\ub4dc. \\n        - 'EQ': \\uac19\\uc74c (\\uae30\\ubcf8\\uac12)\\n        - 'GT': ~\\ubcf4\\ub2e4 \\ud07c (\\ucd08\\uacfc)\\n        - 'LT': ~\\ubcf4\\ub2e4 \\uc791\\uc74c (\\ubbf8\\ub9cc)\\n        - 'GE': ~\\uc774\\uc0c1\\n        - 'LE': ~\\uc774\\ud558\\n        \\uc0ac\\uc6a9\\uc790\\uac00 '30\\uc0b4 \\uc774\\uc0c1'\\uc774\\ub77c\\uace0 \\ud558 \\uba74 age=30, age_condition='GE'\\ub85c \\uc785\\ub825.\"}}}, \"desc\": \"\\uc774\\ub984, \\ub098\\uc774, \\uc131\\ubcc4, \\uc8fc\\ubbfc\\ubc88\\ud638 \\ub4f1 \\ub2e4\\uc591\\ud55c \\uc870\\uac74\\uc73c\\ub85c \\uc0ac\\uc6a9\\uc790\\ub97c \\uac80\\uc0c9\\ud55c\\ub2e4.\"}, {\"name\": \"search_weather_records\", \"params\": {\"type\": \"object\", \"title\": \"SearchWeatherInfo\", \"properties\": {\"weather\": {\"anyOf\": [{\"type\": \"string\"}, {\"type\": \"null\"}], \"title\": \"Weather\", \"default\": null, \"description\": \"[\\ud544\\ud130] \\ub0a0\\uc528 \\uc0c1\\ud0dc (\\ub9d1\\uc74c, \\ube44, \\ud750\\ub9bc \\ub4f1)\"}, \"humidity\": {\"anyOf\": [{\"type\": \"integer\"}, {\"type\": \"null\"}], \"title\": \"Humidity\", \"default\": null, \"description\": \"[\\uac80\\uc0c9 \\uae30\\uc900] \\uc2b5\\ub3c4 \\uac12 (0~100). \\uc870\\uac74 \\ucf54\\ub4dc\\uc640 \\ud568\\uaed8 \\uc0ac\\uc6a9.\"}, \"target_date\": {\"anyOf\": [{\"type\": \"string\"}, {\"type\": \"null\"}], \"title\": \"Target Date\", \"default\": null, \"description\": \"[\\uac80\\uc0c9 \\uc870\\uac74] \\ub0a0\\uc9dc (YYYYMMDD)\"}, \"temperature\": {\"anyOf\": [{\"type\": \"integer\"}, {\"type\": \"null\"}], \"title\": \"Temperature\", \"default\": null, \"description\": \"[\\uac80\\uc0c9 \\uae30\\uc900] \\uc628\\ub3c4 \\uac12 (\\uc608: 25). \\uc870\\uac74 \\ucf54\\ub4dc\\uc640 \\ud568\\uaed8 \\uc0ac\\uc6a9.\"}, \"humidity_condition\": {\"anyOf\": [{\"type\": \"string\"}, {\"type\": \"null\"}], \"title\": \"Humidity Condition\", \"default\": null, \"description\": \"[\\ud544\\ud130 \\uc635\\uc158] \\uc2b5\\ub3c4 \\uc870\\uac74 \\ucf54\\ub4dc (EQ, GT, LT, GE, LE). \\uc608: '\\uc2b5\\ub3c4 80 \\ubbf8\\ub9cc' -> hum=80, cond='LT'\"}, \"temperature_condition\": {\"anyOf\": [{\"type\": \"string\"}, {\"type\": \"null\"}], \"title\": \"Temperature Condition\", \"default\": null, \"description\": \"[\\ud544\\ud130 \\uc635\\uc158] \\uc628\\ub3c4 \\uc870\\uac74 \\ucf54\\ub4dc (EQ, GT, LT, GE, LE). \\uc608: '25\\ub3c4 \\uc774\\uc0c1' -> temp=25, cond='GE'\"}}}, \"desc\": \"\\ub0a0\\uc9dc, \\uc2b5\\ub3c4, \\ub0a0\\uc528 \\uc0c1\\ud0dc \\ub4f1\\uc758 \\uc870\\uac74\\uc73c\\ub85c \\uacfc\\uac70 \\ub0a0\\uc528 \\uae30\\ub85d\\uc744 \\uac80\\uc0c9\\ud55c\\ub2e4.\"}]}, \"id\": \"327246b4-9c88-4653-b013-552095ae88db\", \"jsonrpc\": \"2.0\"}}"}
-2025-12-10T10:20:10.577+09:00  INFO 15284 --- [gateway] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
-2025-12-10T10:20:12.370+09:00  INFO 15284 --- [gateway] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
-2025-12-10T10:40:27.159+09:00  INFO 30352 --- [gateway] [main] org.example.gateway.GatewayApplication   : Starting GatewayApplication using Java 17.0.16 with PID 30352 (C:\Users\csbti\Desktop\ai-agent-prototype\gateway\target\classes started by csbti in C:\Users\csbti\Desktop\ai-agent-prototype\gateway)
-2025-12-10T10:40:27.163+09:00  INFO 30352 --- [gateway] [main] org.example.gateway.GatewayApplication   : No active profile set, falling back to 1 default profile: "default"
-2025-12-10T10:40:28.268+09:00  INFO 30352 --- [gateway] [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
-2025-12-10T10:40:28.273+09:00  INFO 30352 --- [gateway] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2025-12-10T10:40:28.326+09:00  INFO 30352 --- [gateway] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 21 ms. Found 0 Redis repository interfaces.
-2025-12-10T10:40:28.924+09:00  INFO 30352 --- [gateway] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
-2025-12-10T10:40:28.946+09:00  INFO 30352 --- [gateway] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2025-12-10T10:40:28.947+09:00  INFO 30352 --- [gateway] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.48]
-2025-12-10T10:40:29.044+09:00  INFO 30352 --- [gateway] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2025-12-10T10:40:29.044+09:00  INFO 30352 --- [gateway] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1811 ms
-2025-12-10T10:40:30.653+09:00  INFO 30352 --- [gateway] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
-2025-12-10T10:40:30.673+09:00  INFO 30352 --- [gateway] [main] org.example.gateway.GatewayApplication   : Started GatewayApplication in 4.311 seconds (process running for 13.296)
-2025-12-10T10:40:39.358+09:00  INFO 30352 --- [gateway] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-12-10T10:40:39.359+09:00  INFO 30352 --- [gateway] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2025-12-10T10:40:39.364+09:00  INFO 30352 --- [gateway] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 5 ms
-2025-12-10T10:40:44.021+09:00  INFO 30352 --- [gateway] [http-nio-8080-exec-1] o.e.gateway.controller.ChatController    : session ID : 40d3698d-ecff-4d92-b3cd-263d31457b5a
-2025-12-10T10:40:44.025+09:00  INFO 30352 --- [gateway] [http-nio-8080-exec-1] o.e.gateway.controller.ChatController    : initialize 요청
-2025-12-10T10:40:50.058+09:00  INFO 30352 --- [gateway] [http-nio-8080-exec-1] o.e.gateway.controller.ChatController    : initialize 결과 : success
-2025-12-10T11:28:44.048+09:00  INFO 30352 --- [gateway] [http-nio-8080-exec-4] o.e.gateway.controller.ChatController    : session ID : daf90aff-4297-49c3-b668-658d70b4b153
-2025-12-10T11:28:44.051+09:00  INFO 30352 --- [gateway] [http-nio-8080-exec-4] o.e.gateway.controller.ChatController    : initialize 요청
-2025-12-10T11:28:46.848+09:00  INFO 30352 --- [gateway] [http-nio-8080-exec-4] o.e.gateway.controller.ChatController    : initialize 결과 : success
-2025-12-10T11:29:31.719+09:00  INFO 30352 --- [gateway] [http-nio-8080-exec-5] o.e.gateway.controller.ChatController    : frontend 요청 수신 : 유아인 사용자 정보 알려줘 
-2025-12-10T12:01:35.914+09:00  INFO 30352 --- [gateway] [http-nio-8080-exec-5] o.e.gateway.controller.ChatController    : Agent 서버 응답: {"response":"죄송합니다. 관련 정보를 찾을 수 없습니다."}
-2025-12-10T12:02:34.545+09:00  INFO 30352 --- [gateway] [http-nio-8080-exec-8] o.e.gateway.controller.ChatController    : frontend 요청 수신 : 유아인 사용자 정보 알려줘
-2025-12-10T12:03:17.520+09:00  INFO 30352 --- [gateway] [http-nio-8080-exec-8] o.e.gateway.controller.ChatController    : Agent 서버 응답: {"response":"유아인 사용자의 정보는 다음과 같습니다.\n\n- 이름: 유아인\n- 성별: 남성\n- 나이: 38세\n- 이메일: yooi32@example.com\n- 주민등록번호: 900201-1000032"}
-2025-12-10T13:27:46.275+09:00  INFO 30352 --- [gateway] [http-nio-8080-exec-1] o.e.gateway.controller.ChatController    : frontend 요청 수신 : 수지 사용자 정보 알려줘 
-2025-12-10T13:28:16.584+09:00  INFO 30352 --- [gateway] [http-nio-8080-exec-1] o.e.gateway.controller.ChatController    : Agent 서버 응답: {"response":"죄송합니다. 관련 정보를 찾을 수 없습니다."}
-2025-12-10T13:29:00.891+09:00  INFO 30352 --- [gateway] [http-nio-8080-exec-3] o.e.gateway.controller.ChatController    : session ID : f6d60f0e-06ec-429f-90d4-a0d4369bcaa4
-2025-12-10T13:29:00.892+09:00  INFO 30352 --- [gateway] [http-nio-8080-exec-3] o.e.gateway.controller.ChatController    : initialize 요청
-2025-12-10T13:29:05.021+09:00  INFO 30352 --- [gateway] [http-nio-8080-exec-3] o.e.gateway.controller.ChatController    : initialize 결과 : success
-2025-12-10T13:29:07.516+09:00  INFO 30352 --- [gateway] [http-nio-8080-exec-4] o.e.gateway.controller.ChatController    : frontend 요청 수신 : 수지 사용자 정보 알려줘
-2025-12-10T13:29:32.183+09:00  INFO 30352 --- [gateway] [http-nio-8080-exec-4] o.e.gateway.controller.ChatController    : Agent 서버 응답: {"response":"수지님의 정보는 다음과 같습니다.\n\n- 이름: 수지\n- 성별: 여성\n- 나이: 29세\n- 이메일: suzy100@example.com\n- 사회 보장 번호: 900410-1000100"}
-2025-12-10T13:40:25.810+09:00  INFO 30352 --- [gateway] [http-nio-8080-exec-6] o.e.gateway.controller.ChatController    : frontend 요청 수신 : 공유 사용자 정보 알려줘
-2025-12-10T13:41:30.156+09:00  INFO 30352 --- [gateway] [http-nio-8080-exec-6] o.e.gateway.controller.ChatController    : Agent 서버 응답: {"response":"공유님의 정보는 다음과 같습니다.\n\n- 이름: 공유\n- 성별: 남성\n- 나이: 38세\n- 이메일: gongy16@example.com\n- 사회 보장 번호: 900116-1000016"}
-2025-12-10T13:42:01.678+09:00  INFO 30352 --- [gateway] [http-nio-8080-exec-8] o.e.gateway.controller.ChatController    : frontend 요청 수신 : 이광수 사용자 정보 알려줘 
-2025-12-10T13:42:18.134+09:00  INFO 30352 --- [gateway] [http-nio-8080-exec-8] o.e.gateway.controller.ChatController    : Agent 서버 응답: {"response":"죄송합니다. 관련 정보를 찾을 수 없습니다."}
-2025-12-10T13:42:43.073+09:00  INFO 30352 --- [gateway] [http-nio-8080-exec-9] o.e.gateway.controller.ChatController    : frontend 요청 수신 : 이광수 사용자 정보 알려줘
-2025-12-10T13:44:06.463+09:00  INFO 30352 --- [gateway] [http-nio-8080-exec-9] o.e.gateway.controller.ChatController    : Agent 서버 응답: {"response":"죄송합니다. 관련 정보를 찾을 수 없습니다."}
-2025-12-10T13:44:39.748+09:00  INFO 30352 --- [gateway] [http-nio-8080-exec-2] o.e.gateway.controller.ChatController    : session ID : 3fcd6e45-b894-4a1e-b525-4a37a7d59f16
-2025-12-10T13:44:39.764+09:00  INFO 30352 --- [gateway] [http-nio-8080-exec-2] o.e.gateway.controller.ChatController    : initialize 요청
-2025-12-10T13:44:52.237+09:00 ERROR 30352 --- [gateway] [http-nio-8080-exec-2] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.springframework.web.client.HttpServerErrorException$InternalServerError: 500 Internal Server Error on POST request for "http://localhost:8000/chat/initialize": "Internal Server Error"] with root cause
+2025-12-22T13:33:17.434+09:00  INFO 4292 --- [gateway] [main] org.example.gateway.GatewayApplication   : Starting GatewayApplication v0.0.1-SNAPSHOT using Java 19.0.1 with PID 4292 (C:\Users\csbti\Desktop\ai-agent-prototype\gateway\gateway.jar started by csbti in C:\Users\csbti\Desktop\ai-agent-prototype\gateway)
+2025-12-22T13:33:17.449+09:00  INFO 4292 --- [gateway] [main] org.example.gateway.GatewayApplication   : No active profile set, falling back to 1 default profile: "default"
+2025-12-22T13:33:18.451+09:00  INFO 4292 --- [gateway] [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-12-22T13:33:18.457+09:00  INFO 4292 --- [gateway] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-12-22T13:33:18.512+09:00  INFO 4292 --- [gateway] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 19 ms. Found 0 Redis repository interfaces.
+2025-12-22T13:33:19.125+09:00  INFO 4292 --- [gateway] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-12-22T13:33:19.154+09:00  INFO 4292 --- [gateway] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-12-22T13:33:19.155+09:00  INFO 4292 --- [gateway] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.48]
+2025-12-22T13:33:19.211+09:00  INFO 4292 --- [gateway] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-12-22T13:33:19.212+09:00  INFO 4292 --- [gateway] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1678 ms
+2025-12-22T13:33:20.433+09:00  INFO 4292 --- [gateway] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-12-22T13:33:20.475+09:00  INFO 4292 --- [gateway] [main] org.example.gateway.GatewayApplication   : Started GatewayApplication in 3.782 seconds (process running for 4.702)
+2025-12-22T13:37:34.469+09:00  INFO 4292 --- [gateway] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-12-22T13:37:34.471+09:00  INFO 4292 --- [gateway] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-12-22T13:37:34.477+09:00  INFO 4292 --- [gateway] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2025-12-22T13:37:34.663+09:00  INFO 4292 --- [gateway] [http-nio-8080-exec-2] o.e.gateway.controller.ChatController    : session ID : ff7302fc-c22d-49cb-a452-4ee799d21239
+2025-12-22T13:37:34.668+09:00  INFO 4292 --- [gateway] [http-nio-8080-exec-2] o.e.gateway.controller.ChatController    : initialize 요청
+2025-12-22T13:37:34.760+09:00 ERROR 4292 --- [gateway] [http-nio-8080-exec-2] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.springframework.web.client.ResourceAccessException: I/O error on POST request for "http://localhost:8000/chat/initialize": Connection refused: connect] with root cause
+
+java.net.ConnectException: Connection refused: connect
+	at java.base/sun.nio.ch.Net.connect0(Native Method) ~[na:na]
+	at java.base/sun.nio.ch.Net.connect(Net.java:579) ~[na:na]
+	at java.base/sun.nio.ch.Net.connect(Net.java:568) ~[na:na]
+	at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:576) ~[na:na]
+	at java.base/java.net.Socket.connect(Socket.java:666) ~[na:na]
+	at java.base/java.net.Socket.connect(Socket.java:600) ~[na:na]
+	at java.base/sun.net.NetworkClient.doConnect(NetworkClient.java:183) ~[na:na]
+	at java.base/sun.net.www.http.HttpClient.openServer(HttpClient.java:531) ~[na:na]
+	at java.base/sun.net.www.http.HttpClient.openServer(HttpClient.java:636) ~[na:na]
+	at java.base/sun.net.www.http.HttpClient.<init>(HttpClient.java:279) ~[na:na]
+	at java.base/sun.net.www.http.HttpClient.New(HttpClient.java:384) ~[na:na]
+	at java.base/sun.net.www.http.HttpClient.New(HttpClient.java:406) ~[na:na]
+	at java.base/sun.net.www.protocol.http.HttpURLConnection.getNewHttpClient(HttpURLConnection.java:1308) ~[na:na]
+	at java.base/sun.net.www.protocol.http.HttpURLConnection.plainConnect0(HttpURLConnection.java:1241) ~[na:na]
+	at java.base/sun.net.www.protocol.http.HttpURLConnection.plainConnect(HttpURLConnection.java:1127) ~[na:na]
+	at java.base/sun.net.www.protocol.http.HttpURLConnection.connect(HttpURLConnection.java:1056) ~[na:na]
+	at org.springframework.http.client.SimpleClientHttpRequest.executeInternal(SimpleClientHttpRequest.java:79) ~[spring-web-6.2.12.jar!/:6.2.12]
+	at org.springframework.http.client.AbstractStreamingClientHttpRequest.executeInternal(AbstractStreamingClientHttpRequest.java:71) ~[spring-web-6.2.12.jar!/:6.2.12]
+	at org.springframework.http.client.AbstractClientHttpRequest.execute(AbstractClientHttpRequest.java:81) ~[spring-web-6.2.12.jar!/:6.2.12]
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:900) ~[spring-web-6.2.12.jar!/:6.2.12]
+	at org.springframework.web.client.RestTemplate.execute(RestTemplate.java:801) ~[spring-web-6.2.12.jar!/:6.2.12]
+	at org.springframework.web.client.RestTemplate.postForEntity(RestTemplate.java:549) ~[spring-web-6.2.12.jar!/:6.2.12]
+	at org.example.gateway.controller.ChatController.chat(ChatController.java:45) ~[!/:0.0.1-SNAPSHOT]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:258) ~[spring-web-6.2.12.jar!/:6.2.12]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:191) ~[spring-web-6.2.12.jar!/:6.2.12]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.2.12.jar!/:6.2.12]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:991) ~[spring-webmvc-6.2.12.jar!/:6.2.12]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:896) ~[spring-webmvc-6.2.12.jar!/:6.2.12]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.2.12.jar!/:6.2.12]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089) ~[spring-webmvc-6.2.12.jar!/:6.2.12]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) ~[spring-webmvc-6.2.12.jar!/:6.2.12]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.2.12.jar!/:6.2.12]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914) ~[spring-webmvc-6.2.12.jar!/:6.2.12]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.2.12.jar!/:6.2.12]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.48.jar!/:na]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.2.12.jar!/:6.2.12]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.12.jar!/:6.2.12]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.2.12.jar!/:6.2.12]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.12.jar!/:6.2.12]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.2.12.jar!/:6.2.12]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.12.jar!/:6.2.12]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:88) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:399) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1774) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:973) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:491) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at java.base/java.lang.Thread.run(Thread.java:1589) ~[na:na]
+
+2025-12-22T13:37:54.003+09:00  INFO 4292 --- [gateway] [http-nio-8080-exec-3] o.e.gateway.controller.ChatController    : session ID : 26b05039-0bba-4bcb-adf3-4e76a545dd9c
+2025-12-22T13:37:54.004+09:00  INFO 4292 --- [gateway] [http-nio-8080-exec-3] o.e.gateway.controller.ChatController    : initialize 요청
+2025-12-22T13:37:57.363+09:00 ERROR 4292 --- [gateway] [http-nio-8080-exec-3] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.springframework.web.client.HttpServerErrorException$InternalServerError: 500 Internal Server Error on POST request for "http://localhost:8000/chat/initialize": "Internal Server Error"] with root cause
 
 org.springframework.web.client.HttpServerErrorException$InternalServerError: 500 Internal Server Error on POST request for "http://localhost:8000/chat/initialize": "Internal Server Error"
-	at org.springframework.web.client.HttpServerErrorException.create(HttpServerErrorException.java:102) ~[spring-web-6.2.12.jar:6.2.12]
-	at org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:189) ~[spring-web-6.2.12.jar:6.2.12]
-	at org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:147) ~[spring-web-6.2.12.jar:6.2.12]
-	at org.springframework.web.client.RestTemplate.handleResponse(RestTemplate.java:953) ~[spring-web-6.2.12.jar:6.2.12]
-	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:902) ~[spring-web-6.2.12.jar:6.2.12]
-	at org.springframework.web.client.RestTemplate.execute(RestTemplate.java:801) ~[spring-web-6.2.12.jar:6.2.12]
-	at org.springframework.web.client.RestTemplate.postForEntity(RestTemplate.java:549) ~[spring-web-6.2.12.jar:6.2.12]
-	at org.example.gateway.controller.ChatController.chat(ChatController.java:45) ~[classes/:na]
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
-	at java.base/java.lang.reflect.Method.invoke(Method.java:569) ~[na:na]
-	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:258) ~[spring-web-6.2.12.jar:6.2.12]
-	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:191) ~[spring-web-6.2.12.jar:6.2.12]
-	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.2.12.jar:6.2.12]
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:991) ~[spring-webmvc-6.2.12.jar:6.2.12]
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:896) ~[spring-webmvc-6.2.12.jar:6.2.12]
-	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.2.12.jar:6.2.12]
-	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089) ~[spring-webmvc-6.2.12.jar:6.2.12]
-	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) ~[spring-webmvc-6.2.12.jar:6.2.12]
-	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.2.12.jar:6.2.12]
-	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914) ~[spring-webmvc-6.2.12.jar:6.2.12]
-	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590) ~[tomcat-embed-core-10.1.48.jar:6.0]
-	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.2.12.jar:6.2.12]
-	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.48.jar:6.0]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-10.1.48.jar:10.1.48]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138) ~[tomcat-embed-core-10.1.48.jar:10.1.48]
-	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.48.jar:10.1.48]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-10.1.48.jar:10.1.48]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138) ~[tomcat-embed-core-10.1.48.jar:10.1.48]
-	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.2.12.jar:6.2.12]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.12.jar:6.2.12]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-10.1.48.jar:10.1.48]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138) ~[tomcat-embed-core-10.1.48.jar:10.1.48]
-	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.2.12.jar:6.2.12]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.12.jar:6.2.12]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-10.1.48.jar:10.1.48]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138) ~[tomcat-embed-core-10.1.48.jar:10.1.48]
-	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.2.12.jar:6.2.12]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.12.jar:6.2.12]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-10.1.48.jar:10.1.48]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138) ~[tomcat-embed-core-10.1.48.jar:10.1.48]
-	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165) ~[tomcat-embed-core-10.1.48.jar:10.1.48]
-	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:88) ~[tomcat-embed-core-10.1.48.jar:10.1.48]
-	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482) ~[tomcat-embed-core-10.1.48.jar:10.1.48]
-	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113) ~[tomcat-embed-core-10.1.48.jar:10.1.48]
-	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83) ~[tomcat-embed-core-10.1.48.jar:10.1.48]
-	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72) ~[tomcat-embed-core-10.1.48.jar:10.1.48]
-	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342) ~[tomcat-embed-core-10.1.48.jar:10.1.48]
-	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:399) ~[tomcat-embed-core-10.1.48.jar:10.1.48]
-	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.48.jar:10.1.48]
-	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903) ~[tomcat-embed-core-10.1.48.jar:10.1.48]
-	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1774) ~[tomcat-embed-core-10.1.48.jar:10.1.48]
-	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.48.jar:10.1.48]
-	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:973) ~[tomcat-embed-core-10.1.48.jar:10.1.48]
-	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:491) ~[tomcat-embed-core-10.1.48.jar:10.1.48]
-	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.48.jar:10.1.48]
-	at java.base/java.lang.Thread.run(Thread.java:840) ~[na:na]
+	at org.springframework.web.client.HttpServerErrorException.create(HttpServerErrorException.java:102) ~[spring-web-6.2.12.jar!/:6.2.12]
+	at org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:189) ~[spring-web-6.2.12.jar!/:6.2.12]
+	at org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:147) ~[spring-web-6.2.12.jar!/:6.2.12]
+	at org.springframework.web.client.RestTemplate.handleResponse(RestTemplate.java:953) ~[spring-web-6.2.12.jar!/:6.2.12]
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:902) ~[spring-web-6.2.12.jar!/:6.2.12]
+	at org.springframework.web.client.RestTemplate.execute(RestTemplate.java:801) ~[spring-web-6.2.12.jar!/:6.2.12]
+	at org.springframework.web.client.RestTemplate.postForEntity(RestTemplate.java:549) ~[spring-web-6.2.12.jar!/:6.2.12]
+	at org.example.gateway.controller.ChatController.chat(ChatController.java:45) ~[!/:0.0.1-SNAPSHOT]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:258) ~[spring-web-6.2.12.jar!/:6.2.12]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:191) ~[spring-web-6.2.12.jar!/:6.2.12]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.2.12.jar!/:6.2.12]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:991) ~[spring-webmvc-6.2.12.jar!/:6.2.12]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:896) ~[spring-webmvc-6.2.12.jar!/:6.2.12]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.2.12.jar!/:6.2.12]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089) ~[spring-webmvc-6.2.12.jar!/:6.2.12]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) ~[spring-webmvc-6.2.12.jar!/:6.2.12]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.2.12.jar!/:6.2.12]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914) ~[spring-webmvc-6.2.12.jar!/:6.2.12]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.2.12.jar!/:6.2.12]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.48.jar!/:na]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.2.12.jar!/:6.2.12]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.12.jar!/:6.2.12]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.2.12.jar!/:6.2.12]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.12.jar!/:6.2.12]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.2.12.jar!/:6.2.12]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.12.jar!/:6.2.12]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:88) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:399) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1774) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:973) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:491) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at java.base/java.lang.Thread.run(Thread.java:1589) ~[na:na]
 
-2025-12-10T13:45:12.642+09:00  INFO 30352 --- [gateway] [http-nio-8080-exec-4] o.e.gateway.controller.ChatController    : session ID : a8696a0a-b207-4b35-9e49-0758929a8310
-2025-12-10T13:45:12.643+09:00  INFO 30352 --- [gateway] [http-nio-8080-exec-4] o.e.gateway.controller.ChatController    : initialize 요청
-2025-12-10T13:45:14.963+09:00  INFO 30352 --- [gateway] [http-nio-8080-exec-4] o.e.gateway.controller.ChatController    : initialize 결과 : success
-2025-12-10T13:45:59.979+09:00  INFO 30352 --- [gateway] [http-nio-8080-exec-6] o.e.gateway.controller.ChatController    : frontend 요청 수신 : 수지 사용자 정보 알려줘 
-2025-12-10T13:46:13.866+09:00  INFO 30352 --- [gateway] [http-nio-8080-exec-6] o.e.gateway.controller.ChatController    : Agent 서버 응답: {"response":"죄송합니다. 관련 정보를 찾을 수 없습니다."}
-2025-12-10T13:50:43.335+09:00  INFO 30352 --- [gateway] [http-nio-8080-exec-8] o.e.gateway.controller.ChatController    : session ID : c5759798-a491-447c-8159-39f3db09efce
-2025-12-10T13:50:43.335+09:00  INFO 30352 --- [gateway] [http-nio-8080-exec-8] o.e.gateway.controller.ChatController    : initialize 요청
-2025-12-10T13:50:44.558+09:00  INFO 30352 --- [gateway] [http-nio-8080-exec-8] o.e.gateway.controller.ChatController    : initialize 결과 : success
-2025-12-10T13:50:46.636+09:00  INFO 30352 --- [gateway] [http-nio-8080-exec-9] o.e.gateway.controller.ChatController    : frontend 요청 수신 : 수지 사용자 정보 알려줘
-2025-12-10T13:51:40.288+09:00  INFO 30352 --- [gateway] [http-nio-8080-exec-9] o.e.gateway.controller.ChatController    : Agent 서버 응답: {"response":"수지님의 정보는 다음과 같습니다.\n\n- 이름: 수지\n- 성별: 여성\n- 나이: 29세\n- 이메일: suzy100@example.com\n- 사회 보장 번호: 900410-1000100"}
-2025-12-10T13:52:05.168+09:00  INFO 30352 --- [gateway] [http-nio-8080-exec-1] o.e.gateway.controller.ChatController    : frontend 요청 수신 : 이광수라는 사용자 정보 알려줘 
-2025-12-10T13:52:29.495+09:00  INFO 30352 --- [gateway] [http-nio-8080-exec-1] o.e.gateway.controller.ChatController    : Agent 서버 응답: {"response":"이광수라는 사용자의 정보를 알려드리겠습니다. \n\n이름: 이광수\n성별: 남성\n나이: 38세\n이메일: leegs27@example.com\n주민등록번호: 900127-1000027"}
-2025-12-10T13:55:34.401+09:00  INFO 30352 --- [gateway] [http-nio-8080-exec-4] o.e.gateway.controller.ChatController    : session ID : ba6ac577-4a0a-4d99-9f5b-e9d1bd9abb1e
-2025-12-10T13:55:34.402+09:00  INFO 30352 --- [gateway] [http-nio-8080-exec-4] o.e.gateway.controller.ChatController    : initialize 요청
-2025-12-10T13:55:35.628+09:00  INFO 30352 --- [gateway] [http-nio-8080-exec-4] o.e.gateway.controller.ChatController    : initialize 결과 : success
-2025-12-10T13:55:37.677+09:00  INFO 30352 --- [gateway] [http-nio-8080-exec-5] o.e.gateway.controller.ChatController    : frontend 요청 수신 : 수지 사용자 정보 알려줘
-2025-12-10T13:56:10.591+09:00  INFO 30352 --- [gateway] [http-nio-8080-exec-5] o.e.gateway.controller.ChatController    : Agent 서버 응답: {"response":"수지님의 정보는 다음과 같습니다.\n\n- 이름: 수지\n- 성별: 여성\n- 나이: 29세\n- 이메일: suzy100@example.com\n- 사회 보장 번호: 900410-1000100"}
+2025-12-22T13:38:38.739+09:00  INFO 4292 --- [gateway] [http-nio-8080-exec-5] o.e.gateway.controller.ChatController    : session ID : 3c597584-bf32-4a80-ba4f-5214a27a5b4a
+2025-12-22T13:38:38.743+09:00  INFO 4292 --- [gateway] [http-nio-8080-exec-5] o.e.gateway.controller.ChatController    : initialize 요청
+2025-12-22T13:38:42.118+09:00 ERROR 4292 --- [gateway] [http-nio-8080-exec-5] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.springframework.web.client.HttpServerErrorException$InternalServerError: 500 Internal Server Error on POST request for "http://localhost:8000/chat/initialize": "Internal Server Error"] with root cause
+
+org.springframework.web.client.HttpServerErrorException$InternalServerError: 500 Internal Server Error on POST request for "http://localhost:8000/chat/initialize": "Internal Server Error"
+	at org.springframework.web.client.HttpServerErrorException.create(HttpServerErrorException.java:102) ~[spring-web-6.2.12.jar!/:6.2.12]
+	at org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:189) ~[spring-web-6.2.12.jar!/:6.2.12]
+	at org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:147) ~[spring-web-6.2.12.jar!/:6.2.12]
+	at org.springframework.web.client.RestTemplate.handleResponse(RestTemplate.java:953) ~[spring-web-6.2.12.jar!/:6.2.12]
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:902) ~[spring-web-6.2.12.jar!/:6.2.12]
+	at org.springframework.web.client.RestTemplate.execute(RestTemplate.java:801) ~[spring-web-6.2.12.jar!/:6.2.12]
+	at org.springframework.web.client.RestTemplate.postForEntity(RestTemplate.java:549) ~[spring-web-6.2.12.jar!/:6.2.12]
+	at org.example.gateway.controller.ChatController.chat(ChatController.java:45) ~[!/:0.0.1-SNAPSHOT]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:258) ~[spring-web-6.2.12.jar!/:6.2.12]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:191) ~[spring-web-6.2.12.jar!/:6.2.12]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.2.12.jar!/:6.2.12]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:991) ~[spring-webmvc-6.2.12.jar!/:6.2.12]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:896) ~[spring-webmvc-6.2.12.jar!/:6.2.12]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.2.12.jar!/:6.2.12]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089) ~[spring-webmvc-6.2.12.jar!/:6.2.12]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) ~[spring-webmvc-6.2.12.jar!/:6.2.12]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.2.12.jar!/:6.2.12]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914) ~[spring-webmvc-6.2.12.jar!/:6.2.12]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.2.12.jar!/:6.2.12]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.48.jar!/:na]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.2.12.jar!/:6.2.12]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.12.jar!/:6.2.12]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.2.12.jar!/:6.2.12]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.12.jar!/:6.2.12]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.2.12.jar!/:6.2.12]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.12.jar!/:6.2.12]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:88) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:399) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1774) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:973) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:491) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.48.jar!/:na]
+	at java.base/java.lang.Thread.run(Thread.java:1589) ~[na:na]
+
+2025-12-22T13:39:00.513+09:00  INFO 4292 --- [gateway] [http-nio-8080-exec-6] o.e.gateway.controller.ChatController    : session ID : 484a7d79-e27d-4aff-9890-65f7d14d9489
+2025-12-22T13:39:00.515+09:00  INFO 4292 --- [gateway] [http-nio-8080-exec-6] o.e.gateway.controller.ChatController    : initialize 요청
+2025-12-22T13:39:01.977+09:00  INFO 4292 --- [gateway] [http-nio-8080-exec-6] o.e.gateway.controller.ChatController    : initialize 결과 : success
+2025-12-22T13:40:34.508+09:00  INFO 4292 --- [gateway] [http-nio-8080-exec-8] o.e.gateway.controller.ChatController    : frontend 요청 수신 : 수지라는 이름의 사용자 정보 알랴줘
+2025-12-22T13:40:42.933+09:00  INFO 4292 --- [gateway] [http-nio-8080-exec-9] o.e.gateway.controller.ChatController    : session ID : e26fc8e1-b5d1-498a-9ab8-754b97700986
+2025-12-22T13:40:42.938+09:00  INFO 4292 --- [gateway] [http-nio-8080-exec-9] o.e.gateway.controller.ChatController    : initialize 요청
+2025-12-22T13:40:44.818+09:00  INFO 4292 --- [gateway] [http-nio-8080-exec-9] o.e.gateway.controller.ChatController    : initialize 결과 : success
+2025-12-22T13:40:45.574+09:00  INFO 4292 --- [gateway] [http-nio-8080-exec-10] o.e.gateway.controller.ChatController    : session ID : 4343957e-7213-468d-8624-6f775ee7183a
+2025-12-22T13:40:45.577+09:00  INFO 4292 --- [gateway] [http-nio-8080-exec-10] o.e.gateway.controller.ChatController    : initialize 요청
+2025-12-22T13:40:47.039+09:00  INFO 4292 --- [gateway] [http-nio-8080-exec-10] o.e.gateway.controller.ChatController    : initialize 결과 : success
+2025-12-22T13:41:13.099+09:00  INFO 4292 --- [gateway] [http-nio-8080-exec-1] o.e.gateway.controller.ChatController    : frontend 요청 수신 : 수지라는 이름의 사용자 정보 알려줘
+2025-12-22T13:41:42.865+09:00 ERROR 4292 --- [gateway] [http-nio-8080-exec-8] o.e.gateway.controller.ChatController    : Agent 서버 연결 실패 : 500 Internal Server Error on POST request for "http://localhost:8000/chat": "Internal Server Error"
+2025-12-22T13:42:03.637+09:00  INFO 4292 --- [gateway] [http-nio-8080-exec-1] o.e.gateway.controller.ChatController    : Agent 서버 응답: {"response":"수지라는 이름의 사용자 정보를 알려드리겠습니다.\n\n이름: 수지\n성별: 여\n나이: 29세\n이메일: suzy100@example.com\n주민등록번호: 900410-1000100\n\n위의 정보가 수지라는 이름의 사용자 정보입니다."}
+2025-12-22T17:43:49.472+09:00  INFO 4292 --- [gateway] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-12-22T17:43:50.114+09:00  INFO 4292 --- [gateway] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete

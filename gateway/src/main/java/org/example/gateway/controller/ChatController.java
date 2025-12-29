@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.example.gateway.service.SessionService;
 import org.example.gateway.vo.ChatRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
@@ -18,6 +19,9 @@ import java.util.UUID;
 @CrossOrigin(origins = "*")
 public class ChatController {
 
+    @Value("${agent.url}")
+    private String agentUrl;
+
     @Autowired
     public SessionService sessionService;
 
@@ -26,9 +30,6 @@ public class ChatController {
     @PostMapping("/chat")
     public ResponseEntity<?> chat(@RequestBody ChatRequest request,
                                   @RequestHeader(value = "X-Session-ID", required = false) String sessionId) {
-
-        // Agent 서버로 전달
-        String agentUrl = "http://localhost:8000/chat";
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);

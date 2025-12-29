@@ -2,16 +2,20 @@ import redis
 import json
 import requests
 import os
-
-# from app.core.config import settings
-
 from langchain_core.callbacks.base import BaseCallbackHandler
-
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 
+from dotenv import load_dotenv
 
-r = redis.Redis(host="localhost", port=6379, db=0, password="wisenut1!")
+load_dotenv()
+
+r = redis.Redis(
+    host=os.getenv("REDIS_HOST", "localhost"),
+    port=int(os.getenv("REDIS_PORT", 6379)),
+    db=int(os.getenv("REDIS_DB", 0)),
+    password=os.getenv("REDIS_PASSWORD")
+    )
 
 class ChatMemory:
     def __init__(self, session_id: str):

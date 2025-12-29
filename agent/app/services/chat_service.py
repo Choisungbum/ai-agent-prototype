@@ -21,9 +21,7 @@ from langchain_ollama import ChatOllama
 from langchain_core.runnables import RunnableLambda
 
 # redis 
-from app.models.database import redis_client
 from app.models.chat_memory import ChatMemory, SimpleTokenCounter, count_tokens_with_ollama, summarize_if_needed
-
 
 from dotenv import load_dotenv
 
@@ -41,7 +39,7 @@ total_session_tokens = {"input": 0, "output": 0}
 # 전역 LLM 사용
 llm = ChatOllama ( # langchain-ollama 1.0.0 버전 문법 
     model=os.getenv("LLM_MODEL"),
-    base_url="http://localhost:11434", # ✅ 바로 지정
+    base_url=os.getenv("OLLAMA_BASE_URL"), 
     temperature=0,
     num_ctx=4096,  # context 길이
     top_p=0.9,

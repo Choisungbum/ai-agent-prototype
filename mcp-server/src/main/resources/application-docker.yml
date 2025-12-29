@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: mcp-server
+  datasource:
+    url: jdbc:postgresql://postgres:5432/data_info
+    username: wisenut
+    password: wisenut1!
+    dbcp2:
+      driver-class-name: org.postgresql.Driver
+
+mybatis:
+  mapper-locations: classpath:mappers/**/*Mapper.xml
+  type-aliases-package: com.aiagent.mcpserver.model
+  configuration:
+    map-underscore-to-camel-case: true
+
+server:
+  port: 9090

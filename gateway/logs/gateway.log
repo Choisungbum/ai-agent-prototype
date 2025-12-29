@@ -1,21 +1,76 @@
-2025-12-22T13:33:17.434+09:00  INFO 4292 --- [gateway] [main] org.example.gateway.GatewayApplication   : Starting GatewayApplication v0.0.1-SNAPSHOT using Java 19.0.1 with PID 4292 (C:\Users\csbti\Desktop\ai-agent-prototype\gateway\gateway.jar started by csbti in C:\Users\csbti\Desktop\ai-agent-prototype\gateway)
-2025-12-22T13:33:17.449+09:00  INFO 4292 --- [gateway] [main] org.example.gateway.GatewayApplication   : No active profile set, falling back to 1 default profile: "default"
-2025-12-22T13:33:18.451+09:00  INFO 4292 --- [gateway] [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
-2025-12-22T13:33:18.457+09:00  INFO 4292 --- [gateway] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
-2025-12-22T13:33:18.512+09:00  INFO 4292 --- [gateway] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 19 ms. Found 0 Redis repository interfaces.
-2025-12-22T13:33:19.125+09:00  INFO 4292 --- [gateway] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
-2025-12-22T13:33:19.154+09:00  INFO 4292 --- [gateway] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2025-12-22T13:33:19.155+09:00  INFO 4292 --- [gateway] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.48]
-2025-12-22T13:33:19.211+09:00  INFO 4292 --- [gateway] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2025-12-22T13:33:19.212+09:00  INFO 4292 --- [gateway] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1678 ms
-2025-12-22T13:33:20.433+09:00  INFO 4292 --- [gateway] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
-2025-12-22T13:33:20.475+09:00  INFO 4292 --- [gateway] [main] org.example.gateway.GatewayApplication   : Started GatewayApplication in 3.782 seconds (process running for 4.702)
-2025-12-22T13:37:34.469+09:00  INFO 4292 --- [gateway] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-12-22T13:37:34.471+09:00  INFO 4292 --- [gateway] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2025-12-22T13:37:34.477+09:00  INFO 4292 --- [gateway] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
-2025-12-22T13:37:34.663+09:00  INFO 4292 --- [gateway] [http-nio-8080-exec-2] o.e.gateway.controller.ChatController    : session ID : ff7302fc-c22d-49cb-a452-4ee799d21239
-2025-12-22T13:37:34.668+09:00  INFO 4292 --- [gateway] [http-nio-8080-exec-2] o.e.gateway.controller.ChatController    : initialize 요청
-2025-12-22T13:37:34.760+09:00 ERROR 4292 --- [gateway] [http-nio-8080-exec-2] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.springframework.web.client.ResourceAccessException: I/O error on POST request for "http://localhost:8000/chat/initialize": Connection refused: connect] with root cause
+2025-12-29T09:28:07.134+09:00  INFO 2684 --- [gateway] [main] org.example.gateway.GatewayApplication   : Starting GatewayApplication v0.0.1-SNAPSHOT using Java 19.0.1 with PID 2684 (C:\Users\csbti\Desktop\ai-agent-prototype\gateway\gateway.jar started by csbti in C:\Users\csbti\Desktop\ai-agent-prototype\gateway)
+2025-12-29T09:28:07.161+09:00  INFO 2684 --- [gateway] [main] org.example.gateway.GatewayApplication   : No active profile set, falling back to 1 default profile: "default"
+2025-12-29T09:28:10.022+09:00  INFO 2684 --- [gateway] [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-12-29T09:28:10.035+09:00  INFO 2684 --- [gateway] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-12-29T09:28:10.161+09:00  INFO 2684 --- [gateway] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 57 ms. Found 0 Redis repository interfaces.
+2025-12-29T09:28:11.938+09:00  INFO 2684 --- [gateway] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-12-29T09:28:11.987+09:00  INFO 2684 --- [gateway] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-12-29T09:28:11.989+09:00  INFO 2684 --- [gateway] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.48]
+2025-12-29T09:28:12.107+09:00  INFO 2684 --- [gateway] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-12-29T09:28:12.111+09:00  INFO 2684 --- [gateway] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 4804 ms
+2025-12-29T09:28:14.698+09:00  INFO 2684 --- [gateway] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-12-29T09:28:14.782+09:00  INFO 2684 --- [gateway] [main] org.example.gateway.GatewayApplication   : Started GatewayApplication in 9.634 seconds (process running for 11.393)
+2025-12-29T09:36:21.930+09:00  INFO 2684 --- [gateway] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-12-29T09:36:21.931+09:00  INFO 2684 --- [gateway] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-12-29T09:36:21.933+09:00  INFO 2684 --- [gateway] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2025-12-29T09:36:22.279+09:00  INFO 2684 --- [gateway] [http-nio-8080-exec-2] o.e.gateway.controller.ChatController    : session ID : 2bd60c08-fe26-4d29-8e7f-9ce5deac0fd4
+2025-12-29T09:36:22.283+09:00  INFO 2684 --- [gateway] [http-nio-8080-exec-2] o.e.gateway.controller.ChatController    : initialize 요청
+2025-12-29T09:36:23.474+09:00  INFO 2684 --- [gateway] [http-nio-8080-exec-6] o.e.gateway.controller.ChatController    : session ID : 85a83884-c1bb-4114-beb0-76ba00bd7971
+2025-12-29T09:36:23.474+09:00  INFO 2684 --- [gateway] [http-nio-8080-exec-6] o.e.gateway.controller.ChatController    : initialize 요청
+2025-12-29T09:36:25.538+09:00  INFO 2684 --- [gateway] [http-nio-8080-exec-2] o.e.gateway.controller.ChatController    : initialize 결과 : success
+2025-12-29T09:36:25.591+09:00  INFO 2684 --- [gateway] [http-nio-8080-exec-6] o.e.gateway.controller.ChatController    : initialize 결과 : success
+2025-12-29T09:36:38.854+09:00  INFO 2684 --- [gateway] [http-nio-8080-exec-9] o.e.gateway.controller.ChatController    : frontend 요청 수신 : 안녕~~
+2025-12-29T09:37:10.052+09:00  INFO 2684 --- [gateway] [http-nio-8080-exec-9] o.e.gateway.controller.ChatController    : Agent 서버 응답: {"response":"안녕하세요! 반갑습니다. 무엇을 도와드릴까요?"}
+2025-12-29T09:37:19.666+09:00  INFO 2684 --- [gateway] [http-nio-8080-exec-10] o.e.gateway.controller.ChatController    : frontend 요청 수신 : 수지라는 사람의 정보를 알려줘 
+2025-12-29T09:37:44.667+09:00  INFO 2684 --- [gateway] [http-nio-8080-exec-10] o.e.gateway.controller.ChatController    : Agent 서버 응답: {"response":"수지라는 사람의 정보를 알려드리겠습니다.\n\n수지의 이름은 수지입니다. 성별은 여성이고 나이는 29세입니다. 이메일 주소는 suzy100@example.com이고, 사회 보장번호는 900410-1000100입니다."}
+2025-12-29T10:39:37.791+09:00  INFO 2684 --- [gateway] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-12-29T10:39:38.338+09:00  INFO 2684 --- [gateway] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-12-29T10:39:55.767+09:00  INFO 41676 --- [gateway] [main] org.example.gateway.GatewayApplication   : Starting GatewayApplication using Java 17.0.16 with PID 41676 (C:\Users\csbti\Desktop\ai-agent-prototype\gateway\target\classes started by csbti in C:\Users\csbti\Desktop\ai-agent-prototype\gateway)
+2025-12-29T10:39:55.771+09:00  INFO 41676 --- [gateway] [main] org.example.gateway.GatewayApplication   : No active profile set, falling back to 1 default profile: "default"
+2025-12-29T10:39:56.762+09:00  INFO 41676 --- [gateway] [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-12-29T10:39:56.767+09:00  INFO 41676 --- [gateway] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-12-29T10:39:56.824+09:00  INFO 41676 --- [gateway] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 24 ms. Found 0 Redis repository interfaces.
+2025-12-29T10:39:57.416+09:00  INFO 41676 --- [gateway] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-12-29T10:39:57.437+09:00  INFO 41676 --- [gateway] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-12-29T10:39:57.438+09:00  INFO 41676 --- [gateway] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.48]
+2025-12-29T10:39:57.529+09:00  INFO 41676 --- [gateway] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-12-29T10:39:57.530+09:00  INFO 41676 --- [gateway] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1691 ms
+2025-12-29T10:39:58.883+09:00  INFO 41676 --- [gateway] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-12-29T10:39:58.896+09:00  INFO 41676 --- [gateway] [main] org.example.gateway.GatewayApplication   : Started GatewayApplication in 3.965 seconds (process running for 14.071)
+2025-12-29T10:49:12.432+09:00  INFO 41676 --- [gateway] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-12-29T10:49:12.433+09:00  INFO 41676 --- [gateway] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-12-29T10:49:12.435+09:00  INFO 41676 --- [gateway] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2025-12-29T10:49:12.626+09:00  INFO 41676 --- [gateway] [http-nio-8080-exec-2] o.e.gateway.controller.ChatController    : session ID : 1b155e07-e175-4438-98fc-de0484bfa97d
+2025-12-29T10:49:12.628+09:00  INFO 41676 --- [gateway] [http-nio-8080-exec-2] o.e.gateway.controller.ChatController    : initialize 요청
+2025-12-29T10:49:14.690+09:00  INFO 41676 --- [gateway] [http-nio-8080-exec-2] o.e.gateway.controller.ChatController    : initialize 결과 : success
+2025-12-29T10:49:26.503+09:00  INFO 41676 --- [gateway] [http-nio-8080-exec-3] o.e.gateway.controller.ChatController    : frontend 요청 수신 : ㅎㅇㅎㅇ
+2025-12-29T10:49:51.673+09:00  INFO 41676 --- [gateway] [http-nio-8080-exec-3] o.e.gateway.controller.ChatController    : Agent 서버 응답: {"response":"ㅎㅇㅎㅇ! 좋은 하루 보내고 계신가요?"}
+2025-12-29T10:50:57.984+09:00  INFO 37268 --- [gateway] [main] o.e.gateway.GatewayApplicationTests      : Starting GatewayApplicationTests using Java 19.0.1 with PID 37268 (started by csbti in C:\Users\csbti\Desktop\ai-agent-prototype\gateway)
+2025-12-29T10:50:57.986+09:00  INFO 37268 --- [gateway] [main] o.e.gateway.GatewayApplicationTests      : No active profile set, falling back to 1 default profile: "default"
+2025-12-29T10:50:59.371+09:00  INFO 37268 --- [gateway] [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-12-29T10:50:59.377+09:00  INFO 37268 --- [gateway] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-12-29T10:50:59.448+09:00  INFO 37268 --- [gateway] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 28 ms. Found 0 Redis repository interfaces.
+2025-12-29T10:51:01.757+09:00  INFO 37268 --- [gateway] [main] o.e.gateway.GatewayApplicationTests      : Started GatewayApplicationTests in 4.513 seconds (process running for 6.868)
+2025-12-29T11:01:39.441+09:00  INFO 41676 --- [gateway] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-12-29T11:01:40.118+09:00  INFO 41676 --- [gateway] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-12-29T13:44:08.592+09:00  INFO 2928 --- [gateway] [main] org.example.gateway.GatewayApplication   : Starting GatewayApplication v0.0.1-SNAPSHOT using Java 19.0.1 with PID 2928 (C:\Users\csbti\Desktop\ai-agent-prototype\gateway\target\gateway.jar started by csbti in C:\Users\csbti\Desktop\ai-agent-prototype\gateway)
+2025-12-29T13:44:08.600+09:00  INFO 2928 --- [gateway] [main] org.example.gateway.GatewayApplication   : No active profile set, falling back to 1 default profile: "default"
+2025-12-29T13:44:09.737+09:00  INFO 2928 --- [gateway] [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-12-29T13:44:09.744+09:00  INFO 2928 --- [gateway] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-12-29T13:44:09.819+09:00  INFO 2928 --- [gateway] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 23 ms. Found 0 Redis repository interfaces.
+2025-12-29T13:44:10.538+09:00  INFO 2928 --- [gateway] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-12-29T13:44:10.561+09:00  INFO 2928 --- [gateway] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-12-29T13:44:10.562+09:00  INFO 2928 --- [gateway] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.48]
+2025-12-29T13:44:10.611+09:00  INFO 2928 --- [gateway] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-12-29T13:44:10.612+09:00  INFO 2928 --- [gateway] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1911 ms
+2025-12-29T13:44:11.911+09:00  INFO 2928 --- [gateway] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-12-29T13:44:11.940+09:00  INFO 2928 --- [gateway] [main] org.example.gateway.GatewayApplication   : Started GatewayApplication in 4.241 seconds (process running for 4.947)
+2025-12-29T13:44:13.176+09:00  INFO 2928 --- [gateway] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-12-29T13:44:13.178+09:00  INFO 2928 --- [gateway] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-12-29T13:44:13.184+09:00  INFO 2928 --- [gateway] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2025-12-29T13:44:13.392+09:00  INFO 2928 --- [gateway] [http-nio-8080-exec-2] o.e.gateway.controller.ChatController    : session ID : 3a116708-e875-4029-b91e-1ff3c1bd5d6e
+2025-12-29T13:44:13.395+09:00  INFO 2928 --- [gateway] [http-nio-8080-exec-2] o.e.gateway.controller.ChatController    : initialize 요청
+2025-12-29T13:44:13.486+09:00 ERROR 2928 --- [gateway] [http-nio-8080-exec-2] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.springframework.web.client.ResourceAccessException: I/O error on POST request for "http://localhost:8000/chat/initialize": Connection refused: connect] with root cause
 
 java.net.ConnectException: Connection refused: connect
 	at java.base/sun.nio.ch.Net.connect0(Native Method) ~[na:na]
@@ -90,142 +145,14 @@ java.net.ConnectException: Connection refused: connect
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.48.jar!/:na]
 	at java.base/java.lang.Thread.run(Thread.java:1589) ~[na:na]
 
-2025-12-22T13:37:54.003+09:00  INFO 4292 --- [gateway] [http-nio-8080-exec-3] o.e.gateway.controller.ChatController    : session ID : 26b05039-0bba-4bcb-adf3-4e76a545dd9c
-2025-12-22T13:37:54.004+09:00  INFO 4292 --- [gateway] [http-nio-8080-exec-3] o.e.gateway.controller.ChatController    : initialize 요청
-2025-12-22T13:37:57.363+09:00 ERROR 4292 --- [gateway] [http-nio-8080-exec-3] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.springframework.web.client.HttpServerErrorException$InternalServerError: 500 Internal Server Error on POST request for "http://localhost:8000/chat/initialize": "Internal Server Error"] with root cause
-
-org.springframework.web.client.HttpServerErrorException$InternalServerError: 500 Internal Server Error on POST request for "http://localhost:8000/chat/initialize": "Internal Server Error"
-	at org.springframework.web.client.HttpServerErrorException.create(HttpServerErrorException.java:102) ~[spring-web-6.2.12.jar!/:6.2.12]
-	at org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:189) ~[spring-web-6.2.12.jar!/:6.2.12]
-	at org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:147) ~[spring-web-6.2.12.jar!/:6.2.12]
-	at org.springframework.web.client.RestTemplate.handleResponse(RestTemplate.java:953) ~[spring-web-6.2.12.jar!/:6.2.12]
-	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:902) ~[spring-web-6.2.12.jar!/:6.2.12]
-	at org.springframework.web.client.RestTemplate.execute(RestTemplate.java:801) ~[spring-web-6.2.12.jar!/:6.2.12]
-	at org.springframework.web.client.RestTemplate.postForEntity(RestTemplate.java:549) ~[spring-web-6.2.12.jar!/:6.2.12]
-	at org.example.gateway.controller.ChatController.chat(ChatController.java:45) ~[!/:0.0.1-SNAPSHOT]
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
-	at java.base/java.lang.reflect.Method.invoke(Method.java:578) ~[na:na]
-	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:258) ~[spring-web-6.2.12.jar!/:6.2.12]
-	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:191) ~[spring-web-6.2.12.jar!/:6.2.12]
-	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.2.12.jar!/:6.2.12]
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:991) ~[spring-webmvc-6.2.12.jar!/:6.2.12]
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:896) ~[spring-webmvc-6.2.12.jar!/:6.2.12]
-	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.2.12.jar!/:6.2.12]
-	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089) ~[spring-webmvc-6.2.12.jar!/:6.2.12]
-	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) ~[spring-webmvc-6.2.12.jar!/:6.2.12]
-	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.2.12.jar!/:6.2.12]
-	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914) ~[spring-webmvc-6.2.12.jar!/:6.2.12]
-	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590) ~[tomcat-embed-core-10.1.48.jar!/:na]
-	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.2.12.jar!/:6.2.12]
-	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.48.jar!/:na]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-10.1.48.jar!/:na]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138) ~[tomcat-embed-core-10.1.48.jar!/:na]
-	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.48.jar!/:na]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-10.1.48.jar!/:na]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138) ~[tomcat-embed-core-10.1.48.jar!/:na]
-	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.2.12.jar!/:6.2.12]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.12.jar!/:6.2.12]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-10.1.48.jar!/:na]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138) ~[tomcat-embed-core-10.1.48.jar!/:na]
-	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.2.12.jar!/:6.2.12]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.12.jar!/:6.2.12]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-10.1.48.jar!/:na]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138) ~[tomcat-embed-core-10.1.48.jar!/:na]
-	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.2.12.jar!/:6.2.12]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.12.jar!/:6.2.12]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-10.1.48.jar!/:na]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138) ~[tomcat-embed-core-10.1.48.jar!/:na]
-	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165) ~[tomcat-embed-core-10.1.48.jar!/:na]
-	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:88) ~[tomcat-embed-core-10.1.48.jar!/:na]
-	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482) ~[tomcat-embed-core-10.1.48.jar!/:na]
-	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113) ~[tomcat-embed-core-10.1.48.jar!/:na]
-	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83) ~[tomcat-embed-core-10.1.48.jar!/:na]
-	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72) ~[tomcat-embed-core-10.1.48.jar!/:na]
-	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342) ~[tomcat-embed-core-10.1.48.jar!/:na]
-	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:399) ~[tomcat-embed-core-10.1.48.jar!/:na]
-	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.48.jar!/:na]
-	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903) ~[tomcat-embed-core-10.1.48.jar!/:na]
-	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1774) ~[tomcat-embed-core-10.1.48.jar!/:na]
-	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.48.jar!/:na]
-	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:973) ~[tomcat-embed-core-10.1.48.jar!/:na]
-	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:491) ~[tomcat-embed-core-10.1.48.jar!/:na]
-	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.48.jar!/:na]
-	at java.base/java.lang.Thread.run(Thread.java:1589) ~[na:na]
-
-2025-12-22T13:38:38.739+09:00  INFO 4292 --- [gateway] [http-nio-8080-exec-5] o.e.gateway.controller.ChatController    : session ID : 3c597584-bf32-4a80-ba4f-5214a27a5b4a
-2025-12-22T13:38:38.743+09:00  INFO 4292 --- [gateway] [http-nio-8080-exec-5] o.e.gateway.controller.ChatController    : initialize 요청
-2025-12-22T13:38:42.118+09:00 ERROR 4292 --- [gateway] [http-nio-8080-exec-5] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.springframework.web.client.HttpServerErrorException$InternalServerError: 500 Internal Server Error on POST request for "http://localhost:8000/chat/initialize": "Internal Server Error"] with root cause
-
-org.springframework.web.client.HttpServerErrorException$InternalServerError: 500 Internal Server Error on POST request for "http://localhost:8000/chat/initialize": "Internal Server Error"
-	at org.springframework.web.client.HttpServerErrorException.create(HttpServerErrorException.java:102) ~[spring-web-6.2.12.jar!/:6.2.12]
-	at org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:189) ~[spring-web-6.2.12.jar!/:6.2.12]
-	at org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:147) ~[spring-web-6.2.12.jar!/:6.2.12]
-	at org.springframework.web.client.RestTemplate.handleResponse(RestTemplate.java:953) ~[spring-web-6.2.12.jar!/:6.2.12]
-	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:902) ~[spring-web-6.2.12.jar!/:6.2.12]
-	at org.springframework.web.client.RestTemplate.execute(RestTemplate.java:801) ~[spring-web-6.2.12.jar!/:6.2.12]
-	at org.springframework.web.client.RestTemplate.postForEntity(RestTemplate.java:549) ~[spring-web-6.2.12.jar!/:6.2.12]
-	at org.example.gateway.controller.ChatController.chat(ChatController.java:45) ~[!/:0.0.1-SNAPSHOT]
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
-	at java.base/java.lang.reflect.Method.invoke(Method.java:578) ~[na:na]
-	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:258) ~[spring-web-6.2.12.jar!/:6.2.12]
-	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:191) ~[spring-web-6.2.12.jar!/:6.2.12]
-	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.2.12.jar!/:6.2.12]
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:991) ~[spring-webmvc-6.2.12.jar!/:6.2.12]
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:896) ~[spring-webmvc-6.2.12.jar!/:6.2.12]
-	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.2.12.jar!/:6.2.12]
-	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089) ~[spring-webmvc-6.2.12.jar!/:6.2.12]
-	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) ~[spring-webmvc-6.2.12.jar!/:6.2.12]
-	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.2.12.jar!/:6.2.12]
-	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914) ~[spring-webmvc-6.2.12.jar!/:6.2.12]
-	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590) ~[tomcat-embed-core-10.1.48.jar!/:na]
-	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.2.12.jar!/:6.2.12]
-	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.48.jar!/:na]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-10.1.48.jar!/:na]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138) ~[tomcat-embed-core-10.1.48.jar!/:na]
-	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.48.jar!/:na]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-10.1.48.jar!/:na]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138) ~[tomcat-embed-core-10.1.48.jar!/:na]
-	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.2.12.jar!/:6.2.12]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.12.jar!/:6.2.12]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-10.1.48.jar!/:na]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138) ~[tomcat-embed-core-10.1.48.jar!/:na]
-	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.2.12.jar!/:6.2.12]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.12.jar!/:6.2.12]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-10.1.48.jar!/:na]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138) ~[tomcat-embed-core-10.1.48.jar!/:na]
-	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.2.12.jar!/:6.2.12]
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.12.jar!/:6.2.12]
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-10.1.48.jar!/:na]
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138) ~[tomcat-embed-core-10.1.48.jar!/:na]
-	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165) ~[tomcat-embed-core-10.1.48.jar!/:na]
-	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:88) ~[tomcat-embed-core-10.1.48.jar!/:na]
-	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482) ~[tomcat-embed-core-10.1.48.jar!/:na]
-	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113) ~[tomcat-embed-core-10.1.48.jar!/:na]
-	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83) ~[tomcat-embed-core-10.1.48.jar!/:na]
-	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72) ~[tomcat-embed-core-10.1.48.jar!/:na]
-	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342) ~[tomcat-embed-core-10.1.48.jar!/:na]
-	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:399) ~[tomcat-embed-core-10.1.48.jar!/:na]
-	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.48.jar!/:na]
-	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903) ~[tomcat-embed-core-10.1.48.jar!/:na]
-	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1774) ~[tomcat-embed-core-10.1.48.jar!/:na]
-	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.48.jar!/:na]
-	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:973) ~[tomcat-embed-core-10.1.48.jar!/:na]
-	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:491) ~[tomcat-embed-core-10.1.48.jar!/:na]
-	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.48.jar!/:na]
-	at java.base/java.lang.Thread.run(Thread.java:1589) ~[na:na]
-
-2025-12-22T13:39:00.513+09:00  INFO 4292 --- [gateway] [http-nio-8080-exec-6] o.e.gateway.controller.ChatController    : session ID : 484a7d79-e27d-4aff-9890-65f7d14d9489
-2025-12-22T13:39:00.515+09:00  INFO 4292 --- [gateway] [http-nio-8080-exec-6] o.e.gateway.controller.ChatController    : initialize 요청
-2025-12-22T13:39:01.977+09:00  INFO 4292 --- [gateway] [http-nio-8080-exec-6] o.e.gateway.controller.ChatController    : initialize 결과 : success
-2025-12-22T13:40:34.508+09:00  INFO 4292 --- [gateway] [http-nio-8080-exec-8] o.e.gateway.controller.ChatController    : frontend 요청 수신 : 수지라는 이름의 사용자 정보 알랴줘
-2025-12-22T13:40:42.933+09:00  INFO 4292 --- [gateway] [http-nio-8080-exec-9] o.e.gateway.controller.ChatController    : session ID : e26fc8e1-b5d1-498a-9ab8-754b97700986
-2025-12-22T13:40:42.938+09:00  INFO 4292 --- [gateway] [http-nio-8080-exec-9] o.e.gateway.controller.ChatController    : initialize 요청
-2025-12-22T13:40:44.818+09:00  INFO 4292 --- [gateway] [http-nio-8080-exec-9] o.e.gateway.controller.ChatController    : initialize 결과 : success
-2025-12-22T13:40:45.574+09:00  INFO 4292 --- [gateway] [http-nio-8080-exec-10] o.e.gateway.controller.ChatController    : session ID : 4343957e-7213-468d-8624-6f775ee7183a
-2025-12-22T13:40:45.577+09:00  INFO 4292 --- [gateway] [http-nio-8080-exec-10] o.e.gateway.controller.ChatController    : initialize 요청
-2025-12-22T13:40:47.039+09:00  INFO 4292 --- [gateway] [http-nio-8080-exec-10] o.e.gateway.controller.ChatController    : initialize 결과 : success
-2025-12-22T13:41:13.099+09:00  INFO 4292 --- [gateway] [http-nio-8080-exec-1] o.e.gateway.controller.ChatController    : frontend 요청 수신 : 수지라는 이름의 사용자 정보 알려줘
-2025-12-22T13:41:42.865+09:00 ERROR 4292 --- [gateway] [http-nio-8080-exec-8] o.e.gateway.controller.ChatController    : Agent 서버 연결 실패 : 500 Internal Server Error on POST request for "http://localhost:8000/chat": "Internal Server Error"
-2025-12-22T13:42:03.637+09:00  INFO 4292 --- [gateway] [http-nio-8080-exec-1] o.e.gateway.controller.ChatController    : Agent 서버 응답: {"response":"수지라는 이름의 사용자 정보를 알려드리겠습니다.\n\n이름: 수지\n성별: 여\n나이: 29세\n이메일: suzy100@example.com\n주민등록번호: 900410-1000100\n\n위의 정보가 수지라는 이름의 사용자 정보입니다."}
-2025-12-22T17:43:49.472+09:00  INFO 4292 --- [gateway] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
-2025-12-22T17:43:50.114+09:00  INFO 4292 --- [gateway] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-12-29T13:45:21.824+09:00  INFO 2928 --- [gateway] [http-nio-8080-exec-4] o.e.gateway.controller.ChatController    : session ID : 768ea1eb-3f79-453b-997c-4d8cf2f96d9d
+2025-12-29T13:45:21.827+09:00  INFO 2928 --- [gateway] [http-nio-8080-exec-4] o.e.gateway.controller.ChatController    : initialize 요청
+2025-12-29T13:45:22.949+09:00  INFO 2928 --- [gateway] [http-nio-8080-exec-4] o.e.gateway.controller.ChatController    : initialize 결과 : success
+2025-12-29T13:53:58.547+09:00  INFO 2928 --- [gateway] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-12-29T13:53:59.577+09:00  INFO 2928 --- [gateway] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-12-29T14:55:25.775+09:00  INFO 24592 --- [gateway] [main] o.e.gateway.GatewayApplicationTests      : Starting GatewayApplicationTests using Java 19.0.1 with PID 24592 (started by csbti in C:\Users\csbti\Desktop\ai-agent-prototype\gateway)
+2025-12-29T14:55:25.777+09:00  INFO 24592 --- [gateway] [main] o.e.gateway.GatewayApplicationTests      : No active profile set, falling back to 1 default profile: "default"
+2025-12-29T14:55:26.971+09:00  INFO 24592 --- [gateway] [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2025-12-29T14:55:26.977+09:00  INFO 24592 --- [gateway] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-12-29T14:55:27.048+09:00  INFO 24592 --- [gateway] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 32 ms. Found 0 Redis repository interfaces.
+2025-12-29T14:55:29.228+09:00  INFO 24592 --- [gateway] [main] o.e.gateway.GatewayApplicationTests      : Started GatewayApplicationTests in 4.093 seconds (process running for 6.092)

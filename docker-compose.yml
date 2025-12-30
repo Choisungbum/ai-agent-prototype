@@ -19,7 +19,7 @@ services:
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_USER: wisenut       # .env 변수 사용 권장
+      POSTGRES_USER: wisenut 
       POSTGRES_PASSWORD: wisenut1!
       POSTGRES_DB: data_info
     volumes:

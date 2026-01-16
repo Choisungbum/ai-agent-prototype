@@ -6,7 +6,10 @@ langchain-ollama
 pydantic
 python-dotenv
 sqlalchemy
-langfuse
 httpx
 requests
 redis
+
+# test lib
+pdfplumber
+unstructured[pdf]

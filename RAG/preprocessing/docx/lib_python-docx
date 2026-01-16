@@ -1,0 +1,34 @@
+from docx import Document
+
+docx_path = "C:/Users/csbti/Desktop/ai-agent-prototype/RAG/testfile/WISE Ichat_manual_v0.1.docx"
+
+def load_docx(path):
+    doc = Document(path)
+
+    sections = []
+    current = {"title": None, "texts": []}
+
+    for p in doc.paragraphs:
+        text = p.text.strip()
+        if not text:
+            continue
+
+        style = p.style.name
+
+        # 제목 판별 (Heading 기반)
+        if style.startswith("Heading"):
+            if current["texts"]:
+                sections.append(current)
+            current = {
+                "title": text,
+                "texts": []
+            }
+        else:
+            current["texts"].append(text)
+
+    if current["texts"]:
+        sections.append(current)
+
+    return sections
+
+print(load_docx(docx_path))

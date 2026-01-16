@@ -1,0 +1,16 @@
+fastapi
+uvicorn
+langchain
+langchain-community
+langchain-ollama
+pydantic
+python-dotenv
+httpx
+requests
+
+# document loader
+pdfplumber
+unstructured[pdf]
+pymupdf
+statistics
+python-docx

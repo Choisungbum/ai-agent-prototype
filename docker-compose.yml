@@ -5,13 +5,14 @@ services:
     image: redis:alpine
     container_name: my-redis
     ports:
-      - "6379:6379"  # 호스트:컨테이너
+      - "6379:6379"
     command: redis-server /usr/local/etc/redis/redis.conf
     volumes:
-      - ./redis_data:/data # 데이터 보존을 위한 볼륨 마운트
-      # [추가] 내 컴퓨터의 redis.conf를 컨테이너 내부로 연결
       - ./redis.conf:/usr/local/etc/redis/redis.conf
+    tmpfs:
+      - /data
     restart: always
+
 
   postgres:
     image: postgres:15-alpine

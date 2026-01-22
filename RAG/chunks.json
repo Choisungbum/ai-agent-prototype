@@ -1,0 +1,487 @@
+[
+  {
+    "text": "1. 소개
+검색(키워드, 벡터), 리랭킹 및 생성형 답변을 위한 API를 제공한다.
+
+2. 설정
+설정 파일에는 다음과 같은 항목들로 구성되어 있고 설정할 수 있다.
+
+[표 2.1 설정]
+
+| \"port\": {port-number} |
+| --- |
+| \"data\": {data-path} |
+
+[표 2.2 설정 항목]
+
+| 속성 | 설명 |
+| --- | --- |
+| port | API를 수신할 때 사용하는 포트 |
+| data | 빌더의 데이터를 저장하는 builder.sqlite 파일이 존재하는 폴더의 위치 |
+
+3. 실행
+빌더의 구동은 $IRAG_HOME/batch/builder.sh 통해 구동이 가능하다.
+
+3. 실행 > 3.1. 모듈 실행
+$ ./builder.sh ../config/builder.yaml start
+
+3. 실행 > 3.2. 모듈 종료
+$ ./builder.sh stop
+
+3. 실행 > 3.3. 모듈 상태 조회
+$ ./builder.sh status
+
+4. 모듈 기능
+모듈을 관리하기 위해 사용한다.
+
+4. 모듈 기능 > 4.1. 모듈 조회
+[API]
+
+| Method | URL | 비고 |
+| --- | --- | --- |
+| GET | /module | 등록 모듈 조회 |
+
+4. 모듈 기능 > 4.2. 모듈 등록
+[API]
+
+| Method | URL | 비고 |
+| --- | --- | --- |
+| POST | /module | 모듈 등록 |
+
+[설정 항목]
+
+| 속성 | 필수여부 | 설명 |
+| --- | --- | --- |
+| name | Y | 고유 이름 |
+| type | Y | 모듈의 종류
+KEYWORD_SEARCHER, VECTOR_SEARCHER, RETRIEVER,
+RERANKER, LLM |
+| version | Y | 모듈의 버전
+type이 KEYWORD_SEARCHER, VECTOR_SEARCHER 일 때 버전을
+명시 |
+| ip | Y | 모듈의 ip |
+| port | Y | 모듈의 포트 |
+
+[예시]",
+    "pages": [
+      4,
+      5,
+      6,
+      7,
+      8
+    ]
+  },
+  {
+    "text": "RETRIEVER,
+RERANKER, LLM |
+| version | Y | 모듈의 버전
+type이 KEYWORD_SEARCHER, VECTOR_SEARCHER 일 때 버전을
+명시 |
+| ip | Y | 모듈의 ip |
+| port | Y | 모듈의 포트 |
+
+[예시]| { |
+| --- |
+| \"name\": \"searcher\", |
+| \"type\": \"keyword_searcher\", |
+| \"version\": \"v7\", |
+| \"ip\": \"127.0.0.1\", |
+| \"port\": 9000 |
+| } |
+
+4. 모듈 기능 > 4.3. 모듈 업데이트
+[API]
+
+| Method | URL | 비고 |
+| --- | --- | --- |
+| PATCH | /module | 모듈 업데이트 |
+
+[설정 항목]
+
+| 속성 | 필수여부 | 설명 |
+| --- | --- | --- |
+| name | Y | 업데이트 모듈의 고유 이름 |
+| type | Y | 업데이트 모듈의 타입 |
+| version | N | 업데이트 필요 시 명시 |
+| ip | N | 업데이트 필요 시 명시 |
+| port | N | 업데이트 필요 시 명시 |
+
+[예시]
+
+{
+
+| \"name\": \"searcher\", |
+| --- |
+| \"type\": \"keyword_searcher\", |
+| \"port\": 9001 |
+| } |
+
+4. 모듈 기능 > 4.4. 모듈 삭제
+[API]
+
+| Method | URL | 비고 |
+| --- | --- | --- |
+| DELETE | /module | 모듈 삭제 |
+
+[설정 항목]
+
+| 속성 | 필수여부 | 설명 |
+| --- | --- | --- |
+| name | Y | 삭제 모듈의 고유 이름 |
+| type | Y | 삭제 모듈의 타입 |
+
+[예시]
+
+| { |
+| --- |
+| \"name\": \"searcher\", |
+| \"type\": \"keyword_searcher\" |
+| } |
+
+5. 프롬프트 기능
+프롬프트를 관리하기 위해 사용한다.
+
+5. 프롬프트 기능 > 5.1. 프롬프트 조회
+[API]
+
+| Method | URL | 비고 |
+| --- | --- | --- |
+| GET | /prompt | 등록 프롬프트 조회 |
+
+5. 프롬프트 기능 > 5.2. 프롬프트 등록
+[API]",
+    "pages": [
+      8,
+      9,
+      10
+    ]
+  },
+  {
+    "text": "기 위해 사용한다.
+
+5. 프롬프트 기능 > 5.1. 프롬프트 조회
+[API]
+
+| Method | URL | 비고 |
+| --- | --- | --- |
+| GET | /prompt | 등록 프롬프트 조회 |
+
+5. 프롬프트 기능 > 5.2. 프롬프트 등록
+[API]| Method | URL | 비고 |
+| --- | --- | --- |
+| POST | /prompt | 프롬프트 등록 |
+
+[설정 항목]
+
+| 속성 | 필수여부 | 설명 |
+| --- | --- | --- |
+| name | Y | 프롬프트를 구분 할 이름 |
+| text | N | 프롬프트 텍스트 |
+| temperature | N | 모델의 출력 다양성 지정
+- 0에 가까울 수록 결과가 일관적
+- default 0.01 |
+| maximumTokens | N | 모델이 한번에 처리 할 수 있는 입력과 출력의 최대 토큰 수
+- default 4096 |
+| topP | N | 출력 시 선택 가능한 후보 단어의 제한 값 지정
+- 0에 가까울 수록 결과가 일관적 |
+
+| | | - default 0.9 |
+| --- | --- | --- |
+
+[예시]
+
+| { |
+| --- |
+| \"name\": \"default\", |
+| \"text\": \"문맥을 바탕으로 질문에 답해 주세요. 질문과 관련이 없는 문맥은 무시하십시오\", |
+| \"temperature\": 0.1, |
+| \"maximumTokens\": 8192, |
+| \"topP\": 1 |
+| } |
+
+5. 프롬프트 기능 > 5.3. 프롬프트 업데이트
+[API]
+
+| Method | URL | 비고 |
+| --- | --- | --- |
+| PATCH | /prompt | 프롬프트 업데이트 |
+
+[설정 항목]
+
+| 속성 | 필수여부 | 설명 |
+| --- | --- | --- |
+| name | Y | 업데이트 프롬프트의 고유 이름 |
+| text | N | 업데이트 필요 시 명시 |
+| temperature | N | 업데이트 필요 시 명시 |
+| maximumTokens | N | 업데이트 필요 시 명시 |
+| topP | N | 업데이트 필요 시 명시 |
+
+[예시]
+
+| { |
+| --- |
+| \"name\": \"searcher\", |
+| \"topP\": 0.5 |
+| } |",
+    "pages": [
+      10,
+      11,
+      12
+    ]
+  },
+  {
+    "text": "N | 업데이트 필요 시 명시 |
+| maximumTokens | N | 업데이트 필요 시 명시 |
+| topP | N | 업데이트 필요 시 명시 |
+
+[예시]
+
+| { |
+| --- |
+| \"name\": \"searcher\", |
+| \"topP\": 0.5 |
+| } |5. 프롬프트 기능 > 5.4. 프롬프트 삭제
+[API]
+
+| Method | URL | 비고 |
+| --- | --- | --- |
+| DELETE | /prompt?name={value} | value에 삭제 프롬프트의 이름 명시 |
+
+6. 검색 기능
+요청에 대한 옵션을 넣는 request와 실행 순서를 지정하는 chain으로 구분된다.
+
+chain에 등록 된 순서로 검색을 수행한다.
+
+[API]
+
+| Method | URL | 비고 |
+| --- | --- | --- |
+| POST | /search | 검색 |
+
+6. 검색 기능 > 6.1. 공통 영역
+[설정 항목]
+
+| 속성 | 필수여부 | 설명 |
+| --- | --- | --- |
+| query | Y | 검색을 수행하기 위한 쿼리를 입력한다. |
+| debug | N | 설정 시 request의 모든 결과를 반환한다.
+- default: false |
+
+[예시]
+
+| { |
+| --- |
+| \"query\": \"와이즈넛에 대해서 알려줘\", |
+| \"debug\": true |
+| } |
+
+6. 검색 기능 > 6.2. Chain 영역
+[설정 항목]
+
+| 속성 | 필수여부 | 설명 |
+| --- | --- | --- |
+
+| name | Y | request를 구분 할 이름 지정 |
+| --- | --- | --- |
+| module | Y | request를 수행 할 모듈 지정 |
+| type | Y | 수행 타입 지정
+KEYWORD_SEARCHER, VECTOR_SEARCHER,
+RETRIEVER, RERANKER, LLM |
+
+[예시]
+
+| { |
+| --- |
+| \"chain\": [ |
+| { |
+| \"name\": \"vector-search\", |
+| \"module\": “vector-module\", |
+| \"type\": \"VECTOR_SEARCHER\" |
+| } |
+| ] |
+| } |
+
+6. 검색 기능 > 6.3. Request 영역 > 6.3.1. 검색
+[설정 항목]",
+    "pages": [
+      12,
+      13,
+      14
+    ]
+  },
+  {
+    "text": "me\": \"vector-search\", |
+| \"module\": “vector-module\", |
+| \"type\": \"VECTOR_SEARCHER\" |
+| } |
+| ] |
+| } |
+
+6. 검색 기능 > 6.3. Request 영역 > 6.3.1. 검색
+[설정 항목]| 속성 | 필수여부 | 설명 |
+| --- | --- | --- |
+| searchMode | Y | 어떤 방식으로 검색할 지 선택하는 옵션이다.
+키워드 검색 : 0, “keyword”
+자연어 검색 : 1, “natural”
+벡터 검색 : 2, “vector” |
+| paging | N | 검색 결과를 페이징 처리하기 위한 옵션이다.
+기본값은 10으로 문서 결과가 최대 10건 출력된다. |
+| synonymExpansion | N | 동의어확장법을 설정하는 옵션이다. |",
+    "pages": [
+      14
+    ]
+  },
+  {
+    "text": "“natural”
+벡터 검색 : 2, “vector” |
+| paging | N | 검색 결과를 페이징 처리하기 위한 옵션이다.
+기본값은 10으로 문서 결과가 최대 10건 출력된다. |
+| synonymExpansion | N | 동의어확장법을 설정하는 옵션이다. || | | allTerm과 originalTerm 두가지 방식이 있다.
+allTerm : 0 (default)
+originalTerm : 
+1originalTerm으로 설정할 경우 형태소분석된 term에 대해서는
+동의어확장이 수행되지 않는다. |
+| --- | --- | --- |
+| useLa | N | 형태소분석기 사용여부를 설정하는 옵션이다.
+사용하지 않음 : 0 (default)
+형태소분석기 적용 : 1 |
+| useSynonym | N | 동의어 사전 적용여부를 설정하는 옵션이다.
+useLa 옵션이 1 일때만 적용 된다.
+사용하지 않음 : 0 (default)
+동의어사전 적용 : 
+1like, matrix, ngram은 동의어사전이 적용 불가능하다. |
+| useOrigin | N | 원본 토큰 사용여부를 사용하는 옵션이다.
+사용하지 않음 : 0
+원본토큰 사용 : 
+1형태소 분석이 실패한 원본 토큰을 쿼리에 사용하기 위한 옵션 |
+| documentField | N | 검색 결과 문서내용을 출력할 때, 출력할 필드명을 적는다.
+생략하였을 때 기본값은 컬렉션 세팅 기준 전체 필드를 출력한다. |
+| sorting | N | 검색 결과를 정렬하기 위한 옵션이다. 생략하였을 때 기본값은
+문서가 색인된 순서이다. |
+| similarity | N | 랭킹 설정 (설정을 하지 않을 경우, classic을 기본으로 사용함)
+- bm25
+- boolean
+- classic
+- dfi
+- dfr
+- lm |
+
+[예시]",
+    "pages": [
+      15,
+      16
+    ]
+  },
+  {
+    "text": "기 위한 옵션이다. 생략하였을 때 기본값은
+문서가 색인된 순서이다. |
+| similarity | N | 랭킹 설정 (설정을 하지 않을 경우, classic을 기본으로 사용함)
+- bm25
+- boolean
+- classic
+- dfi
+- dfr
+- lm |
+
+[예시]| { |
+| --- |
+| \"request\": { |
+| \"{request-name}\": { |
+| \"collectionId\": \"{collection-id}\", |
+| \"searchMode\": 0 | 1 | 2, |
+| \"synonymExpansion\": 0, |
+| \"useSynonym\": 0, |
+| \"useLa\": 0, |
+| \"searchField\": [ |
+| \" … \" |
+| ] |
+| \"paging\": { |
+| \"from\": 0, |
+| \"size\": 10 |
+| }, |
+| \"sorting\": [ |
+| { |
+| \"field\": \"score\", |
+| \"reverse\": false |
+| } |
+| ] |
+| \"paging\": { |
+| \"from\": 0, |
+| \"size\": 5 |
+| } |
+| } |
+| } |
+| } |
+
+6. 검색 기능 > 6.3. Request 영역 > 6.3.2. Rerank
+[설정 항목]
+
+| topN | Y | 리랭킹 결과를 처리하기 위한 옵션이다. 설정 값 만큼 출력된다. |
+| --- | --- | --- |
+| field | Y | 리랭킹을 진행 할 필드를 설정하는 옵션이다. |
+| target | Y | 검색결과를 가져 올 request name을 지정한다.
+request의 결과 document field에서 topN 만큼 가져와서 리랭킹을
+진행한다. |
+| model | Y | 리랭킹 시 사용할 모델을 지정한다. |
+
+[예시]
+
+| { |
+| --- |
+| \"request\": { |
+| \"{request-name}\": { |
+| \"topN\": 5, |
+| \"field\": \"{document-field}\", |
+| \"target\": [ |
+| \"{target-request-name-1}\", |
+| \"{ … }\" |
+| ], |
+| \"model\": \"wisenut/reranker/1.0.0\" |
+| } |
+| } |
+| } |",
+    "pages": [
+      16,
+      17
+    ]
+  },
+  {
+    "text": "ield\": \"{document-field}\", |
+| \"target\": [ |
+| \"{target-request-name-1}\", |
+| \"{ … }\" |
+| ], |
+| \"model\": \"wisenut/reranker/1.0.0\" |
+| } |
+| } |
+| } |6. 검색 기능 > 6.3. Request 영역 > 6.3.3. LLM
+| 속성 | 필수여부 | 설명 |
+| --- | --- | --- |
+| target | Y | 대상이 되는 request name 지정하는 옵션이다. |
+| field | Y | 문서에서 결과를 가져올 필드 이름을 지정하는 옵션이다. |
+| topN | Y | 문서에서 가져오는 결과 건수를 지정하는 옵션이다. |
+| prompt | Y | 모델에 사용 할 프롬프트 이름을 지정하는 옵션이다. |
+
+| model | Y | 사용할 모델 이름을 지정하는 옵션이다. |
+| --- | --- | --- |
+
+[예시]
+
+| { |
+| --- |
+| \"request\": { |
+| \"{request-name}\": { |
+| \"target\": \"{target-request-name}\", |
+| \"field\": \"{document-field-name}\", |
+| \"topN\": 5, |
+| \"prompt\": \"{prompt-name}\", |
+| \"model\": \"wisenut/llm/1.0.0\" |
+| } |
+| } |
+| } |",
+    "pages": [
+      17,
+      18
+    ]
+  }
+]

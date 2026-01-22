@@ -1,0 +1,70 @@
+1. 문서 로드 
+- pdf
+- word
+- xlsx
+
+2. 전처리  
+
+예정 작업 내역
+1. 문서 로드 시 구조화된 텍스트 형식으로 출력
+2. 해당 출력 텍스트를 의미기반으로 청킹
+3. 해당 전처리 텍스트를 임베딩하여 벡터DB에 저장 
+4. 검색 테스트  
+
+
+- 문서 로드 시 구조화된 텍스트 형식으로 출력
+multi-vector 전략필요 
+표 이미지 저장 필요 
+표 이미지 문장화
+postgreSQL -> PGVector 확장 
+문서 로드 (DB저장) -> 저장된 데이터 읽어 의미기나 청킹 (DB저장) -> 임베딩 -> PGVector 저장 
+
+
+
+
+{
+  "doc_id": "uuid",
+  "file_type": "pdf",
+  "source": "/data/manual.pdf",
+  "metadata": {
+    "page_count": 120,
+    "loaded_at": "2026-01-19T10:20:00"
+  },
+  "sections": [
+    {
+      "section_id": "uuid",
+      "title": "1 시스템 개요 > 1.1 설치 환경",
+      "page_range": [3, 5],
+      "blocks": [
+        {
+          "type": "text",
+          "text": "이 시스템은 ...",
+          "page": 3
+        },
+        {
+          "type": "text",
+          "text": "설치는 다음과 같이 진행한다 ...",
+          "page": 4
+        }
+      ]
+    }
+  ]
+}
+
+
+
+{
+  "schema_version": "1.0",
+  "doc": { "doc_id": "uuid", "file_type": "pdf", "source_path": "...", "loaded_at": "...", "page_count": 120 },
+  "assets": [],
+  "sections": [
+    {
+      "section_id": "uuid",
+      "title": "...",
+      "page_range": [3, 5],
+      "blocks": [
+        { "block_id": "uuid", "type": "text", "page": 3, "order": 10, "bbox": null, "text": "..." }
+      ]
+    }
+  ]
+}

@@ -8,9 +8,14 @@ python-dotenv
 httpx
 requests
 
-# document loader
+# document loader & Embedding
 pdfplumber
 unstructured[pdf]
 pymupdf
 statistics
 python-docx
+sqlalchemy
+psycopg2-binary
+langchain_huggingface
+langchain_postgres
+sentence-transformers

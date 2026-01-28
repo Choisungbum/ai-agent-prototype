@@ -1,0 +1,154 @@
+[
+  {
+    "title": null,
+    "texts": [
+      "한국소방안전원 KFSI 종합정보시스템 구축 용역 운영자 매뉴얼",
+      "문서 재•개정 이력"
+    ]
+  },
+  {
+    "title": "[목 차]",
+    "texts": [
+      "1.\t시스템 구성\t4",
+      "1.1.\t시스템 구성도\t4",
+      "1.2.\t시스템 상세정보\t5",
+      "1.2.1.\t검색엔진(SF-1) 상세정보\t5",
+      "1.2.2.\tDatabase 서버 상세정보\t5",
+      "1.2.3.\t관리도구 상세정보\t6",
+      "2.\t검색엔진 디렉토리 및 파일 구성\t6",
+      "2.1.\t검색엔진(SF-1) 디렉토리 및 파일 구조\t6",
+      "3.\t검색엔진 색인 구성\t7",
+      "3.1.\t검색 색인 구성 - 컬렉션 정보\t7",
+      "4.\t검색엔진 실행 및 스케줄\t8",
+      "4.1.\t검색엔진 실행 방법\t8",
+      "4.1.1.\t검색엔진 시작\t8",
+      "4.1.2.\t검색엔진 중지\t9",
+      "4.1.3.\t수집 / 색인 실행\t10",
+      "4.1.4.\t관리도구 실행\t11",
+      "4.2.\t스케줄 정보\t12",
+      "5.\t로그 메시지\t14",
+      "5.1.\t수집관련 log\t14",
+      "5.2.\t색인관련 log\t14",
+      "5.3.\t검색관련 log\t15",
+      "5.4.\t기타 log\t15",
+      "6.\t유지보수 연락처\t15"
+    ]
+  },
+  {
+    "title": "Database 서버 상세정보",
+    "texts": [
+      "/data/wisenut/sf-1/config/datasource.xml 환경설정 파일 참조 (DB 접속 정보 변경시 수정 필요)"
+    ]
+  },
+  {
+    "title": "검색엔진 실행 및 스케줄",
+    "texts": [
+      "SF-1 검색엔진의 동작 및 수집색인 스케쥴은 CManager 에서 모두 관리되므로, 실제 검색엔진을 시작할때에는 CManager 를 실행하면 되며, 검색엔진을 중지할 때에는 CManager를 내리고 후속 조치를 취한다.",
+      "모든 작업은 wisenut 계정으로 실행되어야 하며 root 로 cmanager 를 한 번이라도 실행할 경우 /data/wisenut/sf-1/log/{실행년도}/{실행 월} 아래에 있는 root 계정으로 생성된 log 파일을 제거하고 다시 실행해야 한다.",
+      "( CManager 를 내려도 검색서비스는 정상적으로 될 수 있다. )",
+      "또한 프로세스가 내려가거나 서버를 reboot 하더라도 10초 후 자동 실행이 된다.",
+      "(sysyemd에 sf1.service 로 서비스 등록)"
+    ]
+  },
+  {
+    "title": "4.1.1. 검색엔진 시작",
+    "texts": [
+      "CManager 는 검색엔진의 프로세스 관리 및 수집 / 색인 스케줄을 관리한다. CManager 를 실행하면, 검색기(isc), 관리도구(sf-1 manager) 프로세서를 자동으로 실행시키고, 주기적인 수집 및 색인 스케쥴을 실행하게 되므로 CManager 만 실행하면 정상적인 서비스를 구동할 수 있다.",
+      "Cmanager 실행",
+      "해당 스크립트 실행",
+      "/data/wisenut/sf-1/batch/cmanager.sh ../config/cmanager.xml start",
+      "해당 스크립트를 실행하면 cmanager 와 함께 isc(검색기), manager(관리도구)가 함께 실행"
+    ]
+  },
+  {
+    "title": "4.1.2. 검색엔진 중지",
+    "texts": [
+      "cmanager 의 중지는 검색서비스를 중지시키는데 제일 먼저 행해져야 한다. cmanager 는 각 프로세서와 스케쥴을 관리하게 되므로 cmanager 가 중지되지 않으면, 계속적인 프로세서 실행과 스케쥴이 실행되어 서버를 내리게 될 경우 색인이 깨질 수 있다.",
+      "cmanger 중지",
+      "해당 스크립트 실행",
+      "/data/wisenut/sf-1/batch/cmanager.sh ../config/cmanager.xml stop",
+      "각 검색서비스 중지",
+      "2) 색인 프로세서 확인 ( 색인 중에는 절대 서버를 내리지 않는다. )",
+      "검색기(isc) 프로세서 중지",
+      "/data/wisenut/sf-1/batch/isc.sh stop",
+      "관리도구 프로세서 중지",
+      "/data/wisenut/sf-1/batch/manager.sh stop"
+    ]
+  },
+  {
+    "title": "4.1.3. 수집 / 색인 실행",
+    "texts": [
+      "수집 / 색인은 미리 작성해둔 스크립트를 통해 실행한다.",
+      "정적 수집/색인 실행",
+      "기본 수집 / 색인인 정적 수집 / 색인은",
+      "해당 스크립트 실행 (수집 / 색인 동시 진행)",
+      "/data/wisenut/sf-1/batch/static/stc_kfsi_all.sh",
+      "동적 수집/색인 실행 (변경사항 실시간 적용)",
+      "동적 수집 / 색인은",
+      "해당 스크립트 실행 (수집 / 색인 동시 진행)",
+      "/data/wisenut/sf-1/batch/dynamic/dnmc_kfsi_all.sh"
+    ]
+  },
+  {
+    "title": "4.1.4. 관리도구 실행",
+    "texts": [
+      "기존 cmanager 실행시 자동으로 실행되어지며 브라우저에 URL 입력으로 접근할 수 있다.",
+      "localhost기준 \nlocalhost:7800/ 입력 (엔진이 설치된 서버의 주소 사용)",
+      "사용법은 관리도구 가이드 참고"
+    ]
+  },
+  {
+    "title": "4.2. 스케줄 정보",
+    "texts": [
+      "검색서버에서의 수집 및 색인, 기타 검색 관련 프로그램의 스케줄은 검색 관리도구 화면에서 설정한다."
+    ]
+  },
+  {
+    "title": "로그 메시지",
+    "texts": [
+      "로그 메시지는 sf-1설치 디렉토리의 log디렉토리에 하위 디렉토리로 구성되어 있으며 각각의 디렉토리명의 작업에 대한 로그를 기록한다."
+    ]
+  },
+  {
+    "title": "수집관련 log",
+    "texts": [
+      "/data/wisenut/sf-1/log/bridge에 위치",
+      "brg-[collectionid].[mode][날짜].log로 쌓인다.",
+      "collectionid : 컬렉션명",
+      "mode : error, info"
+    ]
+  },
+  {
+    "title": "색인관련 log",
+    "texts": [
+      "/data/wisenut/sf-1/log/index에 위치",
+      "idx-[collectionid].[날짜].log.[mode]log로 쌓인다.",
+      "collectionid : 컬렉션명",
+      "mode : error, info"
+    ]
+  },
+  {
+    "title": "검색관련 log",
+    "texts": [
+      "/data/wisenut/sf-1/log/isc에 위치",
+      "isc명-[mode] .[날짜].log로 쌓인다.",
+      "mode : error, info"
+    ]
+  },
+  {
+    "title": "기타 log",
+    "texts": [
+      "/data/wisenut/sf-1/log/그 외 모듈명",
+      "[JobName].[mode].[날짜].log",
+      "JobName – 크론쉘 작업명",
+      "mode : error, info"
+    ]
+  },
+  {
+    "title": "유지보수 연락처",
+    "texts": [
+      "대표 번호 : 02 – 3404 - 6119",
+      "대표 메일 : cs@wisenut.co.kr"
+    ]
+  }
+]

@@ -1,3 +1,6 @@
+docker python 개발 환경 
+
+1. dockerfile
 FROM python:3.11
 
 # 컨테이너 작업 디렉토리
@@ -30,4 +33,27 @@ RUN apt-get update && apt-get install -y \
 # 파일 깔끔
 ENV PYTHONDONTWRITEBYTECODE=1
 # 로그 즉시 출력
-ENV PYTHONUNBUFFERED=1
+ENV PYTHONUNBUFFERED=1"
+
+2. docker build
+docker build -t rag-dev .
+
+3. docker run
+docker run -it `
+  --gpus all `
+  -p 8000:8000 `
+  -v "C:\Users\csbti\Desktop\ai-agent-prototype\RAG:/app" `
+  --name rag-dev-container `
+  rag-dev
+
+
+4. pgvector-postgreSQL
+
+docker run -d ^
+  --name pgvector-container ^
+  -e POSTGRES_USER=langchain ^
+  -e POSTGRES_PASSWORD=langchain ^
+  -e POSTGRES_DB=langchain ^
+  -p 6024:5432 ^
+  -v C:\Users\csbti\Desktop\ai-agent-prototype\RAG_postgre:/var/lib/postgresql/data ^
+  pgvector/pgvector:pg16

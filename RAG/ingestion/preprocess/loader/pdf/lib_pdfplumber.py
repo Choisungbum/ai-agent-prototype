@@ -2,7 +2,7 @@ import pdfplumber
 
 totCount = ''
 tables = []
-with pdfplumber.open("/app/testfile/pdf/WISE_iRAG_V2_Builder_매뉴얼_v1.0.pdf") as pdf:
+with pdfplumber.open("/app/ingestion/testfile/pdf/2026/2026-상호협력평가.pdf") as pdf:
     for page in pdf.pages:
         text = page.extract_text()
         table_data= page.extract_table()

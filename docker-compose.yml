@@ -11,7 +11,7 @@ services:
       - ./redis.conf:/usr/local/etc/redis/redis.conf
     tmpfs:
       - /data
-    restart: always
+   
 
 
   postgres:
@@ -25,7 +25,7 @@ services:
       POSTGRES_DB: data_info
     volumes:
       - ./pg_data:/var/lib/postgresql/data
-    restart: always
+   
 
   ollama:
     image: ollama/ollama:latest
@@ -38,7 +38,7 @@ services:
     environment:
       NVIDIA_VISIBLE_DEVICES: all
     shm_size: "2gb"
-    restart: always
+   
 
   frontend:
     build:
@@ -48,7 +48,7 @@ services:
     container_name: frontend
     ports:
       - "3000:80"
-    restart: always
+   
 
   mcp-server:
     build: 
@@ -62,7 +62,7 @@ services:
       SPRING_PROFILES_ACTIVE: docker
     depends_on:
       - postgres
-    restart: always
+   
 
   gateway:
     build: 
@@ -76,7 +76,7 @@ services:
       SPRING_PROFILES_ACTIVE: docker
     depends_on:
       - frontend
-    restart: always
+   
 
   agent:
     build:

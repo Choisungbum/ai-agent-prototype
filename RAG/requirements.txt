@@ -7,15 +7,11 @@ pydantic
 python-dotenv
 httpx
 requests
+rich
 
-# document loader & Embedding
+# document loader
 pdfplumber
 unstructured[pdf]
 pymupdf
 statistics
 python-docx
-sqlalchemy
-psycopg2-binary
-langchain_huggingface
-langchain_postgres
-sentence-transformers

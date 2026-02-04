@@ -1,0 +1,900 @@
+{
+  "doc": {
+    "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+    "source": "/app/ingestion/testfile/pdf/wiseirag/WISE_iRAG_V2_Builder_매뉴얼_v1.0.pdf"
+  },
+  "sections": [
+    {
+      "section_id": "01e719f4-0225-49e3-afe7-67607814e24a",
+      "section_title": "1. 소개",
+      "blocks": [
+        {
+          "block_id": "ced70ade-cd08-4021-8a1a-d2c6aaaf7e38",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 4,
+          "block_type": "text",
+          "text": "검색(키워드, 벡터), 리랭킹 및 생성형 답변을 위한 API를 제공한다.",
+          "y0": 131.5625,
+          "section_id": "01e719f4-0225-49e3-afe7-67607814e24a",
+          "block_index": 1
+        }
+      ]
+    },
+    {
+      "section_id": "79e7d085-7bf1-462a-9e5a-ab73712ead36",
+      "section_title": "2. 설정",
+      "blocks": [
+        {
+          "block_id": "b2c0bcca-4766-4cfb-87c0-3b5a4aab52d1",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 5,
+          "block_type": "text",
+          "text": "설정 파일에는 다음과 같은 항목들로 구성되어 있고 설정할 수 있다.",
+          "y0": 131.5625,
+          "section_id": "79e7d085-7bf1-462a-9e5a-ab73712ead36",
+          "block_index": 1
+        },
+        {
+          "block_id": "1b3befd3-60c1-4dfd-a67f-11d250a4d672",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 5,
+          "block_type": "text",
+          "text": "[표 2.1 설정]",
+          "y0": 185.1875,
+          "section_id": "79e7d085-7bf1-462a-9e5a-ab73712ead36",
+          "block_index": 2
+        },
+        {
+          "block_id": "d4f3d97d-ec1b-45c7-8811-17ab45901228",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 5,
+          "block_type": "table",
+          "text": "| \"port\": {port-number} |\n| --- |\n| \"data\": {data-path} |",
+          "y0": 213.0,
+          "section_id": "79e7d085-7bf1-462a-9e5a-ab73712ead36",
+          "block_index": 3
+        },
+        {
+          "block_id": "debeab4b-5ecf-43fc-b2d8-498711e51779",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 5,
+          "block_type": "text",
+          "text": "[표 2.2 설정 항목]",
+          "y0": 315.0,
+          "section_id": "79e7d085-7bf1-462a-9e5a-ab73712ead36",
+          "block_index": 4
+        },
+        {
+          "block_id": "56b1e51e-ac48-4a05-8c30-3624fa7fbff1",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 5,
+          "block_type": "table",
+          "text": "| 속성 | 설명 |\n| --- | --- |\n| port | API를 수신할 때 사용하는 포트 |\n| data | 빌더의 데이터를 저장하는 builder.sqlite 파일이 존재하는 폴더의 위치 |",
+          "y0": 337.1666666725,
+          "section_id": "79e7d085-7bf1-462a-9e5a-ab73712ead36",
+          "block_index": 5
+        }
+      ]
+    },
+    {
+      "section_id": "6d3490b2-2f84-4b71-bcf7-7687008b09f3",
+      "section_title": "3. 실행",
+      "blocks": [
+        {
+          "block_id": "87c3a1aa-5031-4f96-90d9-65b50e6c2938",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 6,
+          "block_type": "text",
+          "text": "빌더의 구동은 $IRAG_HOME/batch/builder.sh 통해 구동이 가능하다.",
+          "y0": 131.5625,
+          "section_id": "6d3490b2-2f84-4b71-bcf7-7687008b09f3",
+          "block_index": 1
+        }
+      ]
+    },
+    {
+      "section_id": "e70e643e-d44d-40e1-b46d-1cf71fb4fc60",
+      "section_title": "3. 실행 > 3.1. 모듈 실행",
+      "blocks": [
+        {
+          "block_id": "0b840948-b24e-4fc1-a2b1-c637650a0955",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 6,
+          "block_type": "text",
+          "text": "$ ./builder.sh ../config/builder.yaml start",
+          "y0": 226.9375,
+          "section_id": "e70e643e-d44d-40e1-b46d-1cf71fb4fc60",
+          "block_index": 1
+        }
+      ]
+    },
+    {
+      "section_id": "bf424d09-4fe4-4b84-8d65-dcf043f09625",
+      "section_title": "3. 실행 > 3.2. 모듈 종료",
+      "blocks": [
+        {
+          "block_id": "5fa06a56-981c-4eee-bca4-25d681950be1",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 6,
+          "block_type": "text",
+          "text": "$ ./builder.sh stop",
+          "y0": 320.625,
+          "section_id": "bf424d09-4fe4-4b84-8d65-dcf043f09625",
+          "block_index": 1
+        }
+      ]
+    },
+    {
+      "section_id": "d4efd4dc-d316-403a-9c01-f17e1c16606d",
+      "section_title": "3. 실행 > 3.3. 모듈 상태 조회",
+      "blocks": [
+        {
+          "block_id": "ae240f11-8f9d-4239-9f56-81f16fcf4c42",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 6,
+          "block_type": "text",
+          "text": "$ ./builder.sh status",
+          "y0": 414.3125,
+          "section_id": "d4efd4dc-d316-403a-9c01-f17e1c16606d",
+          "block_index": 1
+        }
+      ]
+    },
+    {
+      "section_id": "491eec5d-2fcf-4e8f-a0b1-44a295557647",
+      "section_title": "4. 모듈 기능",
+      "blocks": [
+        {
+          "block_id": "0cc9b576-c3e5-4b77-810e-afeb6b9f1149",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 7,
+          "block_type": "text",
+          "text": "모듈을 관리하기 위해 사용한다.",
+          "y0": 131.5625,
+          "section_id": "491eec5d-2fcf-4e8f-a0b1-44a295557647",
+          "block_index": 1
+        }
+      ]
+    },
+    {
+      "section_id": "f59142a6-d5f3-4946-ba25-c15b06d839e2",
+      "section_title": "4. 모듈 기능 > 4.1. 모듈 조회",
+      "blocks": [
+        {
+          "block_id": "8f41706e-6f4b-4f07-b950-498a8da471c7",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 7,
+          "block_type": "text",
+          "text": "[API]",
+          "y0": 221.375,
+          "section_id": "f59142a6-d5f3-4946-ba25-c15b06d839e2",
+          "block_index": 1
+        },
+        {
+          "block_id": "27b1140e-1f54-4492-959f-7bbaa8dd1ebe",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 7,
+          "block_type": "table",
+          "text": "| Method | URL | 비고 |\n| --- | --- | --- |\n| GET | /module | 등록 모듈 조회 |",
+          "y0": 243.406250001,
+          "section_id": "f59142a6-d5f3-4946-ba25-c15b06d839e2",
+          "block_index": 2
+        }
+      ]
+    },
+    {
+      "section_id": "402670b2-ade1-43c5-bf2b-b6f7a366dae5",
+      "section_title": "4. 모듈 기능 > 4.2. 모듈 등록",
+      "blocks": [
+        {
+          "block_id": "ca062581-5a0c-41b5-ac02-74d9eb60a470",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 7,
+          "block_type": "text",
+          "text": "[API]",
+          "y0": 371.8125,
+          "section_id": "402670b2-ade1-43c5-bf2b-b6f7a366dae5",
+          "block_index": 1
+        },
+        {
+          "block_id": "d9e30983-c26f-4ccf-b765-deb0df3954cd",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 7,
+          "block_type": "table",
+          "text": "| Method | URL | 비고 |\n| --- | --- | --- |\n| POST | /module | 모듈 등록 |",
+          "y0": 393.73437500125,
+          "section_id": "402670b2-ade1-43c5-bf2b-b6f7a366dae5",
+          "block_index": 2
+        },
+        {
+          "block_id": "460b7779-2cdf-4f5f-aa91-c97f068c3fe6",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 7,
+          "block_type": "text",
+          "text": "[설정 항목]",
+          "y0": 486.0625,
+          "section_id": "402670b2-ade1-43c5-bf2b-b6f7a366dae5",
+          "block_index": 3
+        },
+        {
+          "block_id": "46fe9c01-8ffe-45cc-a9ce-54d9f40ca531",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 7,
+          "block_type": "table",
+          "text": "| 속성 | 필수여부 | 설명 |\n| --- | --- | --- |\n| name | Y | 고유 이름 |\n| type | Y | 모듈의 종류\nKEYWORD_SEARCHER, VECTOR_SEARCHER, RETRIEVER,\nRERANKER, LLM |\n| version | Y | 모듈의 버전\ntype이 KEYWORD_SEARCHER, VECTOR_SEARCHER 일 때 버전을\n명시 |\n| ip | Y | 모듈의 ip |\n| port | Y | 모듈의 포트 |",
+          "y0": 508.171874995625,
+          "section_id": "402670b2-ade1-43c5-bf2b-b6f7a366dae5",
+          "block_index": 4
+        },
+        {
+          "block_id": "628ab100-49c7-457b-9338-6bc88048f14d",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 8,
+          "block_type": "text",
+          "text": "[예시]",
+          "y0": 103.625,
+          "section_id": "402670b2-ade1-43c5-bf2b-b6f7a366dae5",
+          "block_index": 5
+        },
+        {
+          "block_id": "ca487b9d-c81e-4a45-a9bf-a7138f686412",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 8,
+          "block_type": "table",
+          "text": "| { |\n| --- |\n| \"name\": \"searcher\", |\n| \"type\": \"keyword_searcher\", |\n| \"version\": \"v7\", |\n| \"ip\": \"127.0.0.1\", |\n| \"port\": 9000 |\n| } |",
+          "y0": 132.0,
+          "section_id": "402670b2-ade1-43c5-bf2b-b6f7a366dae5",
+          "block_index": 6
+        }
+      ]
+    },
+    {
+      "section_id": "d33c2f33-6f4c-484d-aaa7-63def7426a9b",
+      "section_title": "4. 모듈 기능 > 4.3. 모듈 업데이트",
+      "blocks": [
+        {
+          "block_id": "35ed2e1a-33f9-4db7-804e-984e4fe970dd",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 8,
+          "block_type": "text",
+          "text": "[API]",
+          "y0": 363.0625,
+          "section_id": "d33c2f33-6f4c-484d-aaa7-63def7426a9b",
+          "block_index": 1
+        },
+        {
+          "block_id": "5af03a6e-e7c4-4f2f-ac49-ee723ba67bc2",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 8,
+          "block_type": "table",
+          "text": "| Method | URL | 비고 |\n| --- | --- | --- |\n| PATCH | /module | 모듈 업데이트 |",
+          "y0": 385.171874995625,
+          "section_id": "d33c2f33-6f4c-484d-aaa7-63def7426a9b",
+          "block_index": 2
+        },
+        {
+          "block_id": "e2081fc7-1537-496a-862d-10f73c63a559",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 8,
+          "block_type": "text",
+          "text": "[설정 항목]",
+          "y0": 477.3125,
+          "section_id": "d33c2f33-6f4c-484d-aaa7-63def7426a9b",
+          "block_index": 3
+        },
+        {
+          "block_id": "26ba257e-b7ef-48fa-b5ef-7acdb2090216",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 8,
+          "block_type": "table",
+          "text": "| 속성 | 필수여부 | 설명 |\n| --- | --- | --- |\n| name | Y | 업데이트 모듈의 고유 이름 |\n| type | Y | 업데이트 모듈의 타입 |\n| version | N | 업데이트 필요 시 명시 |\n| ip | N | 업데이트 필요 시 명시 |\n| port | N | 업데이트 필요 시 명시 |",
+          "y0": 499.359375,
+          "section_id": "d33c2f33-6f4c-484d-aaa7-63def7426a9b",
+          "block_index": 4
+        },
+        {
+          "block_id": "ba468b26-f8f2-4b0f-8ea6-5a292c01d898",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 8,
+          "block_type": "text",
+          "text": "[예시]",
+          "y0": 711.3125,
+          "section_id": "d33c2f33-6f4c-484d-aaa7-63def7426a9b",
+          "block_index": 5
+        },
+        {
+          "block_id": "6f16fc2c-fd46-4c61-8f49-9d101aaf947a",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 8,
+          "block_type": "text",
+          "text": "{",
+          "y0": 743.6875,
+          "section_id": "d33c2f33-6f4c-484d-aaa7-63def7426a9b",
+          "block_index": 6
+        },
+        {
+          "block_id": "118f7d1d-2068-4703-b9c6-500b707ac231",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 9,
+          "block_type": "table",
+          "text": "| \"name\": \"searcher\", |\n| --- |\n| \"type\": \"keyword_searcher\", |\n| \"port\": 9001 |\n| } |",
+          "y0": 78.0,
+          "section_id": "d33c2f33-6f4c-484d-aaa7-63def7426a9b",
+          "block_index": 7
+        }
+      ]
+    },
+    {
+      "section_id": "e1b645e0-29b2-471f-a88d-6f60ef5f9070",
+      "section_title": "4. 모듈 기능 > 4.4. 모듈 삭제",
+      "blocks": [
+        {
+          "block_id": "04956039-460b-45ca-ac81-b42427b7c764",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 9,
+          "block_type": "text",
+          "text": "[API]",
+          "y0": 253.375,
+          "section_id": "e1b645e0-29b2-471f-a88d-6f60ef5f9070",
+          "block_index": 1
+        },
+        {
+          "block_id": "b442143c-cddd-499e-aac1-6eb6d20581be",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 9,
+          "block_type": "table",
+          "text": "| Method | URL | 비고 |\n| --- | --- | --- |\n| DELETE | /module | 모듈 삭제 |",
+          "y0": 275.406250001,
+          "section_id": "e1b645e0-29b2-471f-a88d-6f60ef5f9070",
+          "block_index": 2
+        },
+        {
+          "block_id": "42d40896-6892-44a9-bb59-adcf36890346",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 9,
+          "block_type": "text",
+          "text": "[설정 항목]",
+          "y0": 367.625,
+          "section_id": "e1b645e0-29b2-471f-a88d-6f60ef5f9070",
+          "block_index": 3
+        },
+        {
+          "block_id": "5739c69c-6741-43f2-8d65-7231f79243cd",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 9,
+          "block_type": "table",
+          "text": "| 속성 | 필수여부 | 설명 |\n| --- | --- | --- |\n| name | Y | 삭제 모듈의 고유 이름 |\n| type | Y | 삭제 모듈의 타입 |",
+          "y0": 389.593749999,
+          "section_id": "e1b645e0-29b2-471f-a88d-6f60ef5f9070",
+          "block_index": 4
+        },
+        {
+          "block_id": "3a401060-936b-4a92-841c-1d2477cbae0c",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 9,
+          "block_type": "text",
+          "text": "[예시]",
+          "y0": 511.8125,
+          "section_id": "e1b645e0-29b2-471f-a88d-6f60ef5f9070",
+          "block_index": 5
+        },
+        {
+          "block_id": "c19e4488-d12f-4ebd-aa1f-a780f408475c",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 9,
+          "block_type": "table",
+          "text": "| { |\n| --- |\n| \"name\": \"searcher\", |\n| \"type\": \"keyword_searcher\" |\n| } |",
+          "y0": 540.0,
+          "section_id": "e1b645e0-29b2-471f-a88d-6f60ef5f9070",
+          "block_index": 6
+        }
+      ]
+    },
+    {
+      "section_id": "a8bf78bf-c32a-481d-8de5-e149d4da3623",
+      "section_title": "5. 프롬프트 기능",
+      "blocks": [
+        {
+          "block_id": "86872c47-f24e-4ef3-b2a7-2fe5a84eb00b",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 10,
+          "block_type": "text",
+          "text": "프롬프트를 관리하기 위해 사용한다.",
+          "y0": 131.5625,
+          "section_id": "a8bf78bf-c32a-481d-8de5-e149d4da3623",
+          "block_index": 1
+        }
+      ]
+    },
+    {
+      "section_id": "c168d4f7-de8e-46d2-b8ae-c45431b42b91",
+      "section_title": "5. 프롬프트 기능 > 5.1. 프롬프트 조회",
+      "blocks": [
+        {
+          "block_id": "5398a629-b060-4774-8318-a61425132086",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 10,
+          "block_type": "text",
+          "text": "[API]",
+          "y0": 221.375,
+          "section_id": "c168d4f7-de8e-46d2-b8ae-c45431b42b91",
+          "block_index": 1
+        },
+        {
+          "block_id": "e2871213-c9fc-4cfc-a559-543f6825f8be",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 10,
+          "block_type": "table",
+          "text": "| Method | URL | 비고 |\n| --- | --- | --- |\n| GET | /prompt | 등록 프롬프트 조회 |",
+          "y0": 243.406250001,
+          "section_id": "c168d4f7-de8e-46d2-b8ae-c45431b42b91",
+          "block_index": 2
+        }
+      ]
+    },
+    {
+      "section_id": "3a6cb9af-b192-4749-a137-9b3abede6729",
+      "section_title": "5. 프롬프트 기능 > 5.2. 프롬프트 등록",
+      "blocks": [
+        {
+          "block_id": "9a9a15e6-3628-4a9e-96d3-c08c6e6cd9ce",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 10,
+          "block_type": "text",
+          "text": "[API]",
+          "y0": 371.8125,
+          "section_id": "3a6cb9af-b192-4749-a137-9b3abede6729",
+          "block_index": 1
+        },
+        {
+          "block_id": "e9448bf1-f980-4d77-8ac7-dc751678149a",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 10,
+          "block_type": "table",
+          "text": "| Method | URL | 비고 |\n| --- | --- | --- |\n| POST | /prompt | 프롬프트 등록 |",
+          "y0": 393.73437500125,
+          "section_id": "3a6cb9af-b192-4749-a137-9b3abede6729",
+          "block_index": 2
+        },
+        {
+          "block_id": "254a131d-4694-4f32-a880-5908ecc8b975",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 10,
+          "block_type": "text",
+          "text": "[설정 항목]",
+          "y0": 486.0625,
+          "section_id": "3a6cb9af-b192-4749-a137-9b3abede6729",
+          "block_index": 3
+        },
+        {
+          "block_id": "80f947ff-98d4-403f-bf9f-63c7f3aeaf4f",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 10,
+          "block_type": "table",
+          "text": "| 속성 | 필수여부 | 설명 |\n| --- | --- | --- |\n| name | Y | 프롬프트를 구분 할 이름 |\n| text | N | 프롬프트 텍스트 |\n| temperature | N | 모델의 출력 다양성 지정\n- 0에 가까울 수록 결과가 일관적\n- default 0.01 |\n| maximumTokens | N | 모델이 한번에 처리 할 수 있는 입력과 출력의 최대 토큰 수\n- default 4096 |\n| topP | N | 출력 시 선택 가능한 후보 단어의 제한 값 지정\n- 0에 가까울 수록 결과가 일관적 |",
+          "y0": 508.171874995625,
+          "section_id": "3a6cb9af-b192-4749-a137-9b3abede6729",
+          "block_index": 4
+        },
+        {
+          "block_id": "8be33eab-95fa-4d4b-99ec-bd510ca3384f",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 11,
+          "block_type": "table",
+          "text": "|  |  | - default 0.9 |\n| --- | --- | --- |",
+          "y0": 72.50000001750004,
+          "section_id": "3a6cb9af-b192-4749-a137-9b3abede6729",
+          "block_index": 5
+        },
+        {
+          "block_id": "2bb45c12-517b-4ea3-a080-018c702b2f2e",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 11,
+          "block_type": "text",
+          "text": "[예시]",
+          "y0": 134.3125,
+          "section_id": "3a6cb9af-b192-4749-a137-9b3abede6729",
+          "block_index": 6
+        },
+        {
+          "block_id": "8b4e52a4-c2bd-4b65-9881-23278eb0bd94",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 11,
+          "block_type": "table",
+          "text": "| { |\n| --- |\n| \"name\": \"default\", |\n| \"text\": \"문맥을 바탕으로 질문에 답해 주세요. 질문과 관련이 없는 문맥은 무시하십시오\", |\n| \"temperature\": 0.1, |\n| \"maximumTokens\": 8192, |\n| \"topP\": 1 |\n| } |",
+          "y0": 162.00000000499995,
+          "section_id": "3a6cb9af-b192-4749-a137-9b3abede6729",
+          "block_index": 7
+        }
+      ]
+    },
+    {
+      "section_id": "706a589d-a9a9-4d9c-a915-1ed2e5a76c66",
+      "section_title": "5. 프롬프트 기능 > 5.3. 프롬프트 업데이트",
+      "blocks": [
+        {
+          "block_id": "fc945e4f-4dc2-4ef8-9013-f1b72695c298",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 11,
+          "block_type": "text",
+          "text": "[API]",
+          "y0": 393.75,
+          "section_id": "706a589d-a9a9-4d9c-a915-1ed2e5a76c66",
+          "block_index": 1
+        },
+        {
+          "block_id": "5bfaf675-95a5-46f4-b7cb-e6526c54f574",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 11,
+          "block_type": "table",
+          "text": "| Method | URL | 비고 |\n| --- | --- | --- |\n| PATCH | /prompt | 프롬프트 업데이트 |",
+          "y0": 415.68749999875,
+          "section_id": "706a589d-a9a9-4d9c-a915-1ed2e5a76c66",
+          "block_index": 2
+        },
+        {
+          "block_id": "f54c7648-382f-46a6-8b06-7bf8fc88dc35",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 11,
+          "block_type": "text",
+          "text": "[설정 항목]",
+          "y0": 508.0,
+          "section_id": "706a589d-a9a9-4d9c-a915-1ed2e5a76c66",
+          "block_index": 3
+        },
+        {
+          "block_id": "28c946ff-0067-4b32-8b43-fc7831b9d9f9",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 11,
+          "block_type": "table",
+          "text": "| 속성 | 필수여부 | 설명 |\n| --- | --- | --- |\n| name | Y | 업데이트 프롬프트의 고유 이름 |\n| text | N | 업데이트 필요 시 명시 |\n| temperature | N | 업데이트 필요 시 명시 |\n| maximumTokens | N | 업데이트 필요 시 명시 |\n| topP | N | 업데이트 필요 시 명시 |",
+          "y0": 530.125000004375,
+          "section_id": "706a589d-a9a9-4d9c-a915-1ed2e5a76c66",
+          "block_index": 4
+        },
+        {
+          "block_id": "62b881f8-128e-4bba-b409-bb18ba82aabf",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 11,
+          "block_type": "text",
+          "text": "[예시]",
+          "y0": 742.0,
+          "section_id": "706a589d-a9a9-4d9c-a915-1ed2e5a76c66",
+          "block_index": 5
+        },
+        {
+          "block_id": "e03ba292-c0a0-458a-b3ca-3182a99cf9b6",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 12,
+          "block_type": "table",
+          "text": "| { |\n| --- |\n| \"name\": \"searcher\", |\n| \"topP\": 0.5 |\n| } |",
+          "y0": 78.0,
+          "section_id": "706a589d-a9a9-4d9c-a915-1ed2e5a76c66",
+          "block_index": 6
+        }
+      ]
+    },
+    {
+      "section_id": "4636c5d1-5537-4d73-8e8f-41445d48580e",
+      "section_title": "5. 프롬프트 기능 > 5.4. 프롬프트 삭제",
+      "blocks": [
+        {
+          "block_id": "015c5e1d-0903-4f27-be79-099c007b1f6e",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 12,
+          "block_type": "text",
+          "text": "[API]",
+          "y0": 226.5625,
+          "section_id": "4636c5d1-5537-4d73-8e8f-41445d48580e",
+          "block_index": 1
+        },
+        {
+          "block_id": "3f4c8c8b-9fcd-4013-add3-48030f3b7a87",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 12,
+          "block_type": "table",
+          "text": "| Method | URL | 비고 |\n| --- | --- | --- |\n| DELETE | /prompt?name={value} | value에 삭제 프롬프트의 이름 명시 |",
+          "y0": 248.5468749995,
+          "section_id": "4636c5d1-5537-4d73-8e8f-41445d48580e",
+          "block_index": 2
+        }
+      ]
+    },
+    {
+      "section_id": "29ebb9e1-4e79-4232-bfe3-9501bd51d8a5",
+      "section_title": "6. 검색 기능",
+      "blocks": [
+        {
+          "block_id": "f72af6c4-5341-4110-83a6-253de6afc769",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 13,
+          "block_type": "text",
+          "text": "요청에 대한 옵션을 넣는 request와 실행 순서를 지정하는 chain으로 구분된다.",
+          "y0": 131.5625,
+          "section_id": "29ebb9e1-4e79-4232-bfe3-9501bd51d8a5",
+          "block_index": 1
+        },
+        {
+          "block_id": "66837cb2-24cc-4446-baec-53424e4ba5b9",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 13,
+          "block_type": "text",
+          "text": "chain에 등록 된 순서로 검색을 수행한다.",
+          "y0": 158.375,
+          "section_id": "29ebb9e1-4e79-4232-bfe3-9501bd51d8a5",
+          "block_index": 2
+        },
+        {
+          "block_id": "731db57c-5660-49e8-b811-1b1206eb3f1a",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 13,
+          "block_type": "text",
+          "text": "[API]",
+          "y0": 212.0,
+          "section_id": "29ebb9e1-4e79-4232-bfe3-9501bd51d8a5",
+          "block_index": 3
+        },
+        {
+          "block_id": "37155c1b-5e20-4a6d-9b3c-ffdac8405798",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 13,
+          "block_type": "table",
+          "text": "| Method | URL | 비고 |\n| --- | --- | --- |\n| POST | /search | 검색 |",
+          "y0": 234.125000004375,
+          "section_id": "29ebb9e1-4e79-4232-bfe3-9501bd51d8a5",
+          "block_index": 4
+        }
+      ]
+    },
+    {
+      "section_id": "b1dff3f5-8cee-4c4a-ab98-f6969f27ff97",
+      "section_title": "6. 검색 기능 > 6.1. 공통 영역",
+      "blocks": [
+        {
+          "block_id": "eef9ad67-d956-43f5-a020-da91dbe12977",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 13,
+          "block_type": "text",
+          "text": "[설정 항목]",
+          "y0": 362.4375,
+          "section_id": "b1dff3f5-8cee-4c4a-ab98-f6969f27ff97",
+          "block_index": 1
+        },
+        {
+          "block_id": "ff37e4cd-f777-4035-a5e5-7741fb1fa2cf",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 13,
+          "block_type": "table",
+          "text": "| 속성 | 필수여부 | 설명 |\n| --- | --- | --- |\n| query | Y | 검색을 수행하기 위한 쿼리를 입력한다. |\n| debug | N | 설정 시 request의 모든 결과를 반환한다.\n- default: false |",
+          "y0": 384.4531250005,
+          "section_id": "b1dff3f5-8cee-4c4a-ab98-f6969f27ff97",
+          "block_index": 2
+        },
+        {
+          "block_id": "2e4aa161-38fa-4e5c-ba55-7628936921e7",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 13,
+          "block_type": "text",
+          "text": "[예시]",
+          "y0": 525.3125,
+          "section_id": "b1dff3f5-8cee-4c4a-ab98-f6969f27ff97",
+          "block_index": 3
+        },
+        {
+          "block_id": "a2fd7bf5-6179-4d96-8332-b4513568e689",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 13,
+          "block_type": "table",
+          "text": "| { |\n| --- |\n| \"query\": \"와이즈넛에 대해서 알려줘\", |\n| \"debug\": true |\n| } |",
+          "y0": 553.000000005,
+          "section_id": "b1dff3f5-8cee-4c4a-ab98-f6969f27ff97",
+          "block_index": 4
+        }
+      ]
+    },
+    {
+      "section_id": "a90bdd0a-5950-4967-8219-667ed8e43147",
+      "section_title": "6. 검색 기능 > 6.2. Chain 영역",
+      "blocks": [
+        {
+          "block_id": "3d264a45-409c-46f2-8978-2889cee09f06",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 13,
+          "block_type": "text",
+          "text": "[설정 항목]",
+          "y0": 701.875,
+          "section_id": "a90bdd0a-5950-4967-8219-667ed8e43147",
+          "block_index": 1
+        },
+        {
+          "block_id": "04173df2-4a91-4c74-bd6e-771ffc83f3b2",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 13,
+          "block_type": "table",
+          "text": "| 속성 | 필수여부 | 설명 |\n| --- | --- | --- |",
+          "y0": 723.78125,
+          "section_id": "a90bdd0a-5950-4967-8219-667ed8e43147",
+          "block_index": 2
+        },
+        {
+          "block_id": "39d3406f-f55f-4d11-9ff2-cb8407926986",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 14,
+          "block_type": "table",
+          "text": "| name | Y | request를 구분 할 이름 지정 |\n| --- | --- | --- |\n| module | Y | request를 수행 할 모듈 지정 |\n| type | Y | 수행 타입 지정\nKEYWORD_SEARCHER, VECTOR_SEARCHER,\nRETRIEVER, RERANKER, LLM |",
+          "y0": 72.50000001750004,
+          "section_id": "a90bdd0a-5950-4967-8219-667ed8e43147",
+          "block_index": 3
+        },
+        {
+          "block_id": "41e54d4e-9e08-4be5-b852-aedb518f0ded",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 14,
+          "block_type": "text",
+          "text": "[예시]",
+          "y0": 231.5625,
+          "section_id": "a90bdd0a-5950-4967-8219-667ed8e43147",
+          "block_index": 4
+        },
+        {
+          "block_id": "8a8ddbe5-4556-4b36-98f9-ade988c5a486",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 14,
+          "block_type": "table",
+          "text": "| { |\n| --- |\n| \"chain\": [ |\n| { |\n| \"name\": \"vector-search\", |\n| \"module\": “vector-module\", |\n| \"type\": \"VECTOR_SEARCHER\" |\n| } |\n| ] |\n| } |",
+          "y0": 259.99999998249996,
+          "section_id": "a90bdd0a-5950-4967-8219-667ed8e43147",
+          "block_index": 5
+        }
+      ]
+    },
+    {
+      "section_id": "48ba260d-6dbc-4e3b-95be-2d309e61a30b",
+      "section_title": "6. 검색 기능 > 6.3. Request 영역 > 6.3.1. 검색",
+      "blocks": [
+        {
+          "block_id": "59713d69-d928-4ea8-8d5e-e56a40e7de24",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 14,
+          "block_type": "text",
+          "text": "[설정 항목]",
+          "y0": 549.6875,
+          "section_id": "48ba260d-6dbc-4e3b-95be-2d309e61a30b",
+          "block_index": 1
+        },
+        {
+          "block_id": "f9080bda-12f1-4676-a763-c73e141f9875",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 14,
+          "block_type": "table",
+          "text": "| 속성 | 필수여부 | 설명 |\n| --- | --- | --- |\n| searchMode | Y | 어떤 방식으로 검색할 지 선택하는 옵션이다.\n키워드 검색 : 0, “keyword”\n자연어 검색 : 1, “natural”\n벡터 검색 : 2, “vector” |\n| paging | N | 검색 결과를 페이징 처리하기 위한 옵션이다.\n기본값은 10으로 문서 결과가 최대 10건 출력된다. |\n| synonymExpansion | N | 동의어확장법을 설정하는 옵션이다. |",
+          "y0": 571.640625,
+          "section_id": "48ba260d-6dbc-4e3b-95be-2d309e61a30b",
+          "block_index": 2
+        },
+        {
+          "block_id": "b82f95da-50c6-441b-bdc2-56e50f38dd83",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 15,
+          "block_type": "table",
+          "text": "|  |  | allTerm과 originalTerm 두가지 방식이 있다.\nallTerm : 0 (default)\noriginalTerm : 1\noriginalTerm으로 설정할 경우 형태소분석된 term에 대해서는\n동의어확장이 수행되지 않는다. |\n| --- | --- | --- |\n| useLa | N | 형태소분석기 사용여부를 설정하는 옵션이다.\n사용하지 않음 : 0 (default)\n형태소분석기 적용 : 1 |\n| useSynonym | N | 동의어 사전 적용여부를 설정하는 옵션이다.\nuseLa 옵션이 1 일때만 적용 된다.\n사용하지 않음 : 0 (default)\n동의어사전 적용 : 1\nlike, matrix, ngram은 동의어사전이 적용 불가능하다. |\n| useOrigin | N | 원본 토큰 사용여부를 사용하는 옵션이다.\n사용하지 않음 : 0\n원본토큰 사용 : 1\n형태소 분석이 실패한 원본 토큰을 쿼리에 사용하기 위한 옵션 |\n| documentField | N | 검색 결과 문서내용을 출력할 때, 출력할 필드명을 적는다.\n생략하였을 때 기본값은 컬렉션 세팅 기준 전체 필드를 출력한다. |\n| sorting | N | 검색 결과를 정렬하기 위한 옵션이다. 생략하였을 때 기본값은\n문서가 색인된 순서이다. |\n| similarity | N | 랭킹 설정 (설정을 하지 않을 경우, classic을 기본으로 사용함)\n- bm25\n- boolean\n- classic\n- dfi\n- dfr\n- lm |",
+          "y0": 72.50000001750004,
+          "section_id": "48ba260d-6dbc-4e3b-95be-2d309e61a30b",
+          "block_index": 3
+        },
+        {
+          "block_id": "cad96944-6b89-43cd-9c89-22932f6d4a38",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 16,
+          "block_type": "text",
+          "text": "[예시]",
+          "y0": 76.8125,
+          "section_id": "48ba260d-6dbc-4e3b-95be-2d309e61a30b",
+          "block_index": 4
+        },
+        {
+          "block_id": "d406d046-9734-442c-87db-2e68b3155251",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 16,
+          "block_type": "table",
+          "text": "| { |\n| --- |\n| \"request\": { |\n| \"{request-name}\": { |\n| \"collectionId\": \"{collection-id}\", |\n| \"searchMode\": 0 | 1 | 2, |\n| \"synonymExpansion\": 0, |\n| \"useSynonym\": 0, |\n| \"useLa\": 0, |\n| \"searchField\": [ |\n| \" … \" |\n| ] |\n| \"paging\": { |\n| \"from\": 0, |\n| \"size\": 10 |\n| }, |\n| \"sorting\": [ |\n| { |\n| \"field\": \"score\", |\n| \"reverse\": false |\n| } |\n| ] |\n| \"paging\": { |\n| \"from\": 0, |\n| \"size\": 5 |\n| } |\n| } |\n| } |\n| } |",
+          "y0": 105.0,
+          "section_id": "48ba260d-6dbc-4e3b-95be-2d309e61a30b",
+          "block_index": 5
+        }
+      ]
+    },
+    {
+      "section_id": "1dc6bddc-8d0e-4a2b-a5f6-c63f0c41c0c3",
+      "section_title": "6. 검색 기능 > 6.3. Request 영역 > 6.3.2. Rerank",
+      "blocks": [
+        {
+          "block_id": "1575f937-02d5-4a79-b535-be237d43ebec",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 16,
+          "block_type": "text",
+          "text": "[설정 항목]",
+          "y0": 693.0,
+          "section_id": "1dc6bddc-8d0e-4a2b-a5f6-c63f0c41c0c3",
+          "block_index": 1
+        },
+        {
+          "block_id": "89e86c1a-93f5-4064-97de-24ff9ff28b64",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 17,
+          "block_type": "table",
+          "text": "| topN | Y | 리랭킹 결과를 처리하기 위한 옵션이다. 설정 값 만큼 출력된다. |\n| --- | --- | --- |\n| field | Y | 리랭킹을 진행 할 필드를 설정하는 옵션이다. |\n| target | Y | 검색결과를 가져 올 request name을 지정한다.\nrequest의 결과 document field에서 topN 만큼 가져와서 리랭킹을\n진행한다. |\n| model | Y | 리랭킹 시 사용할 모델을 지정한다. |",
+          "y0": 72.50000001750004,
+          "section_id": "1dc6bddc-8d0e-4a2b-a5f6-c63f0c41c0c3",
+          "block_index": 2
+        },
+        {
+          "block_id": "686b97cc-a6f2-4699-adc3-505d9736c923",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 17,
+          "block_type": "text",
+          "text": "[예시]",
+          "y0": 261.5,
+          "section_id": "1dc6bddc-8d0e-4a2b-a5f6-c63f0c41c0c3",
+          "block_index": 3
+        },
+        {
+          "block_id": "a9ae84e7-ed10-4d51-92a7-2d44420963c9",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 17,
+          "block_type": "table",
+          "text": "| { |\n| --- |\n| \"request\": { |\n| \"{request-name}\": { |\n| \"topN\": 5, |\n| \"field\": \"{document-field}\", |\n| \"target\": [ |\n| \"{target-request-name-1}\", |\n| \"{ … }\" |\n| ], |\n| \"model\": \"wisenut/reranker/1.0.0\" |\n| } |\n| } |\n| } |",
+          "y0": 290.00000001750004,
+          "section_id": "1dc6bddc-8d0e-4a2b-a5f6-c63f0c41c0c3",
+          "block_index": 4
+        }
+      ]
+    },
+    {
+      "section_id": "e318f6a4-59e7-420a-9f68-47018dbd20a7",
+      "section_title": "6. 검색 기능 > 6.3. Request 영역 > 6.3.3. LLM",
+      "blocks": [
+        {
+          "block_id": "973dd6da-a510-4c47-b692-999c872e9b7a",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 17,
+          "block_type": "table",
+          "text": "| 속성 | 필수여부 | 설명 |\n| --- | --- | --- |\n| target | Y | 대상이 되는 request name 지정하는 옵션이다. |\n| field | Y | 문서에서 결과를 가져올 필드 이름을 지정하는 옵션이다. |\n| topN | Y | 문서에서 가져오는 결과 건수를 지정하는 옵션이다. |\n| prompt | Y | 모델에 사용 할 프롬프트 이름을 지정하는 옵션이다. |",
+          "y0": 619.406250001,
+          "section_id": "e318f6a4-59e7-420a-9f68-47018dbd20a7",
+          "block_index": 1
+        },
+        {
+          "block_id": "624abf2f-12e9-4d94-ad43-342a1e20e024",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 18,
+          "block_type": "table",
+          "text": "| model | Y | 사용할 모델 이름을 지정하는 옵션이다. |\n| --- | --- | --- |",
+          "y0": 72.50000001750004,
+          "section_id": "e318f6a4-59e7-420a-9f68-47018dbd20a7",
+          "block_index": 2
+        },
+        {
+          "block_id": "c91cf8ba-406c-4964-bb57-9011c9e59441",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 18,
+          "block_type": "text",
+          "text": "[예시]",
+          "y0": 134.3125,
+          "section_id": "e318f6a4-59e7-420a-9f68-47018dbd20a7",
+          "block_index": 3
+        },
+        {
+          "block_id": "83276e05-20f8-4cdb-85ce-2e2f857f5f61",
+          "doc_id": "16b2101f-db1c-4e2c-bea3-bd256e460fd1",
+          "page": 18,
+          "block_type": "table",
+          "text": "| { |\n| --- |\n| \"request\": { |\n| \"{request-name}\": { |\n| \"target\": \"{target-request-name}\", |\n| \"field\": \"{document-field-name}\", |\n| \"topN\": 5, |\n| \"prompt\": \"{prompt-name}\", |\n| \"model\": \"wisenut/llm/1.0.0\" |\n| } |\n| } |\n| } |",
+          "y0": 162.00000000499995,
+          "section_id": "e318f6a4-59e7-420a-9f68-47018dbd20a7",
+          "block_index": 4
+        }
+      ]
+    }
+  ]
+}

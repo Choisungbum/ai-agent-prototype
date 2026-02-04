@@ -46,27 +46,21 @@ def ingest_chunk_file(json_path):
     db.add_documents(docs)
     print(f"[INGESTED] {os.path.basename(json_path)} ({len(docs)} chunks)")
 
-#  확장자별
-exts = ['/pdf']
-# 컬렉션 별 
-collections = ['/wiseirag']
 # 원문, 2단계 요약, 1단계 요약
 chunk_json = ['/content', '/mid_summary', '/top_summary']
 
 # 시작 시간
 start = time.time()
 print(f'### [embedding] start')
-for ext in exts:
-    for collection in collections:
-        for chunk in chunk_json:
-            db = db_conn(collection + chunk)
-            chunk_dir_ext = chunk_dir + ext + collection + chunk
-            for fname in os.listdir(chunk_dir_ext):
-                if not fname.endswith('.json'):
-                    continue
+for chunk in chunk_json:
+    db = db_conn(chunk)
+    full_chunk_dir = chunk_dir + chunk
+    for fname in os.listdir(full_chunk_dir):
+        if not fname.endswith('.json'):
+            continue
 
-                json_path = os.path.join(chunk_dir_ext, fname)
-                ingest_chunk_file(json_path)
+        json_path = os.path.join(full_chunk_dir, fname)
+        ingest_chunk_file(json_path)
                                                                                                                                                                                                                                                                                                                                                                   
 print(f'### [embedding] end')
 # 종료 시간  

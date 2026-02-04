@@ -39,7 +39,7 @@ def chunk_file(pdf_path):
     chunks = semantic_chunking_by_section(paragrephs)
 
     # 3. summary(top, mid), 원문 chunk 생성
-    content_chunks, summary_chunks = semantic_chunking_by_section(chunks)
+    content_chunks, mid_summary_chunks, top_summary_chunks = build_2level_summaries(chunks)
 
     name = pdf_path.rsplit("/")
     file_name = name[-1]
@@ -48,15 +48,20 @@ def chunk_file(pdf_path):
     # dir 생성
     os.makedirs(chunk_dir, exist_ok=True)
     os.makedirs(chunk_dir + '/content', exist_ok=True)
-    os.makedirs(chunk_dir + '/summary', exist_ok=True)
+    os.makedirs(chunk_dir + '/top_summary', exist_ok=True)
+    os.makedirs(chunk_dir + '/mid_summary', exist_ok=True)
 
     # 원문 chunk
     with open(f"{chunk_dir}/content/{file_name}.json", "w", encoding="utf-8") as f:
         json.dump(content_chunks, f, ensure_ascii=False, indent=2)
 
-    # 요약 chunk
-    with open(f"{chunk_dir}/summary/{file_name}.json", "w", encoding="utf-8") as f:
-        json.dump(summary_chunks, f, ensure_ascii=False, indent=2)
+    # top 요약 chunk
+    with open(f"{chunk_dir}/top_summary/{file_name}.json", "w", encoding="utf-8") as f:
+        json.dump(top_summary_chunks, f, ensure_ascii=False, indent=2)
+
+    # mid 요약 chunk
+    with open(f"{chunk_dir}/mid_summary/{file_name}.json", "w", encoding="utf-8") as f:
+        json.dump(mid_summary_chunks, f, ensure_ascii=False, indent=2)
 
 ##################################
 # collection 필요 시 추후 추가
@@ -92,9 +97,9 @@ def run_preprocessing(test_dir: str):
 
 
 # 1. 작엄 문서 작업할 디렉토리로 copy
-convert_docs_in_dir(raw_dir, staging_dir, converted_dir)
+# convert_docs_in_dir(raw_dir, staging_dir, converted_dir)
 
-# document= parse_pdf_for_rag_json(os.path.join(converted_dir , os.listdir(converted_dir)[0]))
+document= parse_pdf_for_rag_json(os.path.join(converted_dir , os.listdir(converted_dir)[0]))
 # def run_preprocessing(test_dir: str):
 #      # 시작 시간
 #     start = time.time()

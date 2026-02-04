@@ -11,6 +11,19 @@ def detect_role(text):
         return "action"
     return "general"
 
+def make_manual_tag(source_path):
+    filepath = os.path.basename(source_path)
+    filename = filepath.split('/')[-1]
+
+    # WISE_iRAG 문서 표기 및 어떤 메뉴얼인지 표기
+    # 예: WISE_iRAG_V2_Builder_매뉴얼_v1.0.pdf
+    if filename.startswith("WISE_iRAG"):
+        parts = filename.replace(".pdf", "").split("_")
+        if len(parts) >= 4:
+            return f"[WISE_iRAG:{parts[3].upper()}]"
+        return "[WISE_iRAG]"
+    else: # 다른 문서일 경우 관련 태그 표기
+        return None
 
 def extract_paragraphs(doc_json):
     """가장작은 의미단위로 분해"""
@@ -110,6 +123,10 @@ def semantic_chunking_by_section(paragraphs, max_chars=1000, overlap=150):
         if section_title:
             parts.append(f"[SECTION_PATH]{section_title}")
 
+        manual_tag = make_manual_tag(source)
+        if manual_tag:
+            parts.append(manual_tag)
+
         if role == "action":
             parts.append("[ACTION]")
 
@@ -120,7 +137,7 @@ def semantic_chunking_by_section(paragraphs, max_chars=1000, overlap=150):
         chunks.append({
             "text": final_text,
 
-            # 핵심 메타데이터
+            # 🔑 핵심 메타데이터
             "doc_id": doc_id,
             "source": source,
             "section_id": section_id,
@@ -178,7 +195,7 @@ def semantic_chunking_by_section(paragraphs, max_chars=1000, overlap=150):
             section_id = p["section_id"]
             section_title = p["section_title"]
 
-        # buf에는 "본문 텍스트만" 누적
+        # 🔑 buf에는 "본문 텍스트만" 누적
         buf += text + "\n\n"
 
         # 메타 누적
@@ -243,6 +260,7 @@ def build_summaries_chunk(content_chunks):
 
         lines = []
         lines.append(f"[SECTION_PATH]{summary_path}")
+        lines.append(make_manual_tag(info["source"]))
         lines.append('[SUMMARY]')
         for c in content:
             lines.append(f" - {c}")

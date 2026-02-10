@@ -44,6 +44,8 @@ __pycache__/
 *.pyc
 *.pyo
 
+
+
 # =====================
 # Java / Maven / Gradle / Spring
 # =====================
@@ -99,3 +101,12 @@ pytest_cache/
 *.deb
 *.rpm
 *.msi
+
+# =====================
+# 1차 산출물 제거
+# RAG ingestion working files
+# chunk files
+# =====================
+RAG/ingestion/working_dir/
+RAG/ingestion/chunk/
+RAG/ingestion/testfile/

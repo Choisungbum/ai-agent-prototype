@@ -1,7 +1,7 @@
 import {useEffect, useRef, useState} from "react"
 
 // 스크롤 관리 custom hook
-export function useChatScroll(messages, isTyping) {
+export function useChatScroll(messages, isTyping, setMessages, setIsTyping) {
     // 자동 스크롤 상태
     const [autoScroll, setAutoScroll] = useState(true);
 

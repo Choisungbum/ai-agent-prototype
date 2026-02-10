@@ -1,7 +1,8 @@
 import {useState} from "react"
 import MessageList from "./MessageList";
 import ChatInput from "./ChatInput";
-import { useChatScroll, sendMessageFunc } from "../hooks/scrollHook";
+import { useChatScroll } from "../hooks/scrollHook";
+import { sendMessageFunc } from "../hooks/sendMessageHook";
 
 function ChatLayout() {
     // 메시지 상태 및 입력 대기 상태
@@ -17,14 +18,14 @@ function ChatLayout() {
         containerRef,
         handleScroll,
         scrollToBottom
-    } = useChatScroll(messages, isTyping);
+    } = useChatScroll(messages, isTyping, setMessages, setIsTyping);
 
     const {
          // 핸들러 함수
          appendAssistantContent,
          streamAssistantMessage,
          handleSendMessage
-    } = sendMessageFunc(messages, isTyping);
+    } = sendMessageFunc(messages, isTyping, setMessages, setIsTyping);
 
     return (
         <div className="app-container">

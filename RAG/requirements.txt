@@ -3,11 +3,12 @@ uvicorn
 langchain
 langchain-community
 langchain-ollama
+langchain_huggingface
+langchain_postgres
 pydantic
 python-dotenv
 httpx
 requests
-rich
 
 # document loader
 pdfplumber
@@ -15,3 +16,6 @@ unstructured[pdf]
 pymupdf
 statistics
 python-docx
+
+# RAG
+rank-bm25

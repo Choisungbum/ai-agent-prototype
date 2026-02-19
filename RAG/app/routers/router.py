@@ -1,16 +1,14 @@
 from fastapi import APIRouter
 from pydantic import BaseModel
 
-from app.common.common import (
-    chunk_file, get_ext, converted_dir,
-    retrieve_pipeline, build_context,
-)
-from app.service.embedding import run_embedding
-from app.common.LLMClient import call_llm
-
 import os, time
 
 router = APIRouter()
+print("router imported")
+@router.post("/")
+def api():
+    # TODO: 기존 ingestion 로직 호출
+    return {"status": "ok"}
 
 
 # ── Request / Response ──────────────────────────────
@@ -35,13 +33,16 @@ class RetrieveResponse(BaseModel):
  # ↓
  # PDF loader
  # convert_docs_in_dir(raw_dir, staging_dir, converted_dir)
-@router.post("/preprocessing")
+@router.get("/preprocessing")
 def preprocessing():
+    from app.loaders.libreoffice import convert_docs_in_dir
+    from app.service.preprocessing import ( chunk_file, get_ext, raw_dir, staging_dir, converted_dir, )
+
     print('preprocessing 시작')
     start = time.time()
 
     # 문서 변환 (raw → staging → converted)
-    # convert_docs_in_dir(raw_dir, staging_dir, converted_dir)
+    convert_docs_in_dir(raw_dir, staging_dir, converted_dir)
 
     # 변환된 PDF 청킹
     processed = []
@@ -62,8 +63,10 @@ def preprocessing():
 
 # ── 2. 임베딩 ───────────────────────────────────────
 
-@router.post("/embedding")
+@router.get("/embedding")
 def embedding():
+    from app.service.embedding import run_embedding
+
     print('embedding 시작')
     result = run_embedding()
     print('embedding 종료')
@@ -74,6 +77,8 @@ def embedding():
 
 @router.post("/retrieve", response_model=RetrieveResponse)
 async def retrieve(req: RetrieveRequest):
+    from app.service.retriever import ( retrieve_pipeline, build_context)
+    from app.common.LLMClient import call_llm
     print('retrieve 시작')
     start = time.time()
 

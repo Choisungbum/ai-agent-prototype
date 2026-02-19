@@ -9,6 +9,7 @@ pydantic
 python-dotenv
 httpx
 requests
+sentence-transformers
 
 # document loader
 pdfplumber

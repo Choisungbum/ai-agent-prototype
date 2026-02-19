@@ -14,7 +14,7 @@ from pathlib import Path
 import json, os, re
 
 
-# ══════════════════════════════════════════════════════
+# ══════════════════════════════════════════════════════ db_conn 수정 필요
 #  공통 경로 설정
 # ══════════════════════════════════════════════════════
 
@@ -46,7 +46,7 @@ connection = 'postgresql+psycopg://langchain:langchain@pgvector-container:5432/l
 embedding = HuggingFaceEmbeddings(
     model_name="BAAI/bge-m3",
     model_kwargs={
-        "device": "cpu",
+        "device": "cuda",
         # HuggingFace 모델이 커스텀 파이썬 코드를 포함하고 있을 때 그걸 허용하는 옵션 
         # 일부 환경에서 필요
         "trust_remote_code": True,   
@@ -279,7 +279,7 @@ def retrieve_pipeline(query: str,
     ]
 
     # 3. summary_id 기반 content 검색
-    content_vs = db_conn("/content")
+    content_vs = db_conn("/rag_test")
 
     content_docs_with_score = content_vs.db.similarity_search_with_score(
         query=query,

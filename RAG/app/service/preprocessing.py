@@ -2,9 +2,6 @@ from app.common.common import chunk_file, converted_dir
 import os, time
 
 
-##################################
-# collection 필요 시 추후 추가
-##################################
 # preprocessing 실행
 def run_preprocessing(converted_dir: str):
 

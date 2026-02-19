@@ -1,16 +1,16 @@
 version: '3.8'
 
 services:
-  redis:
-    image: redis:alpine
-    container_name: my-redis
-    ports:
-      - "6379:6379"
-    command: redis-server /usr/local/etc/redis/redis.conf
-    volumes:
-      - ./redis.conf:/usr/local/etc/redis/redis.conf
-    tmpfs:
-      - /data
+  # redis:
+  #   image: redis:alpine
+  #   container_name: my-redis
+  #   ports:
+  #     - "6379:6379"
+  #   command: redis-server /usr/local/etc/redis/redis.conf
+  #   volumes:
+  #     - ./redis.conf:/usr/local/etc/redis/redis.conf
+  #   tmpfs:
+  #     - /data
    
 
 
@@ -27,78 +27,78 @@ services:
       - ./pg_data:/var/lib/postgresql/data
    
 
-  ollama:
-    image: ollama/ollama:latest
-    container_name: ollama
-    ports:
-      - "11434:11434"
-    volumes:
-      - ollama_data:/root/.ollama
-    runtime: nvidia
-    environment:
-      NVIDIA_VISIBLE_DEVICES: all
-    shm_size: "2gb"
+  # ollama:
+  #   image: ollama/ollama:latest
+  #   container_name: ollama
+  #   ports:
+  #     - "11434:11434"
+  #   volumes:
+  #     - ollama_data:/root/.ollama
+  #   runtime: nvidia
+  #   environment:
+  #     NVIDIA_VISIBLE_DEVICES: all
+  #   shm_size: "2gb"
    
 
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    image: my-frontend:latest
-    container_name: frontend
-    ports:
-      - "3000:80"
+  # frontend:
+  #   build:
+  #     context: ./frontend
+  #     dockerfile: Dockerfile
+  #   image: my-frontend:latest
+  #   container_name: frontend
+  #   ports:
+  #     - "3000:80"
    
 
-  mcp-server:
-    build: 
-      context: ./mcp-server
-      dockerfile: Dockerfile
-    image: my-mcp-server:latest
-    container_name: mcp-server
-    ports:
-      - "9090:9090"
-    environment:
-      SPRING_PROFILES_ACTIVE: docker
-    depends_on:
-      - postgres
+  # mcp-server:
+  #   build: 
+  #     context: ./mcp-server
+  #     dockerfile: Dockerfile
+  #   image: my-mcp-server:latest
+  #   container_name: mcp-server
+  #   ports:
+  #     - "9090:9090"
+  #   environment:
+  #     SPRING_PROFILES_ACTIVE: docker
+  #   depends_on:
+  #     - postgres
    
 
-  gateway:
-    build: 
-      context: ./gateway
-      dockerfile: Dockerfile
-    image: my-gateway:latest
-    container_name: gateway
-    ports:
-      - "8080:8080"
-    environment:
-      SPRING_PROFILES_ACTIVE: docker
-    depends_on:
-      - frontend
+  # gateway:
+  #   build: 
+  #     context: ./gateway
+  #     dockerfile: Dockerfile
+  #   image: my-gateway:latest
+  #   container_name: gateway
+  #   ports:
+  #     - "8080:8080"
+  #   environment:
+  #     SPRING_PROFILES_ACTIVE: docker
+  #   depends_on:
+  #     - frontend
    
 
-  agent:
-    build:
-      context: ./agent
-      dockerfile: Dockerfile
-    image: my-agent:latest
-    container_name: agent
-    ports:
-      - "8000:8000"
-    env_file:
-    - ./agent/.env
-    environment:
-      REDIS_HOST: redis
-      REDIS_PORT: 6379
-      REDIS_DB: 0
-      REDIS_PASSWORD: wisenut1!
-      LLM_MODEL: llama3.1:8b
-      MCP_SERVER_URL: http://mcp-server:9090
-      OLLAMA_BASE_URL: http://ollama:11434
-    depends_on:
-      - redis
-      - gateway
+  # agent:
+  #   build:
+  #     context: ./agent
+  #     dockerfile: Dockerfile
+  #   image: my-agent:latest
+  #   container_name: agent
+  #   ports:
+  #     - "8000:8000"
+  #   env_file:
+  #   - ./agent/.env
+  #   environment:
+  #     REDIS_HOST: redis
+  #     REDIS_PORT: 6379
+  #     REDIS_DB: 0
+  #     REDIS_PASSWORD: wisenut1!
+  #     LLM_MODEL: llama3.1:8b
+  #     MCP_SERVER_URL: http://mcp-server:9090
+  #     OLLAMA_BASE_URL: http://ollama:11434
+  #   depends_on:
+  #     - redis
+  #     - gateway
 
 volumes:
   ollama_data:
